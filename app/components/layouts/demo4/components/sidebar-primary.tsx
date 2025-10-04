@@ -9,6 +9,7 @@ import { UserDropdownMenu } from '@/partials/topbar/user-dropdown-menu';
 import {
   BarChart3,
   Bell,
+  Car,
   CheckSquare,
   Code,
   LayoutGrid,
@@ -42,6 +43,12 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { icon: BarChart3, tooltip: 'Dashboard', path: '/', rootPath: '/' },
+  {
+    icon: Car,
+    tooltip: 'Jain Automart',
+    path: '/jammanage/dashboard',
+    rootPath: '/jammanage/',
+  },
   {
     icon: UserCircle,
     tooltip: 'Profile',
