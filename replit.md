@@ -20,14 +20,20 @@ Preferred communication style: Simple, everyday language.
   - JWT-based session management
   - Middleware-based route protection
   - No hardcoded credentials (uses environment variables)
-- **Design**: Uses Metronic UI components (Card, Form, Input, Button, Alert)
+- **Design**: 
+  - Login page uses Metronic BrandedLayout (2-column grid with branded background)
+  - Dashboard uses full Demo4Layout with icon-based sidebar, expandable menu, toolbar, and responsive header/footer
+  - All components follow Metronic design system (Alert, Card, Form, Input, Button)
 - **Credentials**: Stored in Replit Secrets as `ADMIN_EMAIL` and `ADMIN_PASSWORD_HASH`
 
 ## Implementation Files
-- `/app/jammanage/page.tsx` - Login page with Metronic Card layout
-- `/app/jammanage/dashboard/page.tsx` - Protected dashboard
+- `/app/jammanage/page.tsx` - Login page with Metronic BrandedLayout
+- `/app/jammanage/(dashboard)/layout.tsx` - Demo4Layout wrapper for all dashboard routes
+- `/app/jammanage/(dashboard)/dashboard/page.tsx` - Protected dashboard with Metronic components
 - `/components/jammanage/LoginForm.tsx` - Login form with React Hook Form and Zod validation
-- `/components/jammanage/DashboardShell.tsx` - Dashboard layout with logout functionality
+- `/app/components/layouts/demo4/components/sidebar-menu-jammanage.tsx` - Custom Jain Automart sidebar menu
+- `/app/components/layouts/demo4/components/sidebar-primary.tsx` - Icon-based sidebar with Car icon for Jain Automart
+- `/app/components/layouts/demo4/components/sidebar-secondary.tsx` - Expandable menu with route detection
 - `/lib/crypto.ts` - bcrypt password verification utilities
 - `/lib/rateLimit.ts` - In-memory rate limiting for login attempts
 - `/app/api/auth/[...nextauth]/auth-options.ts` - NextAuth configuration with admin provider
