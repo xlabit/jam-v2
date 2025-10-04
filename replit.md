@@ -2,9 +2,36 @@
 
 Metronic 9 is a comprehensive Next.js template for modern web applications, built on Tailwind CSS 4.x and React 19.x. It serves as a complete admin dashboard and application framework with multiple layout demos, authentication system, user management, and various UI components. The project integrates ReUI (an open-source React component library) and provides a foundation for building scalable web applications with modern design patterns.
 
+**Project**: Jain Automart admin panel with secure site-owner login system at `/jammanage`.
+
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+# Jain Automart Admin System
+
+## Site Owner Login (`/jammanage`)
+- **Route**: `/jammanage` - Secure login portal for site administrators
+- **Dashboard**: `/jammanage/dashboard` - Protected admin dashboard (requires authentication)
+- **Authentication**: NextAuth.js with custom admin credentials provider
+- **Security Features**:
+  - bcrypt password hashing for secure credential storage
+  - Rate limiting: 5 login attempts per 10 minutes per IP address
+  - JWT-based session management
+  - Middleware-based route protection
+  - No hardcoded credentials (uses environment variables)
+- **Design**: Uses Metronic UI components (Card, Form, Input, Button, Alert)
+- **Credentials**: Stored in Replit Secrets as `ADMIN_EMAIL` and `ADMIN_PASSWORD_HASH`
+
+## Implementation Files
+- `/app/jammanage/page.tsx` - Login page with Metronic Card layout
+- `/app/jammanage/dashboard/page.tsx` - Protected dashboard
+- `/components/jammanage/LoginForm.tsx` - Login form with React Hook Form and Zod validation
+- `/components/jammanage/DashboardShell.tsx` - Dashboard layout with logout functionality
+- `/lib/crypto.ts` - bcrypt password verification utilities
+- `/lib/rateLimit.ts` - In-memory rate limiting for login attempts
+- `/app/api/auth/[...nextauth]/auth-options.ts` - NextAuth configuration with admin provider
+- `/middleware.ts` - Route protection for `/jammanage/*` routes
 
 # System Architecture
 
