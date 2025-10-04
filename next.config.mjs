@@ -18,10 +18,12 @@ const nextConfig = {
       },
     ];
   },
-  // Allow all hosts for development in Replit
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
-  },
+  // Allow dev origins for Replit
+  allowedDevOrigins: [
+    '*.replit.dev',
+    '127.0.0.1',
+    'localhost',
+  ],
 };
 
 export default nextConfig;
