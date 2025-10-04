@@ -1,0 +1,158 @@
+Perfect—here’s a **copy-paste, no-code** master prompt you can give to Replit’s AI (or any dev assistant) to build the secure **site-owner login at `/jammanage`** for Jain Automart using **Next.js (App Router)** and the **Metronic** theme. It’s written to avoid revealing your code and to keep secrets safe while still being ultra-specific.
+
+---
+
+# 🚀 Master Prompt — Secure Site-Owner Login (`/jammanage`) using Next.js (App Router) + Metronic on Replit
+
+**Act as a senior Next.js engineer**. You will create a secure **site-owner login** for **JainAutomart** at **`/jammanage`** and a protected dashboard at **`/jammanage/dashboard`**, styled with the **Metronic** theme that already exists in the project.
+**Important constraints:**
+
+* **Do not hardcode secrets.** Use environment variables only.
+* **Do not output full file contents unless explicitly instructed.** Describe what to create and where; summarize key function signatures and props; show only minimal excerpts when critically necessary.
+* **No sample passwords** or dummy secrets in the code. Reference env vars instead.
+
+## 1) Tech & Security Requirements
+
+* Framework: **Next.js 14+ App Router** with React.
+* Auth: **NextAuth (Credentials Provider)** with **JWT** sessions.
+* Password storage: **bcrypt hash** via env var `ADMIN_PASSWORD_HASH` (no plaintext).
+* Rate limiting for login attempts (simple in-memory guard by IP is fine for now).
+* Middleware-based route protection for everything under **`/jammanage/*`** (except the login page and NextAuth APIs).
+* CSRF and signed cookies via NextAuth defaults.
+* On success: redirect to **`/jammanage/dashboard`**; on failure: show Metronic-styled error.
+* Logout ends session and returns to **`/jammanage`**.
+
+## 2) URLs & Flows
+
+* **GET `/jammanage`** → Metronic sign-in UI (email + password).
+* **POST `/api/auth/callback/credentials`** → NextAuth credentials flow with rate-limit & bcrypt compare.
+* **GET `/jammanage/dashboard`** → Protected admin landing page (Metronic layout shell).
+* **POST `/api/auth/signout`** → Logout, redirect to `/jammanage`.
+
+## 3) Environment Variables (Replit → Secrets)
+
+Create **only** these secrets (no defaults in code):
+
+* `ADMIN_EMAIL` → e.g., `owner@jainautomart.com`
+* `ADMIN_PASSWORD_HASH` → **bcrypt hash** of the real password
+* `NEXTAUTH_SECRET` → long random string
+* `NEXTAUTH_URL` → your live Replit URL (e.g., `https://<your-repl>.replit.dev`)
+
+> Do **not** store plain passwords. You will **compare** `password` against `ADMIN_PASSWORD_HASH` with bcrypt.
+
+## 4) File & Directory Plan (no code yet)
+
+Create/confirm the following paths (App Router):
+
+```
+/app
+  /jammanage
+    page.(ts|tsx)                 // Login page wrapper (server component)
+    /dashboard
+      page.(ts|tsx)               // Protected dashboard page
+  /api/auth/[...nextauth]/route.(ts|tsx)   // NextAuth handler (Credentials Provider)
+/components/jammanage
+  LoginForm.(ts|tsx)              // Metronic-styled form (client component)
+  DashboardShell.(ts|tsx)         // Metronic header/aside/content shell
+/lib
+  auth.ts                         // NextAuth options: providers, callbacks
+  crypto.ts                       // bcrypt helpers
+  rateLimit.ts                    // minimal in-memory rate limiter
+/middleware.ts                    // Protect /jammanage routes
+```
+
+## 5) Integration with Metronic (no code dump)
+
+* Use Metronic’s **Authentication → Sign-in** layout as the visual basis for `LoginForm`.
+* Keep Metronic’s class names (e.g., `d-flex`, `card`, `btn`, `alert`) so the existing Metronic assets apply.
+* In `DashboardShell`, include the standard Metronic layout regions (header, sidebar, content container).
+* Ensure global Metronic CSS/JS is already imported at the app level (do not re-import in components).
+
+## 6) Behavior & Guards (precise, no code)
+
+* **Login Page (`/jammanage`)**
+
+  * If a session exists server-side, redirect to `/jammanage/dashboard`.
+  * Otherwise render Metronic login (email + password).
+  * Submit calls `signIn('credentials')` (NextAuth), with redirect to `/jammanage/dashboard` on success.
+  * If `?error=…` present, show a Metronic **alert**.
+
+* **Credentials Authorize**
+
+  * Apply **rateLimit** by IP **before** bcrypt (e.g., 5 attempts / 10 min).
+  * Compare `credentials.email` with `process.env.ADMIN_EMAIL`.
+  * Compare `credentials.password` with `process.env.ADMIN_PASSWORD_HASH` using **bcrypt.compare**.
+  * On success, return `{ id: 'owner', email, role: 'owner' }` for JWT.
+  * On failure, throw a generic auth error (no detail about which field failed).
+
+* **JWT & Session**
+
+  * Strategy: **`jwt`**.
+  * Include minimal claims: `sub`, `email`, `role: 'owner'`.
+
+* **Middleware Protection**
+
+  * Matcher: `['/jammanage/:path*']`.
+  * Allow unauthenticated access only to:
+
+    * `/jammanage` (login page)
+    * `/api/auth/*` (NextAuth routes)
+    * Metronic static assets if they live under public paths
+  * Any other `/jammanage/*` without a valid session → 302 to `/jammanage`.
+
+* **Dashboard (`/jammanage/dashboard`)**
+
+  * Server component page, wrapped with `DashboardShell`.
+  * Show a Metronic card: “Welcome, Site Owner”.
+  * Include a **Logout** button that calls `signOut({ callbackUrl: '/jammanage' })`.
+
+## 7) Rate Limiting (design, not code)
+
+* In `/lib/rateLimit.ts`, define a tiny in-memory map keyed by client IP with timestamps & counts.
+* Configuration: **max 5 attempts / 10 minutes**.
+* If exceeded, throw a throttling error (“Too many attempts, please try later.”).
+
+## 8) Error States & UX
+
+* Wrong creds → red Metronic alert with generic message (“Invalid credentials.”)
+* Rate limit hit → red alert (“Too many attempts, please try later.”)
+* Session expired → redirect to `/jammanage` and show info alert (“Session ended, please sign in again.”)
+
+## 9) Accessibility & UX Details
+
+* Email and password fields are labeled, with `aria-invalid` on error.
+* Disable submit while request is in flight; show a subtle Metronic spinner on the button.
+* Support “Enter to submit”.
+
+## 10) Acceptance Criteria (use this exact checklist)
+
+* [ ] `/jammanage` renders a **Metronic-styled** login screen.
+* [ ] Successful sign-in (env-based admin) → **redirects** to `/jammanage/dashboard`.
+* [ ] Unsuccessful sign-in shows a **Metronic alert** (no sensitive detail).
+* [ ] Direct access to `/jammanage/dashboard` without session → **redirects** to `/jammanage`.
+* [ ] **Logout** ends session and returns to `/jammanage`.
+* [ ] **No plaintext secrets** in repo; all sensitive values via Replit secrets.
+* [ ] **bcrypt** used to verify password against `ADMIN_PASSWORD_HASH`.
+* [ ] **Rate limiting** applied **before** bcrypt in authorize.
+* [ ] **Middleware** protects all `/jammanage/*` (except login and NextAuth APIs).
+* [ ] Metronic layout & classes used for both login and dashboard shell.
+
+## 11) Testing Instructions (nowhere show code)
+
+1. Set Replit Secrets: `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`.
+2. Visit `/jammanage` → see Metronic login.
+3. Try wrong creds → see Metronic alert.
+4. Try correct creds → land on `/jammanage/dashboard`.
+5. Open `/jammanage/dashboard` in a private window → redirected to `/jammanage`.
+6. Click Logout → session ends → redirected back to `/jammanage`.
+7. Attempt >5 wrong tries in 10 minutes → throttled with proper alert.
+
+## 12) Deliverables Recap (no code unless asked)
+
+* Created/updated files and their purposes (as listed in Section 4).
+* A brief summary of how each part satisfies Sections 5–11.
+* Confirm the checklist in Section 10 passes.
+
+---
+
+**Execute all steps above. Do not print full file contents unless I explicitly ask for a specific file. Confirm when the `/jammanage` secure login and protected dashboard are fully working with Metronic styling and the acceptance criteria are met.**

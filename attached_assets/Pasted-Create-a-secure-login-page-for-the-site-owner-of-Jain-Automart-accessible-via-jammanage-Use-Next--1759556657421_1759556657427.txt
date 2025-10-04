@@ -1,0 +1,108 @@
+Create a secure login page for the site owner of Jain Automart, accessible via /jammanage. Use Next.js (App Router), style the UI with the Metronic Dashboard Theme, and set this up in a Replit development environment.
+
+🔧 Requirements
+
+Route: /jammanage
+
+Stack: Next.js (App Router), Tailwind CSS (or Metronic's preferred method), React
+
+UI Framework: Metronic Dashboard Theme (already installed)
+
+Authentication Logic:
+
+Use environment variable (or hardcoded string for now) as admin password
+
+Use localStorage or cookies to store auth token
+
+After successful login, redirect to /jammanage/dashboard
+
+Security:
+
+Protect dashboard and all /jammanage/* routes unless authenticated
+
+Redirect unauthenticated users to /jammanage login page
+
+📁 Folder & File Structure to Create
+/app
+  /jammanage
+    /dashboard
+      page.tsx
+    page.tsx
+/components
+  /jammanage
+    LoginForm.tsx
+/middleware.ts
+.env
+
+🧠 Logic Flow to Implement
+1. Login Page (/jammanage)
+
+Show a clean Metronic-style login screen (email not needed, just a password field)
+
+Use Tailwind or Metronic’s Bootstrap styles for layout
+
+On submit, compare entered password with process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+
+If correct:
+
+Store auth flag in localStorage or cookies (e.g., jamadmin-auth = true)
+
+Redirect to /jammanage/dashboard
+
+If incorrect:
+
+Show error message using Metronic alert component
+
+2. Dashboard Page (/jammanage/dashboard)
+
+Simple welcome message with Metronic-styled card
+
+Add logout button to clear token and redirect to /jammanage
+
+3. Middleware Protection
+
+Use middleware.ts to protect all routes under /jammanage/dashboard
+
+If no valid auth cookie/token → redirect to /jammanage
+
+💄 UI Styling (Metronic)
+
+Use Metronic’s Login 1 or Login 2 layout (HTML snippet) and convert it into a React component
+
+Use Metronic buttons, alert messages, and card components in the dashboard
+
+Example login layout to convert:
+https://preview.keenthemes.com/metronic8/demo1/authentication/layouts/corporate/sign-in.html
+
+🗝️ Environment Variable
+
+In .env or Replit secrets:
+
+NEXT_PUBLIC_ADMIN_PASSWORD=YourSecurePassword123
+
+🛡️ Authentication Guard (Frontend or Middleware)
+
+If using middleware:
+
+export const config = {
+  matcher: ['/jammanage/dashboard/:path*'],
+};
+
+
+Check token/cookie in middleware.ts and redirect unauthorized users.
+
+✅ Expected Outcome
+
+When user visits /jammanage:
+
+Login screen styled with Metronic is shown
+
+On entering the correct password:
+
+Redirects to /jammanage/dashboard
+
+Any attempt to access /jammanage/dashboard without login:
+
+Redirects back to login screen
+
+Logout option is available on dashboard
