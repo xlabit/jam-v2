@@ -5,10 +5,62 @@ import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import prisma from '@/lib/prisma';
+import { verifyPassword } from '@/lib/crypto';
+import { checkRateLimit, resetRateLimit } from '@/lib/rateLimit';
 
 const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
+    CredentialsProvider({
+      id: 'admin',
+      name: 'Admin Login',
+      credentials: {
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials, req) {
+        if (!credentials || !credentials.email || !credentials.password) {
+          throw new Error('Please enter both email and password.');
+        }
+
+        const clientIp = req.headers?.['x-forwarded-for'] || req.headers?.['x-real-ip'] || 'unknown';
+        const identifier = `admin-${clientIp}`;
+
+        const rateCheck = checkRateLimit(identifier);
+        if (!rateCheck.allowed) {
+          throw new Error('Too many login attempts. Please try again later.');
+        }
+
+        const adminEmail = process.env.ADMIN_EMAIL;
+        const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+        if (!adminEmail || !adminPasswordHash) {
+          throw new Error('Server configuration error.');
+        }
+
+        if (credentials.email !== adminEmail) {
+          throw new Error('Invalid credentials.');
+        }
+
+        const isPasswordValid = await verifyPassword(
+          credentials.password,
+          adminPasswordHash
+        );
+
+        if (!isPasswordValid) {
+          throw new Error('Invalid credentials.');
+        }
+
+        resetRateLimit(identifier);
+
+        return {
+          id: 'owner',
+          email: adminEmail,
+          name: 'Site Owner',
+          role: 'owner',
+        };
+      },
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -171,18 +223,22 @@ const authOptions: NextAuthOptions = {
       if (trigger === 'update' && session?.user) {
         token = session.user;
       } else {
-        if (user && user.roleId) {
-          const role = await prisma.userRole.findUnique({
-            where: { id: user.roleId },
-          });
-
+        if (user) {
           token.id = (user.id || token.sub) as string;
           token.email = user.email;
           token.name = user.name;
           token.avatar = user.avatar;
-          token.status = user.status;
-          token.roleId = user.roleId;
-          token.roleName = role?.name;
+          
+          if (user.role) {
+            token.role = user.role;
+          } else if (user.roleId) {
+            const role = await prisma.userRole.findUnique({
+              where: { id: user.roleId },
+            });
+            token.status = user.status;
+            token.roleId = user.roleId;
+            token.roleName = role?.name;
+          }
         }
       }
 
@@ -197,6 +253,7 @@ const authOptions: NextAuthOptions = {
         session.user.status = token.status;
         session.user.roleId = token.roleId;
         session.user.roleName = token.roleName;
+        session.user.role = token.role;
       }
       return session;
     },
