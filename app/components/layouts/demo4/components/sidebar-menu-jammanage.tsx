@@ -11,6 +11,14 @@ import {
   FileText,
   Shield,
   UserCircle,
+  Truck,
+  Tag,
+  Layers,
+  Grid3x3,
+  Fuel,
+  Wind,
+  Cog,
+  Zap,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -30,6 +38,61 @@ const menuItems: MenuItemType[] = [
 ];
 
 const menuSections = [
+  {
+    title: 'VEHICLES',
+    items: [
+      {
+        label: 'Vehicles',
+        path: '/jammanage/vehicles',
+        icon: Truck,
+      },
+      {
+        label: 'Makes',
+        path: '/jammanage/vehicles/makes',
+        icon: Tag,
+      },
+      {
+        label: 'Models',
+        path: '/jammanage/vehicles/models',
+        icon: Layers,
+      },
+      {
+        label: 'Variants',
+        path: '/jammanage/vehicles/variants',
+        icon: Grid3x3,
+      },
+      {
+        label: 'Body Types',
+        path: '/jammanage/vehicles/body-types',
+        icon: Package,
+      },
+      {
+        label: 'Axle Configurations',
+        path: '/jammanage/vehicles/axle-config',
+        icon: Cog,
+      },
+      {
+        label: 'Fuel Types',
+        path: '/jammanage/vehicles/fuel-types',
+        icon: Fuel,
+      },
+      {
+        label: 'Emission Norms',
+        path: '/jammanage/vehicles/emission-norms',
+        icon: Wind,
+      },
+      {
+        label: 'Transmissions',
+        path: '/jammanage/vehicles/transmissions',
+        icon: Settings,
+      },
+      {
+        label: 'Feature Tags',
+        path: '/jammanage/vehicles/feature-tags',
+        icon: Zap,
+      },
+    ],
+  },
   {
     title: 'SERVICE CENTERS',
     items: [
