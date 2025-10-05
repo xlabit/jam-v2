@@ -31,12 +31,7 @@ export default async function EditVehicleBrandPage({
 
   return (
     <div className="container-fixed">
-      <div className="flex flex-col gap-5 lg:gap-7.5">
-        <h1 className="text-xl font-semibold text-foreground">
-          Edit Vehicle Brand
-        </h1>
-        <VehicleBrandForm initialData={brand} />
-      </div>
+      <VehicleBrandForm initialData={brand} />
     </div>
   );
 }

@@ -31,12 +31,7 @@ export default async function EditServiceTypePage({
 
   return (
     <div className="container-fixed">
-      <div className="flex flex-col gap-5 lg:gap-7.5">
-        <h1 className="text-xl font-semibold text-foreground">
-          Edit Service Type
-        </h1>
-        <ServiceTypeForm initialData={serviceType} />
-      </div>
+      <ServiceTypeForm initialData={serviceType} />
     </div>
   );
 }

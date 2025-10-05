@@ -103,14 +103,18 @@ export function ServiceTypeForm({ initialData }: Props) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>
-          {isEdit ? 'Edit Service Type' : 'New Service Type'}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="lg:py-7.5">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 lg:gap-7.5">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-2xl font-semibold text-mono">
+                {isEdit ? 'Edit Service Type' : 'New Service Type'}
+              </h2>
+              <p className="text-sm text-secondary-foreground">
+                Complete the form below to {isEdit ? 'update' : 'add a new'} service type
+              </p>
+            </div>
+
             <FormField
               control={form.control}
               name="name"
@@ -170,7 +174,7 @@ export function ServiceTypeForm({ initialData }: Props) {
               )}
             />
 
-            <div className="flex gap-3">
+            <div className="flex gap-2.5">
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting
                   ? 'Saving...'

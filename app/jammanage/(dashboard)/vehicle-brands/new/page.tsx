@@ -16,12 +16,7 @@ export default async function NewVehicleBrandPage() {
 
   return (
     <div className="container-fixed">
-      <div className="flex flex-col gap-5 lg:gap-7.5">
-        <h1 className="text-xl font-semibold text-foreground">
-          New Vehicle Brand
-        </h1>
-        <VehicleBrandForm />
-      </div>
+      <VehicleBrandForm />
     </div>
   );
 }

@@ -138,15 +138,19 @@ export function ServiceCenterForm({ initialData }: Props) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>
-          {isEdit ? 'Edit Service Center' : 'New Service Center'}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="lg:py-7.5">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 lg:gap-7.5">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-2xl font-semibold text-mono">
+                {isEdit ? 'Edit Service Center' : 'New Service Center'}
+              </h2>
+              <p className="text-sm text-secondary-foreground">
+                Complete the form below to {isEdit ? 'update' : 'add a new'} service center
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7.5">
               <FormField
                 control={form.control}
                 name="name"
@@ -201,7 +205,7 @@ export function ServiceCenterForm({ initialData }: Props) {
               )}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7.5">
               <FormField
                 control={form.control}
                 name="primaryContactName"
@@ -287,7 +291,7 @@ export function ServiceCenterForm({ initialData }: Props) {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7.5">
               <FormField
                 control={form.control}
                 name="address1"
@@ -489,7 +493,7 @@ export function ServiceCenterForm({ initialData }: Props) {
               )}
             />
 
-            <div className="flex gap-3">
+            <div className="flex gap-2.5">
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting
                   ? 'Saving...'
