@@ -2,14 +2,13 @@ import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/app/api/auth/[...nextauth]/auth-options';
 import prisma from '@/lib/prisma';
-import { ServiceCenterTypesClient } from './client';
+import { ServiceCentersClient } from './client';
 
 export const metadata = {
-  title: 'Service Center Types | Jain Automart Admin',
-  description: 'Manage service center types',
+  title: 'Service Centers | Jain Automart Admin',
 };
 
-export default async function ServiceCenterTypesPage({
+export default async function ServiceCentersPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string; search?: string; status?: string }>;
@@ -28,31 +27,37 @@ export default async function ServiceCenterTypesPage({
 
   const where = {
     ...(search && {
-      name: {
-        contains: search,
-        mode: 'insensitive' as const,
-      },
+      OR: [
+        { name: { contains: search, mode: 'insensitive' as const } },
+        { city: { contains: search, mode: 'insensitive' as const } },
+        { state: { contains: search, mode: 'insensitive' as const } },
+      ],
     }),
     ...(statusFilter && {
       status: statusFilter as any,
     }),
   };
 
-  const [types, totalCount] = await Promise.all([
-    prisma.serviceCenterType.findMany({
+  const [centers, totalCount] = await Promise.all([
+    prisma.serviceCenter.findMany({
       where,
+      include: {
+        type: true,
+        brands: { include: { brand: true } },
+        services: { include: { serviceType: true } },
+      },
       orderBy: { updatedAt: 'desc' },
       skip: (page - 1) * pageSize,
       take: pageSize,
     }),
-    prisma.serviceCenterType.count({ where }),
+    prisma.serviceCenter.count({ where }),
   ]);
 
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <ServiceCenterTypesClient
-      types={types}
+    <ServiceCentersClient
+      centers={centers}
       currentPage={page}
       totalPages={totalPages}
       totalCount={totalCount}

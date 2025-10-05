@@ -2,14 +2,13 @@ import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/app/api/auth/[...nextauth]/auth-options';
 import prisma from '@/lib/prisma';
-import { ServiceCenterTypesClient } from './client';
+import { VehicleBrandsClient } from './client';
 
 export const metadata = {
-  title: 'Service Center Types | Jain Automart Admin',
-  description: 'Manage service center types',
+  title: 'Vehicle Brands | Jain Automart Admin',
 };
 
-export default async function ServiceCenterTypesPage({
+export default async function VehicleBrandsPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string; search?: string; status?: string }>;
@@ -38,21 +37,21 @@ export default async function ServiceCenterTypesPage({
     }),
   };
 
-  const [types, totalCount] = await Promise.all([
-    prisma.serviceCenterType.findMany({
+  const [brands, totalCount] = await Promise.all([
+    prisma.vehicleBrand.findMany({
       where,
       orderBy: { updatedAt: 'desc' },
       skip: (page - 1) * pageSize,
       take: pageSize,
     }),
-    prisma.serviceCenterType.count({ where }),
+    prisma.vehicleBrand.count({ where }),
   ]);
 
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <ServiceCenterTypesClient
-      types={types}
+    <VehicleBrandsClient
+      brands={brands}
       currentPage={page}
       totalPages={totalPages}
       totalCount={totalCount}
