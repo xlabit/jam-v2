@@ -1,0 +1,382 @@
+Perfect — here’s a single, copy-paste **Replit-friendly build prompt** (no source code) that your dev assistant can follow to implement the **Admin → Service Centers** module end-to-end. It includes: (1) the build plan, (2) a CSV import template spec, and (3) a Metronic field-mapping checklist — all inside one instruction block.
+
+---
+
+# 🔧 Master Build Prompt (No Source Code) — **Admin → Service Centers** for JainAutomart
+
+**Context:** Replit project, Next.js (App Router), React, Metronic theme already integrated. Secure admin area exists under `/jammanage` with authenticated access.
+
+> **Act as a senior Next.js engineer using Metronic.** Implement the **Admin → Service Centers** module exactly as specified. Do **not** print large code blocks unless I ask for a specific file. First, confirm directory/file scaffolding, then implement iteratively. Keep secrets in env only. Use server-side validation for all mutations.
+
+---
+
+## A) Objectives & Scope
+
+1. Create Admin CRUD for **Service Centers** with controlled vocabularies:
+
+   * **Service Center Types** (single select)
+   * **Vehicle Brands** (multi select)
+   * **Service Types** (multi select)
+2. Provide List, Create/Edit, View, Archive/Restore, soft delete (where applicable).
+3. Provide **Import/Export CSV** with validation preview + error reporting.
+4. Ensure Metronic-consistent UI (tables, forms, filters, toasts, modals).
+5. Prepare for future frontend finder (filters by brand, service, city, state).
+
+---
+
+## B) Tech Constraints & Conventions
+
+* **Next.js 14+ App Router** with server actions (where suited) and API routes where needed.
+* **Server-side validation** (never trust client).
+* **Metronic components & classes** for all forms and tables.
+* **Pagination, sorting, filtering** must be server-driven (scalable).
+* **Audit log** entries for create/update/status changes/imports.
+* **Soft delete / Archive** for Service Centers and vocabularies; avoid hard delete when referenced.
+
+---
+
+## C) Information Architecture & Routes (no code)
+
+### Admin Sidebar (under `/jammanage`)
+
+* **Service Centers**
+
+  * List: `/jammanage/service-centers`
+  * New: `/jammanage/service-centers/new`
+  * Edit: `/jammanage/service-centers/{id}`
+  * View (optional): `/jammanage/service-centers/{id}/view`
+* **Service Center Types**: `/jammanage/service-center-types`
+* **Vehicle Brands**: `/jammanage/vehicle-brands`
+* **Service Types**: `/jammanage/service-types`
+
+> Keep a **Quick-Add** modal for each vocabulary, callable from the Service Center form (adds, returns, and preselects the created option).
+
+---
+
+## D) Data Model (implementation blueprint, no code)
+
+**Tables/Collections:**
+
+* `service_centers`
+* `service_center_types`
+* `vehicle_brands`
+* `service_types`
+* `service_center_brand_map` (M:N)
+* `service_center_service_map` (M:N)
+* `admin_audit_logs`
+
+**Service Center — Fields**
+
+* `id` (uuid)
+* `name` (string, 3–120, required; unique with `city` when Active)
+* `type_id` (fk → service_center_types, required)
+* `description` (rich text, optional)
+* Contacts:
+
+  * `primary_contact_name` (string, required)
+  * `primary_phone` (string, E.164, required)
+  * `secondary_phone` (string, optional)
+  * `email` (email, optional)
+  * `website` (url, optional)
+  * `whatsapp` (string, optional)
+  * `hours_json` (json schedule, optional)
+* Address:
+
+  * `address1` (required), `address2` (optional), `landmark` (optional)
+  * `city` (required), `state` (required), `pincode` (required, India 6-digit), `country` (required; default “India”)
+  * `lat`/`lng` (optional)
+* Capabilities:
+
+  * `brand_ids` (M:N; ≥1 required)
+  * `service_type_ids` (M:N; ≥1 required)
+  * `specializations` (string[]/tags, optional)
+  * `facilities` (string[] enum, optional; e.g., Pick & Drop, Cashless, EV Fast Charging)
+  * `service_radius_km` (number, optional)
+* Ops:
+
+  * `status` (enum: Draft/Active/Inactive/NeedsReview, required)
+  * `visibility` (boolean; show on frontend)
+  * `slug` (auto: `name-city-state`)
+  * `created_by`, `updated_by`, `created_at`, `updated_at`
+
+**Vocabularies:**
+
+* All have: `id`, `name` (unique), `description` (optional), `status` (Active/Inactive), usage count, timestamps.
+* `vehicle_brands` may include `logo_url` (optional).
+
+**Integrity:**
+
+* Prevent **hard delete** when in use; allow Inactivate to hide from selects.
+
+---
+
+## E) Service Centers — List View (no code)
+
+**Path:** `/jammanage/service-centers`
+**Table Columns:**
+
+* □ (bulk) | **Name** (link to Edit) | **Type** | **Brands** (≤3 + “+N”) | **Services** (≤3 + “+N”) | **City, State** | **Primary Phone** | **Status** | **Updated** | **Actions** (Edit • View • Duplicate • Archive)
+
+**Controls:**
+
+* Search (name, phone, email, city, state, pincode, slug)
+* Filters: Type (single), Brands (multi), Service Types (multi), Status (multi), City/State (typeahead)
+* Sort: Name, Updated, City, State
+* Pagination: 10/25/50/100
+* Bulk actions: Activate, Deactivate, Archive, Export CSV
+* **Import CSV** (with template & dry-run validation report)
+* **Empty state** with CTA “Add your first Service Center”
+
+**Performance target:** ≤500ms server response for 1k rows (paged).
+
+---
+
+## F) Service Centers — Create/Edit Form (no code)
+
+**Paths:**
+
+* Create: `/jammanage/service-centers/new`
+* Edit: `/jammanage/service-centers/{id}`
+
+**Header Actions (sticky):** Save Draft • Save & Publish • Save & Continue • Cancel • (More) Duplicate • Archive
+
+**Sections & Fields:**
+
+1. **Basic Info**
+
+   * Service Center Name (required)
+   * Type (required; from Service Center Types; **Quick-Add**)
+   * Description (rich text)
+2. **Contact Details**
+
+   * Primary Contact Person (required)
+   * Primary Phone (required, E.164)
+   * Secondary Phone (optional)
+   * Email (optional)
+   * Website (optional)
+   * WhatsApp (optional; “Same as Primary” toggle)
+   * Working Hours (weekly schedule builder)
+3. **Address & Location**
+
+   * Address1 (required), Address2, Landmark
+   * City (required), State (required), Pincode (required), Country (required, default India)
+   * Latitude/Longitude (optional), “Pin on Map” stub (phase-2)
+4. **Capabilities**
+
+   * Vehicle Brands (multi, **≥1 required**; **Quick-Add**)
+   * Service Types (multi, **≥1 required**; **Quick-Add**)
+   * Specializations (tags)
+   * Facilities (checkbox group)
+   * Service Radius (km)
+5. **Media** (optional v1)
+
+   * Logo, Gallery (images), Documents (PDF)
+6. **Operational Flags**
+
+   * Status (Draft/Active/Inactive/NeedsReview)
+   * Visibility (Show on frontend)
+   * Owner Notes (internal)
+
+**Sidebar Meta:** Record ID/Slug (RO), Created/Updated by + timestamps, Audit Log link
+
+**Validation:**
+Required fields as above; email/url formats; India pincode 6-digit; unique (Name + City) when publishing Active.
+
+**Save Outcomes:** Toast success; remain on edit; links to “Go to List” and “View”.
+
+---
+
+## G) Vocabulary Screens (no code)
+
+**Paths:**
+
+* Types: `/jammanage/service-center-types`
+* Brands: `/jammanage/vehicle-brands`
+* Service Types: `/jammanage/service-types`
+
+**List:** Name | Status | Usage Count | Updated | Actions (Edit • Inactivate • View usage)
+**Form:** Name (required), Description/Logo (for Brand), Status
+**Guards:** If “in use” → disable hard delete; allow Inactivate.
+**Quick-Add:** consistent modal used from main form, returns selected option.
+
+---
+
+## H) Import/Export — CSV Templates & Rules (no code)
+
+### H1. Export
+
+* Export current filtered set for **Service Centers** and all **Vocabularies**.
+* Include headers exactly as in templates below.
+* Encode multi-selects as **pipe-separated IDs** (e.g., `1|4|9`).
+
+### H2. Import Workflow
+
+* Download template → Fill → Upload → **Preview & Validate** → Show errors with row numbers → Confirm import.
+* Options:
+
+  * “Create missing Vocab” (Types/Brands/Service Types) — default OFF.
+  * “Update on ID/Slug match” — default ON.
+* Result report: new rows, updated rows, errors.
+
+### H3. **CSV Template: Service Centers**
+
+Create file at `/public/templates/service_centers_template.csv` with **header row only** and field documentation (you may embed a comment README alongside, not in CSV):
+
+**CSV Header Order (exact):**
+
+```
+id, name, type_id, description, primary_contact_name, primary_phone, secondary_phone, email, website, whatsapp, hours_json, address1, address2, landmark, city, state, pincode, country, lat, lng, brand_ids, service_type_ids, specializations, facilities, service_radius_km, status, visibility, slug
+```
+
+**Notes:**
+
+* `id`: leave blank to create; fill to update
+* `type_id`: FK to `service_center_types.id`
+* `brand_ids`: pipe-separated FK ids (e.g., `2|7|10`)
+* `service_type_ids`: pipe-separated FK ids
+* `specializations`: pipe-separated strings
+* `facilities`: pipe-separated from allowed enum
+* `status`: `Draft|Active|Inactive|NeedsReview`
+* `visibility`: `true|false`
+* `hours_json`: JSON string (weekly schedule)
+
+### H4. **CSV Template: Service Center Types**
+
+Create `/public/templates/service_center_types_template.csv`:
+
+```
+id, name, description, status
+```
+
+### H5. **CSV Template: Vehicle Brands**
+
+Create `/public/templates/vehicle_brands_template.csv`:
+
+```
+id, name, alias, logo_url, status
+```
+
+### H6. **CSV Template: Service Types**
+
+Create `/public/templates/service_types_template.csv`:
+
+```
+id, name, description, status
+```
+
+**Validation Rules (Importer):**
+
+* Required fields enforced (`name`, `type_id`, `primary_phone`, `address1`, `city`, `state`, `pincode`, at least one brand/service type for Active).
+* Verify FK existence for `type_id`, `brand_ids`, `service_type_ids` (unless “Create missing” is ON, only for vocab).
+* On “Create missing”: add any unknown vocab with Status=Active.
+* On conflict (duplicate `name+city` for Active): reject row with error.
+* Accumulate errors per row, continue validating rest; commit only if user confirms after viewing report.
+
+---
+
+## I) Metronic Field Mapping Checklist (use strictly)
+
+Use these exact Metronic components/styles. Keep labels, helper text, and error states consistent.
+
+| Section      | Field                  | Metronic Component                 | Layout/UX                                   | Validation & Notes                            |
+| ------------ | ---------------------- | ---------------------------------- | ------------------------------------------- | --------------------------------------------- |
+| Basic Info   | Service Center Name    | `form-control` text                | 2-col grid, label top, helper “3–120 chars” | Required; 3–120; unique with City when Active |
+| Basic Info   | Type                   | **KT Select** (single, searchable) | Full width                                  | Required; **Quick-Add Modal** to Types        |
+| Basic Info   | Description            | `textarea` / rich text             | Full width                                  | Optional                                      |
+| Contact      | Primary Contact Person | `form-control` text                | 2-col                                       | Required                                      |
+| Contact      | Primary Phone          | `input-group` + phone icon         | E.164 hint                                  | Required; phone pattern                       |
+| Contact      | Secondary Phone        | `form-control`                     | Right col                                   | Optional                                      |
+| Contact      | Email                  | `form-control` email               | 2-col                                       | RFC format                                    |
+| Contact      | Website                | `form-control` url                 | 2-col                                       | URL format                                    |
+| Contact      | WhatsApp               | `form-control` tel                 | 2-col                                       | “Same as Primary” toggle                      |
+| Contact      | Working Hours          | KT schedule pattern                | Weekly rows, Closed toggle                  | Optional                                      |
+| Address      | Address1               | `form-control`                     | Full width                                  | Required                                      |
+| Address      | Address2               | `form-control`                     | Full width                                  | Optional                                      |
+| Address      | Landmark               | `form-control`                     | Full width                                  | Optional                                      |
+| Address      | City                   | **Typeahead**                      | Row with State/Pincode                      | Required                                      |
+| Address      | State                  | **Typeahead**                      |                                             | Required                                      |
+| Address      | Pincode                | `form-control`                     |                                             | Required; 6 digits (IN)                       |
+| Address      | Country                | **KT Select**                      | Default “India”                             | Required                                      |
+| Geo          | Latitude/Longitude     | `input-group` numeric              | Map-pin icon                                | Optional                                      |
+| Capabilities | Vehicle Brands         | **KT Select** (multi + chips)      | Show selected as badges                     | **≥1 required**; **Quick-Add**                |
+| Capabilities | Service Types          | **KT Select** (multi + chips)      |                                             | **≥1 required**; **Quick-Add**                |
+| Capabilities | Specializations        | **Tagify**                         | Freeform tags                               | Optional                                      |
+| Capabilities | Facilities             | Checkbox group                     | 2 columns                                   | Optional                                      |
+| Capabilities | Service Radius (km)    | `form-control` number              | Suffix “km”                                 | Optional                                      |
+| Ops          | Status                 | **KT Select** or segmented control | Sticky actions honor publish guard          | Required                                      |
+| Ops          | Visibility             | Switch                             |                                             | Required                                      |
+| Media        | Logo/Gallery           | **KT Image Input**                 | Previews                                    | Optional                                      |
+
+**List/Table Mapping**
+
+* KT Datatable, server pagination & filters, pill badges for Status, tooltips for Updated.
+
+**Toasts & Alerts**
+
+* Use Metronic toast for success; inline invalid feedback for field errors; red alert for import errors.
+
+---
+
+## J) Validation & Workflow Rules
+
+* **Draft**: allow partial save.
+* **Publish (Active)**: enforce all required fields + uniqueness (Name+City).
+* **Inactive**: hidden from frontend.
+* **NeedsReview**: internal staging.
+* **Vocab deletion**: disable if in use; suggest Inactivate.
+* **Audit log** every create/update/archive/import with who/when/what changed (key fields diff).
+
+---
+
+## K) Permissions
+
+* Only **Site Owner/Admin** can CRUD Service Centers and vocabularies, use Import/Export, and see Audit logs. (Vendor flows later.)
+
+---
+
+## L) Acceptance Criteria (QA Checklist)
+
+* [ ] Sidebar entries present; navigation matches paths.
+* [ ] Service Centers **List** supports search, filters, sort, pagination, bulk actions.
+* [ ] **Create/Edit** form matches mapping; validations enforced server-side.
+* [ ] **Quick-Add** vocab modals function and return selected value.
+* [ ] **Status workflow** respected; publishing guard blocks invalid records.
+* [ ] **Export CSV** outputs current filtered set with correct headers.
+* [ ] **Import CSV** supports dry-run validation with clear row-level errors; options work.
+* [ ] **Audit logs** captured for CRUD, status changes, imports.
+* [ ] **Soft delete/Archive** works; prevents hard delete when referenced.
+* [ ] Performance baseline achieved (paged list ≤500ms for 1k rows).
+
+---
+
+## M) Testing Steps (manual)
+
+1. Create 3 vocab entries for Types; 6 brands; 8 service types.
+2. Add one Service Center with minimal required fields → Save Draft.
+3. Publish it (Active) → ensure validations pass.
+4. Attempt duplicate Name + City Active → expect error.
+5. Export filtered list → verify CSV headers & values.
+6. Import from template with 2 new rows + 1 update + 1 error → validate preview & final report.
+7. Inactivate a brand used by a center → center remains valid; brand hidden from future selection.
+8. Archive a Service Center → ensure not shown in default list; restorable.
+9. Confirm Audit log entries for each action.
+
+---
+
+## N) Deliverables (no code dump)
+
+When done, provide:
+
+* Confirmed **route map** and **files created**.
+* Screenshots/notes showing **List**, **Create/Edit**, **Vocab screens**, **Import/Export** flows.
+* CSV templates created at:
+
+  * `/public/templates/service_centers_template.csv`
+  * `/public/templates/service_center_types_template.csv`
+  * `/public/templates/vehicle_brands_template.csv`
+  * `/public/templates/service_types_template.csv`
+* A brief summary explaining how the implementation meets Sections A–L.
+
+---
+
+**Proceed with implementation as specified. Do not print file contents unless I ask for a specific file. When ready, report completion against the Acceptance Criteria and Testing Steps.**
