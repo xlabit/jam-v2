@@ -1,0 +1,252 @@
+Great catch. You’re right—#12 was a controller prompt, not the whole spec. Here’s a **single, expanded, copy-paste “Replit-friendly build prompt”** that **fully embeds** the plan (no source code). Hand this to your dev assistant/AI and it’ll cover everything end-to-end.
+
+---
+
+# 🔧 Master Build Prompt (No Code) — **Admin → Vehicles (New & Used)** for JainAutomart
+
+**Context:** Replit project. Next.js 14+ (App Router) + React. Metronic theme integrated. Secure admin exists at `/jammanage`. You are a senior Next.js + Metronic engineer. Implement exactly as specified below. Do **not** print large code blocks unless asked for a specific file.
+
+---
+
+## 1) Objectives & Scope
+
+* Build an admin module to **create, manage, and publish vehicle listings** (heavy vehicles: trucks, trailers, tippers, tankers, tractors, etc.).
+* Support **New** and **Used** vehicles with conditional fields.
+* Include **dependent vocabularies** (Make → Model → Variant; Body Type; Axle Config; Fuel; Emission; Transmission; Feature Tags) with **Quick-Add** modals.
+* Provide **List**, **Create/Edit (Stepper + autosave)**, **View (optional)**, **Duplicate**, **Archive**, **Reserved**, **Sold** workflows.
+* Prepare for a future public catalog (filters & fast search).
+* Exclude import/export for now.
+
+---
+
+## 2) Information Architecture & Routes (no code)
+
+**Sidebar (under `/jammanage`)**
+
+* **Vehicles**
+
+  * List: `/jammanage/vehicles`
+  * Add New: `/jammanage/vehicles/new`
+  * Edit: `/jammanage/vehicles/{id}`
+  * View (optional): `/jammanage/vehicles/{id}/view`
+* **Vocabularies (Vehicles)**
+
+  * Makes: `/jammanage/vehicles/makes`
+  * Models: `/jammanage/vehicles/models`
+  * Variants: `/jammanage/vehicles/variants`
+  * Body Types: `/jammanage/vehicles/body-types`
+  * Axle Config: `/jammanage/vehicles/axle-config`
+  * Fuel Types: `/jammanage/vehicles/fuel-types`
+  * Emission Norms: `/jammanage/vehicles/emission-norms`
+  * Transmissions: `/jammanage/vehicles/transmissions`
+  * Feature Tags: `/jammanage/vehicles/feature-tags`
+
+> Each vocabulary has List + Create/Edit, **Inactivate (no hard delete if referenced)**, usage count, search/filter/sort. **Quick-Add** modal is invokable from main form selects and returns the new item pre-selected.
+
+---
+
+## 3) Data Model (implementation blueprint, no code)
+
+**Tables/Collections**
+
+* `vehicles`
+* `vehicle_makes`, `vehicle_models`, `vehicle_variants`
+* `vehicle_body_types`, `vehicle_axle_configs`
+* `vehicle_fuel_types`, `vehicle_emission_norms`, `vehicle_transmissions`
+* `vehicle_feature_tags`
+* `vehicle_feature_map` (vehicle_id ↔ feature_tag_id, M:N)
+* `admin_audit_logs`
+
+**Vehicle — Core Fields**
+
+* Identity: `id`, `slug` (unique), `title` (editable, auto-generated), `condition` (New|Used)
+* Taxonomy: `make_id` → `model_id` → `variant_id` (nullable), `body_type_id`, `axle_config_id`
+* Year & key specs: `model_year`, `wheelbase_mm`, `gvw_t`, `gcw_t`, `payload_t`
+* Engine/Driveline: `engine_cc`, `power_hp`, `power_kw`, `torque_nm`, `fuel_type_id`, `emission_norm_id`, `transmission_id`, `gears`, `final_drive_ratio` (opt)
+* Dimensions: `overall_l_mm`, `overall_w_mm`, `overall_h_mm`, `load_l_mm`, `load_w_mm`, `load_h_mm`, `turning_radius_m`
+* Features (M:N via map)
+* Commercials (frontend): `asking_price_inr` (req), `negotiable` (bool), `finance_available` (bool), `gst_slab` (opt)
+* Commercials (internal only): `vendor_price_inr`, `target_margin_inr` (hide from frontend)
+* Location/Seller: `seller_id` (admin/vendor future), `city`, `state`, `pincode`, `lat`, `lng`, `contact_phone`, `contact_whatsapp`
+* Used-only docs: `reg_no`, `reg_date`, `ownership_count`, `insurance_type`, `insurance_expiry`, `fitness_expiry`, `puc_expiry`, `permit_states_json`, `hypothecation_bank`
+* Media: `cover_url`, `gallery_json` (ordered), `video_url`, `brochure_url`, `watermark_enabled` (bool)
+* SEO: `meta_title`, `meta_description`
+* Workflow: `status` (Draft|PendingReview|Published|Reserved|Sold|Archived), `visibility` (bool)
+* Audit: `created_by`, `updated_by`, `created_at`, `updated_at`
+
+**Integrity & Uniqueness**
+
+* `slug` unique per vehicle.
+* When **Published** and **Used**, `(reg_no + state)` must be unique.
+* Foreign keys must exist unless Quick-Add created them.
+
+---
+
+## 4) UX & Forms — **4-Step Stepper with Autosave**
+
+**Global**
+
+* Sticky top actions: **Save Draft**, **Publish**, **Preview**, **Duplicate**, status pill, “Saved Xs ago”.
+* Right rail: **Summary card** (Title, Price, Make/Model/Axle/Body, Cover thumb), live-updating.
+* **Autosave** on field blur and step change; show non-blocking toast.
+
+**Step 1 — Basics**
+
+* **Condition**: New/Used (segmented buttons) *(req)*
+* **Make** *(req; select + Quick-Add)* → **Model** *(req; dependent + Quick-Add)* → **Variant** *(opt; dependent + Quick-Add)*
+* **Model Year** *(YYYY, req; range current+1 back to 1990)*
+* **Body Type** *(req; select + search)*
+* **Axle Configuration** *(req)*
+* **Title** *(auto-generated from Year, Make, Model, Variant, Axle, Body; editable)*
+* **Cover Image** *(KT Image Input, req)*
+* **Quick Gallery** *(drag-drop; reorder; set cover)*
+
+**Step 2 — Specs**
+
+* **Configuration**: wheelbase_mm, gvw_t, gcw_t, payload_t
+* **Chassis/Cabin**: day/sleeper, AC (bool), suspension (front/rear), brake type, tyre size/count
+* **Engine & Driveline**: engine_cc, power_hp/power_kw (either; derive counterpart), torque_nm, fuel_type_id, emission_norm_id, transmission_id, gears, final_drive_ratio (opt)
+* **Dimensions**: overall L/W/H, load body L/W/H (if applicable), turning_radius_m
+* **Features**: multi-select chips/badges from Feature Tags (searchable)
+
+**Step 3 — Commercials & Location**
+
+* **Pricing (frontend)**: asking_price_inr *(req)*, negotiable (bool), finance_available (bool), gst_slab (opt)
+* **Internal**: vendor_price_inr, target_margin_inr *(hidden from frontend)*
+* **Seller/Location**: seller_id (admin/vendor future), city *(req)*, state *(req)*, pincode *(req)*, lat/lng (opt; pin on map), contact_phone *(req)*, contact_whatsapp (opt)
+
+**Step 4 — Media, Docs, SEO & Visibility**
+
+* **Media**: gallery (drag-drop, reorder), video_url (opt), brochure_url (opt), watermark_enabled (bool)
+* **Used Docs (Condition=Used only)**: reg_no, reg_date, ownership_count, insurance_type+expiry, fitness_expiry, puc_expiry, permit_states (tags), hypothecation_bank
+* **SEO**: meta_title (default from Title), meta_description (160–180 chars), **Slug** (auto from Title; editable; validate unique)
+* **Visibility/Status**: visibility (bool), status (Draft|PendingReview|Published|Reserved|Sold|Archived)
+
+**Micro-interactions**
+
+* Field help text, unit suffixes (mm, t, Nm, HP/kW, ₹).
+* Derived fields: when power_hp filled, compute power_kw, and vice-versa (simple conversion 1 HP ≈ 0.7457 kW).
+* Conditional rendering for Used-only fields.
+* **Publish Guard**: show a checklist modal of unmet requirements (see §6).
+
+---
+
+## 5) Model Template Prefill Logic
+
+* Maintain per **Variant** a defaults object (GVW, GCW, engine_cc, power_hp/kw, torque_nm, transmission_id, gears, typical axle config, etc.).
+* On selecting **Variant**:
+
+  * If a field is empty, auto-fill from variant defaults.
+  * If already filled by user, **do not override**, but show a “Template values available” popover with “Apply all / Apply selective”.
+* If only **Model** chosen (no Variant), load model-level defaults where available.
+
+---
+
+## 6) Validation & Guards (server-side enforce)
+
+**Required to Publish**
+
+* condition, make_id, model_id, model_year, body_type_id, axle_config_id
+* city, state, pincode
+* asking_price_inr
+* cover image
+* slug unique
+* If **Used**: reg_no present; optionally enforce ownership_count; warn (not block) for missing insurance/fitness
+  **Ranges & Formats**
+* Year: 1990 … (current year + 1)
+* Pincode: India 6-digit
+* Phone: E.164 or 10-digit India with +91 hint
+* Numbers non-negative; sensible maxima (e.g., GVW ≤ 60t typical)
+  **Uniqueness**
+* (reg_no + state) must be unique among **Published/Sold** Used vehicles
+  **Status Transitions**
+* Draft ↔ PendingReview ↔ Published; Published → Reserved/Sold/Archived; Sold → Archived (can unarchive to Published by admin only)
+
+---
+
+## 7) List View (Vehicles)
+
+**Path:** `/jammanage/vehicles`
+**Columns:** □ | cover | **Title** | Condition | Make/Model | Body Type | Axle | City/State | Price | Status | Updated | Actions (Edit • View • Duplicate • Archive/Sold)
+**Controls:** search (title, make, model, variant, reg_no, city/state, slug), filters (Condition, Make, Model, Body Type, Axle, Fuel, Emission, Status, City/State, Year range, Price range), sort (Updated, Year, Price, Title), pagination (10/25/50/100), bulk (Publish, Mark Reserved, Mark Sold, Archive, Change Seller).
+**Performance:** server-driven pagination; target ≤ 500 ms for 1k items.
+
+---
+
+## 8) Metronic Field Mapping (use strictly)
+
+* **Selects**: KT Select (searchable). Dependent selects for Make→Model→Variant.
+* **Segmented buttons** for Condition.
+* **Inputs with unit suffix**: input-group (`mm`, `t`, `Nm`, `HP`, `kW`, `₹`).
+* **Feature Tags**: chips/badges selector with search (Tagify/KT multi).
+* **Media**: KT Image Input (cover), KT media uploader (gallery) with drag-drop + reorder + set cover.
+* **Status/Visibility**: KT Select or segmented control + switch.
+* **Toasts/Alerts**: success/info/error; inline invalid feedback; step-top error summary on publish attempt.
+
+---
+
+## 9) Quick-Add Modals (Vocab)
+
+For each vocab screen, a consistent modal pattern:
+
+* Fields: **Name** (required, unique), optional **Alias/Description** (Brand logo for Make), **Status** (Active/Inactive).
+* On save success: return the new row and **preselect** it in the originating select.
+* **Inactivate** hides from selects but keeps data integrity.
+
+---
+
+## 10) Workflows & Roles
+
+* Only **Owner/Admin** can **Publish**, **Mark Sold**, **Archive**, or **Unarchive**.
+* Data-entry role may **Save Draft** and submit **Pending Review**.
+* **Duplicate** action clones a listing to Draft (no docs); regenerate slug.
+* **Reserved** requires reserved_until date (optional); auto-revert to Published after expiry.
+
+---
+
+## 11) Frontend Readiness (for later)
+
+* Index for: make_id, model_id, body_type_id, axle_config_id, fuel_type_id, emission_norm_id, city/state, model_year, asking_price_inr.
+* Maintain a denormalized `key_specs` string for fast card render (e.g., “4023 • 6×4 • 55t GVW • BS-VI”).
+
+---
+
+## 12) Acceptance Criteria (QA)
+
+* [ ] Routes & sidebar entries created as in §2; vocab sections present with Quick-Add modals.
+* [ ] **4-step stepper** with autosave, sticky actions, live **Summary card**.
+* [ ] Dependent selects (Make→Model→Variant) work with async options; Quick-Add returns preselected value.
+* [ ] **Model Template Prefill** applies defaults without overriding user edits; “Apply all/selective” option offered.
+* [ ] Conditional **Used-only** fields appear correctly.
+* [ ] **Gallery** drag-drop reorder; set cover; cover required to publish.
+* [ ] **Publish Guard** blocks publish until §6 requirements met and displays a checklist; slug uniqueness enforced.
+* [ ] List view: search, filters, sort, pagination, bulk actions; status transitions per §6.
+* [ ] Performance: paged list ≤ 500 ms at 1k items.
+* [ ] **Audit logs** for create/update/status/duplicate/archive with who/when/what changed.
+
+---
+
+## 13) Testing Steps (manual)
+
+1. Seed vocab: 5 Makes, 12 Models, 10 Body Types, 6 Axles, 5 Fuels, 3 Emissions, 4 Transmissions, 20 Feature Tags.
+2. Create a **New** vehicle: fill required fields only → Save Draft → Publish (ensure guard passes).
+3. Create a **Used** vehicle: try publish without reg_no → expect guard failure; add reg_no/state → publish; try duplicate reg_no/state on another used listing → expect uniqueness error.
+4. Select Variant with defaults → verify **Model Template Prefill**; edit a value, re-select variant → ensure user edit remains unless explicitly “Apply”.
+5. Upload 6 images; reorder; change cover → verify summary updates.
+6. Change status: Published → Reserved (with date) → auto-restore to Published after expiry; Published → Sold → Archived; unarchive back to Published (admin only).
+7. List filters: filter by Make/Body Type/City; sort by Updated; bulk mark Reserved.
+8. Verify audit logs for all actions.
+
+---
+
+## 14) Deliverables (no code dump)
+
+Provide:
+
+* Route map and files created.
+* Screenshots/notes for **List**, **Create/Edit (all steps)**, **status changes**, **Quick-Add** usage.
+* Brief summary explaining how the implementation meets §§1–13.
+
+---
+
+**Execute all steps above. Do not print full file contents unless I ask for a specific file. When done, report completion against the Acceptance Criteria and Testing Steps with screenshots/notes.**

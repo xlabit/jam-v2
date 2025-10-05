@@ -310,3 +310,311 @@ model ServiceCenterService {
   @@index([serviceCenterId])
   @@index([serviceTypeId])
 }
+
+// Vehicles Module
+enum VehicleCondition {
+  NEW
+  USED
+}
+
+enum VehicleStatus {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  RESERVED
+  SOLD
+  ARCHIVED
+}
+
+model VehicleMake {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  logoUrl     String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  models      VehicleModel[]
+  vehicles    Vehicle[]
+  
+  @@index([status])
+  @@index([name])
+}
+
+model VehicleModel {
+  id          String           @id @default(uuid())
+  makeId      String
+  name        String
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  
+  // Model-level defaults (optional prefill)
+  defaultsJson Json?
+  
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  make        VehicleMake      @relation(fields: [makeId], references: [id])
+  variants    VehicleVariant[]
+  vehicles    Vehicle[]
+  
+  @@unique([makeId, name])
+  @@index([makeId])
+  @@index([status])
+}
+
+model VehicleVariant {
+  id          String           @id @default(uuid())
+  modelId     String
+  name        String
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  
+  // Variant-level defaults for prefill
+  defaultsJson Json?
+  
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  model       VehicleModel     @relation(fields: [modelId], references: [id])
+  vehicles    Vehicle[]
+  
+  @@unique([modelId, name])
+  @@index([modelId])
+  @@index([status])
+}
+
+model VehicleBodyType {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  vehicles    Vehicle[]
+  
+  @@index([status])
+}
+
+model VehicleAxleConfig {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  vehicles    Vehicle[]
+  
+  @@index([status])
+}
+
+model VehicleFuelType {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  vehicles    Vehicle[]
+  
+  @@index([status])
+}
+
+model VehicleEmissionNorm {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  vehicles    Vehicle[]
+  
+  @@index([status])
+}
+
+model VehicleTransmission {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  status      VocabularyStatus @default(ACTIVE)
+  usageCount  Int              @default(0)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  
+  vehicles    Vehicle[]
+  
+  @@index([status])
+}
+
+model VehicleFeatureTag {
+  id          String               @id @default(uuid())
+  name        String               @unique
+  description String?
+  status      VocabularyStatus     @default(ACTIVE)
+  usageCount  Int                  @default(0)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  
+  vehicles    VehicleFeatureMap[]
+  
+  @@index([status])
+}
+
+model Vehicle {
+  id                   String             @id @default(uuid())
+  slug                 String             @unique
+  title                String
+  condition            VehicleCondition
+  
+  // Taxonomy
+  makeId               String
+  modelId              String
+  variantId            String?
+  bodyTypeId           String
+  axleConfigId         String
+  
+  // Year & Key Specs
+  modelYear            Int
+  wheelbaseMm          Int?
+  gvwT                 Float?
+  gcwT                 Float?
+  payloadT             Float?
+  
+  // Engine & Driveline
+  engineCc             Int?
+  powerHp              Float?
+  powerKw              Float?
+  torqueNm             Float?
+  fuelTypeId           String?
+  emissionNormId       String?
+  transmissionId       String?
+  gears                Int?
+  finalDriveRatio      String?
+  
+  // Chassis & Cabin
+  cabinType            String?            // Day/Sleeper
+  hasAc                Boolean            @default(false)
+  suspensionFront      String?
+  suspensionRear       String?
+  brakeType            String?
+  tyreSize             String?
+  tyreCount            Int?
+  
+  // Dimensions
+  overallLengthMm      Int?
+  overallWidthMm       Int?
+  overallHeightMm      Int?
+  loadBodyLengthMm     Int?
+  loadBodyWidthMm      Int?
+  loadBodyHeightMm     Int?
+  turningRadiusM       Float?
+  
+  // Commercials (Frontend)
+  askingPriceInr       Float
+  negotiable           Boolean            @default(false)
+  financeAvailable     Boolean            @default(false)
+  gstSlab              String?
+  
+  // Commercials (Internal Only)
+  vendorPriceInr       Float?
+  targetMarginInr      Float?
+  
+  // Location & Seller
+  sellerId             String?
+  city                 String
+  state                String
+  pincode              String
+  latitude             Float?
+  longitude            Float?
+  contactPhone         String
+  contactWhatsapp      String?
+  
+  // Used Vehicle Docs (conditional)
+  regNo                String?
+  regDate              DateTime?
+  ownershipCount       Int?
+  insuranceType        String?
+  insuranceExpiry      DateTime?
+  fitnessExpiry        DateTime?
+  pucExpiry            DateTime?
+  permitStatesJson     Json?              // Array of states
+  hypothecationBank    String?
+  
+  // Media
+  coverUrl             String?
+  galleryJson          Json?              // Ordered array of image URLs
+  videoUrl             String?
+  brochureUrl          String?
+  watermarkEnabled     Boolean            @default(true)
+  
+  // SEO
+  metaTitle            String?
+  metaDescription      String?
+  
+  // Workflow
+  status               VehicleStatus      @default(DRAFT)
+  visibility           Boolean            @default(false)
+  reservedUntil        DateTime?
+  
+  // Denormalized for fast frontend
+  keySpecs             String?            // e.g., "4023 • 6×4 • 55t GVW • BS-VI"
+  
+  // Audit
+  createdBy            String?
+  updatedBy            String?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  
+  // Relations
+  make                 VehicleMake        @relation(fields: [makeId], references: [id])
+  model                VehicleModel       @relation(fields: [modelId], references: [id])
+  variant              VehicleVariant?    @relation(fields: [variantId], references: [id])
+  bodyType             VehicleBodyType    @relation(fields: [bodyTypeId], references: [id])
+  axleConfig           VehicleAxleConfig  @relation(fields: [axleConfigId], references: [id])
+  fuelType             VehicleFuelType?   @relation(fields: [fuelTypeId], references: [id])
+  emissionNorm         VehicleEmissionNorm? @relation(fields: [emissionNormId], references: [id])
+  transmission         VehicleTransmission? @relation(fields: [transmissionId], references: [id])
+  features             VehicleFeatureMap[]
+  
+  @@unique([regNo, state], name: "unique_reg_per_state")
+  @@index([makeId])
+  @@index([modelId])
+  @@index([bodyTypeId])
+  @@index([axleConfigId])
+  @@index([fuelTypeId])
+  @@index([emissionNormId])
+  @@index([city])
+  @@index([state])
+  @@index([modelYear])
+  @@index([askingPriceInr])
+  @@index([status])
+  @@index([visibility])
+  @@index([condition])
+  @@index([slug])
+}
+
+model VehicleFeatureMap {
+  id           String            @id @default(uuid())
+  vehicleId    String
+  featureTagId String
+  createdAt    DateTime          @default(now())
+  
+  vehicle      Vehicle           @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  featureTag   VehicleFeatureTag @relation(fields: [featureTagId], references: [id], onDelete: Cascade)
+  
+  @@unique([vehicleId, featureTagId])
+  @@index([vehicleId])
+  @@index([featureTagId])
+}
