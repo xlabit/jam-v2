@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // User Modoule
@@ -167,4 +166,147 @@ model SystemSetting {
   notifySystemErrorFailureEmail  Boolean  @default(true)
   notifySystemErrorWeb           Boolean  @default(true)
   notifySystemErrorRoleIds       String[]
+}
+
+// Service Centers Module
+enum ServiceCenterStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  NEEDS_REVIEW
+}
+
+enum VocabularyStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model ServiceCenterType {
+  id             String               @id @default(uuid())
+  name           String               @unique
+  description    String?
+  status         VocabularyStatus     @default(ACTIVE)
+  usageCount     Int                  @default(0)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  serviceCenters ServiceCenter[]
+
+  @@index([status])
+}
+
+model VehicleBrand {
+  id             String                @id @default(uuid())
+  name           String                @unique
+  description    String?
+  logoUrl        String?
+  status         VocabularyStatus      @default(ACTIVE)
+  usageCount     Int                   @default(0)
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  serviceCenters ServiceCenterBrand[]
+
+  @@index([status])
+}
+
+model ServiceType {
+  id             String                 @id @default(uuid())
+  name           String                 @unique
+  description    String?
+  status         VocabularyStatus       @default(ACTIVE)
+  usageCount     Int                    @default(0)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  serviceCenters ServiceCenterService[]
+
+  @@index([status])
+}
+
+model ServiceCenter {
+  id                  String                 @id @default(uuid())
+  name                String
+  typeId              String
+  description         String?                @db.Text
+  
+  // Contact Details
+  primaryContactName  String
+  primaryPhone        String
+  secondaryPhone      String?
+  email               String?
+  website             String?
+  whatsapp            String?
+  hoursJson           Json?
+  
+  // Address
+  address1            String
+  address2            String?
+  landmark            String?
+  city                String
+  state               String
+  pincode             String
+  country             String                 @default("India")
+  latitude            Float?
+  longitude           Float?
+  
+  // Capabilities
+  specializations     String[]
+  facilities          String[]
+  serviceRadiusKm     Int?
+  
+  // Operational
+  status              ServiceCenterStatus    @default(DRAFT)
+  visibility          Boolean                @default(false)
+  slug                String                 @unique
+  ownerNotes          String?                @db.Text
+  
+  // Media
+  logoUrl             String?
+  galleryUrls         String[]
+  documentUrls        String[]
+  
+  // Audit
+  createdBy           String?
+  updatedBy           String?
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  
+  // Relations
+  type                ServiceCenterType      @relation(fields: [typeId], references: [id])
+  brands              ServiceCenterBrand[]
+  services            ServiceCenterService[]
+  
+  @@unique([name, city, status])
+  @@index([typeId])
+  @@index([city])
+  @@index([state])
+  @@index([status])
+  @@index([visibility])
+  @@index([slug])
+}
+
+model ServiceCenterBrand {
+  id              String        @id @default(uuid())
+  serviceCenterId String
+  brandId         String
+  createdAt       DateTime      @default(now())
+  
+  serviceCenter   ServiceCenter @relation(fields: [serviceCenterId], references: [id], onDelete: Cascade)
+  brand           VehicleBrand  @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  
+  @@unique([serviceCenterId, brandId])
+  @@index([serviceCenterId])
+  @@index([brandId])
+}
+
+model ServiceCenterService {
+  id              String        @id @default(uuid())
+  serviceCenterId String
+  serviceTypeId   String
+  createdAt       DateTime      @default(now())
+  
+  serviceCenter   ServiceCenter @relation(fields: [serviceCenterId], references: [id], onDelete: Cascade)
+  serviceType     ServiceType   @relation(fields: [serviceTypeId], references: [id], onDelete: Cascade)
+  
+  @@unique([serviceCenterId, serviceTypeId])
+  @@index([serviceCenterId])
+  @@index([serviceTypeId])
 }
