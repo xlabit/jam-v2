@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Plus, Search, Edit } from 'lucide-react';
+import { Plus, Search, Edit, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -65,6 +66,23 @@ export function ServiceTypesClient({
     if (searchValue) params.set('search', searchValue);
     if (value && value !== 'all') params.set('status', value);
     router.push(`/jammanage/service-types?${params.toString()}`);
+  };
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
+
+    try {
+      const response = await fetch(`/api/jammanage/service-types/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Failed to delete');
+
+      toast.success('Service type deleted successfully');
+      router.refresh();
+    } catch (error) {
+      toast.error('Failed to delete service type');
+    }
   };
 
   return (
@@ -165,16 +183,26 @@ export function ServiceTypesClient({
                           {format(new Date(type.updatedAt), 'MMM d, yyyy')}
                         </TableCell>
                         <TableCell className="text-right">
-                          <Button
-                            asChild
-                            variant="ghost"
-                            size="sm"
-                            mode="icon"
-                          >
-                            <Link href={`/jammanage/service-types/${type.id}`}>
-                              <Edit className="size-4" />
-                            </Link>
-                          </Button>
+                          <div className="flex items-center justify-end gap-1">
+                            <Button
+                              asChild
+                              variant="ghost"
+                              size="sm"
+                              mode="icon"
+                            >
+                              <Link href={`/jammanage/service-types/${type.id}`}>
+                                <Edit className="size-4" />
+                              </Link>
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              mode="icon"
+                              onClick={() => handleDelete(type.id, type.name)}
+                            >
+                              <Trash2 className="size-4 text-destructive" />
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
