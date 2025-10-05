@@ -31,6 +31,31 @@ const menuItems: MenuItemType[] = [
 
 const menuSections = [
   {
+    title: 'SERVICE CENTERS',
+    items: [
+      {
+        label: 'Service Centers',
+        path: '/jammanage/service-centers',
+        icon: Package,
+      },
+      {
+        label: 'Service Center Types',
+        path: '/jammanage/service-center-types',
+        icon: Settings,
+      },
+      {
+        label: 'Vehicle Brands',
+        path: '/jammanage/vehicle-brands',
+        icon: Shield,
+      },
+      {
+        label: 'Service Types',
+        path: '/jammanage/service-types',
+        icon: FileText,
+      },
+    ],
+  },
+  {
     title: 'MANAGEMENT',
     items: [
       {
