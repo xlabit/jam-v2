@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { ArrowLeft, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -97,25 +97,27 @@ export function ServiceCenterTypeForm({ type }: Props) {
 
   return (
     <div className="container-fixed">
-      <div className="flex flex-col gap-5 lg:gap-7.5">
-        <div className="flex items-center gap-4">
-          <Button asChild variant="ghost" size="sm" mode="icon">
-            <Link href="/jammanage/service-center-types">
-              <ArrowLeft className="size-4" />
-            </Link>
-          </Button>
-          <h1 className="text-xl font-semibold text-foreground">
-            {type ? 'Edit' : 'New'} Service Center Type
-          </h1>
-        </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 lg:gap-7.5">
+          <Card>
+            <CardContent className="lg:py-7.5">
+              <div className="flex flex-col gap-5 lg:gap-7.5">
+                <div className="flex items-center gap-4">
+                  <Button asChild variant="ghost" size="sm" mode="icon">
+                    <Link href="/jammanage/service-center-types">
+                      <ArrowLeft className="size-4" />
+                    </Link>
+                  </Button>
+                  <div className="flex flex-col gap-1">
+                    <h2 className="text-2xl font-semibold text-mono">
+                      {type ? 'Edit' : 'New'} Service Center Type
+                    </h2>
+                    <p className="text-sm text-secondary-foreground">
+                      Complete the form below to {type ? 'update' : 'add a new'} service center type
+                    </p>
+                  </div>
+                </div>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Basic Information</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
                 <FormField
                   control={form.control}
                   name="name"
@@ -182,25 +184,25 @@ export function ServiceCenterTypeForm({ type }: Props) {
                     </FormItem>
                   )}
                 />
-              </CardContent>
-            </Card>
 
-            <div className="flex items-center gap-3">
-              <Button type="submit" disabled={isSubmitting}>
-                <Save className="size-4 mr-2" />
-                {isSubmitting ? 'Saving...' : 'Save Type'}
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => router.push('/jammanage/service-center-types')}
-              >
-                Cancel
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </div>
+                <div className="flex items-center gap-2.5">
+                  <Button type="submit" disabled={isSubmitting}>
+                    <Save className="size-4 mr-2" />
+                    {isSubmitting ? 'Saving...' : 'Save Type'}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => router.push('/jammanage/service-center-types')}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </form>
+      </Form>
     </div>
   );
 }
