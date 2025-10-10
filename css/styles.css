@@ -23,6 +23,9 @@
 @import './components/image-input.css';
 @import './components/scrollable.css';
 
+/* Jain Automart Brand System */
+@import './jainautomart.css';
+
 /* Demos */
 @import './demos/demo1.css';
 

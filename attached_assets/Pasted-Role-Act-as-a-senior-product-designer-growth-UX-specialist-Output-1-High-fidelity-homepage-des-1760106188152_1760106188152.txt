@@ -1,0 +1,273 @@
+Role: Act as a senior product designer + growth UX specialist.
+Output: 1) High-fidelity homepage designs (desktop/tablet/mobile), 2) clickable prototype, 3) UI kit (tokens + components), 4) dev handoff specs (spacing, grids, states, performance & a11y notes).
+Tech: Next.js frontend (performance-minded, SEO-friendly).
+
+0) Inputs
+
+Brand: Jain Automart
+
+Logo: (use the provided logo asset; derive tokens from it)
+
+Existing site (KEEP SAME SECTION ORDER): https://www.jainautomart.com/
+ (full-page screenshot provided)
+
+Competitors (inspiration, do not copy):
+
+https://trucks.cardekho.com/
+
+https://trucks.tractorjunction.com/
+
+https://www.trucksbuses.com/
+
+1) Goals (ranked)
+
+Generate qualified leads: Calls, WhatsApp, Get Best Price, Request Callback, Send Enquiry, Book Inspection/Test Drive.
+
+Help users find vehicles fast: prominent search, clean taxonomy (New/Used, Body Type, Make/Model), filter chips, comparison hooks.
+
+Build trust: dealer credibility, numbers band, OEM/partner logos, badges (RC Verified/Warranty/Finance), testimonials.
+
+Preserve SEO: maintain content density + section order; improve scannability.
+
+2) Brand System (define & use consistently)
+
+Palette (derived from logo, WCAG AA compliant):
+--brand-primary (CTAs/links), --brand-accent (badges),
+--neutral-100/200/300/500/700/900 (surfaces & type),
+--success, --warning, --danger (badges/alerts).
+
+Type scale (desktop → mobile):
+H1 40/48 → 28/36, H2 32/40 → 24/32, H3 24/32 → 20/28, body 16/24, small 14/20.
+Recommended families: Inter or Poppins (system fallbacks defined).
+
+Radii & shadows: radius 12 (cards), 999 (chips), elevation tokens (elev-1/2/3).
+
+Iconography: duotone, 24px grid, consistent stroke weight.
+
+3) Performance Budget (design for it)
+
+LCP < 2.5s, CLS < 0.1, TTI < 3s.
+
+Hero art: WebP ~180–220KB (1×), ~360KB (2×).
+
+Listing card images ≤120KB (responsive srcset).
+
+Defer off-screen carousels; lazy-load below the fold; avoid autoplay video in hero.
+
+4) Accessibility (bake into mocks)
+
+All text/background pairs ≥ AA contrast.
+
+Visible focus states for every interactive element (show in UI kit).
+
+Logical tab order for hero search and sticky CTA bar (annotate).
+
+Icon-only buttons must have labels or tooltips in spec.
+
+5) Analytics & Events (name now; include data-test-id in handoff)
+
+hero_search_submit, cta_get_best_price_click, cta_request_callback_click, cta_whatsapp_click,
+featured_listing_card_view, featured_listing_card_click, brand_tile_click, category_tile_click,
+sticky_bar_click, exit_intent_submit.
+
+6) Above-the-Fold (Hero = Conversion Engine)
+
+Headline: “Heavy Vehicles. Verified. Delivered.”
+
+Subhead: “Buy new & used trucks, trailers, and tippers with transparent pricing, inspection, and easy finance.”
+
+Primary CTA group (desktop & sticky on mobile): Get Best Price, Request Callback, WhatsApp (deep link).
+
+Search Bar (prominent, card style): Tabs New | Used; fields Body Type (req), Make (opt), City/State (opt); button Find Vehicles.
+
+Trust Strip under hero: badges (RC Verified, Financing Available, Pan-India Delivery, Warranty Options).
+
+Hero media: studio-style heavy vehicle; subtle scroll-fade (no flashy parallax).
+
+Hero search → Dev spec: Submit to PLP with query params:
+?cond=used&type=tipper&make=tata&city=jaipur&state=rajasthan
+Enter = submit; ESC closes dropdowns; tabs persist selection.
+
+7) Keep SAME SECTION ORDER as current homepage — Redesign each section with modern patterns
+A) Category Navigator (if present)
+
+Card grid with pictograms: Truck, Trailer, Tipper, Tanker, Reefer, Container, Tractor, Bus.
+
+Each card: image, title, “X Listings”, CTA to category PLP.
+
+Hover lift + shadow; mobile = full-bleed rows.
+
+B) Featured Listings (New & Used)
+
+Toggle: New | Used; carousel on desktop, horizontal scroll on mobile.
+
+Card anatomy:
+
+Top: image 4:3 with Verified ribbon + watermark.
+
+Title: Year Make Model Variant.
+
+Spec row: Axle • GVW • Emission • City.
+
+Price (₹) + Negotiable pill if true.
+
+CTAs: View Details (primary), Get Best Price, WhatsApp.
+
+Hover: micro-lift, 3–5% image zoom, shadow-2.
+
+C) Brands / OEMs
+
+Horizontal logo marquee; chips for quick filtering; click → brand landing (SEO page).
+
+D) Body Type Finder
+
+Iconic tiles: Tipper, Trailer, Reefer, Container, Tanker, etc.
+
+Show counts; deep-link to PLP with pre-applied filters.
+
+E) Why Jain Automart (Trust)
+
+3–4 value props with icons (Verified Docs, Cities Served, Finance/Insurance, Expert Inspection).
+
+Numbers band: “10K+ Vehicles Listed • 100+ Cities • 1.5K+ Fleet Owners • 4.7★ Avg. Rating”.
+
+Partner bank/OEM logos (SVG).
+
+F) Finance & Insurance CTA
+
+Split panel: Get Pre-Approved micro-form + partner logos.
+
+Fields: Name (req), Phone (req +91), Vehicle Type, City (req). Consent checkbox.
+
+G) Customer Stories / Testimonials
+
+Photos, 2-line quotes, star rating, city. Carousel with dots.
+
+H) Blog / Guides (SEO)
+
+3–6 cards; category, title, read time; CTA: Read More → Blog PLP.
+
+I) FAQ (Collapsible; schema-friendly)
+
+6–8 FAQs (finance, RC, delivery, warranty). Write concise, markup-ready copy.
+
+J) Footer
+
+Repeat conversion hooks: Call, WhatsApp, Get Best Price.
+
+Quick links: Categories, Brands, New, Used, Service Centers, Finance, Blog, About, Contact.
+
+Compliance: Address, CIN/GST, social, copyright.
+
+8) Primary CTAs & Lead Forms (exact fields + rules)
+
+Get Best Price / Request Callback (same schema, modal):
+
+Name (req, 2–60), Phone (req, +91 pattern), City (req), State (req), Interest (New/Used/Service Center/Finance), Notes (opt, 280 chars).
+
+Consent (req): “I agree to be contacted via phone/WhatsApp.”
+
+Success: show lead ID + WhatsApp deep link: https://wa.me/<number>?text=<URL-encoded message> (prefill interest & city).
+
+Sticky mobile CTA bar (lock exact items): Call | WhatsApp | Get Best Price | Filters
+Height 56–64px, safe-area padding (iOS), hide on scroll down, reveal on scroll up.
+
+9) Navigation & IA
+
+Top nav: Categories (mega), Brands, New, Used, Service Centers, Finance, Blog.
+
+Mega-menu (Categories): Truck, Trailer, Tipper, Tanker, Reefer, Container, Tractor, Bus → each shows 2 popular makes as quick links.
+
+Right cluster: Search icon (expands large search), Compare, Call, WhatsApp.
+
+Breadcrumbs on inner pages for SEO.
+
+10) Listing Card & Compare (lock it down)
+
+Card includes: image 4:3, verified ribbon, watermark; Title; Spec row; Price + Negotiable; 3 CTAs (Details, Best Price, WhatsApp).
+
+Compare mini-drawer: add up to 3 vehicles; sticky CTA “Compare Now”.
+
+11) Motion & Skeletons
+
+Section reveal: 120–180ms fade/slide, 16px offset, once per session.
+
+Button hover: 120ms ease; no over-animated CTAs.
+
+Skeleton loaders for hero cards & featured lists (3–6 blocks).
+
+12) Content & Copy (starter deck)
+
+Hero H1: “Heavy Vehicles. Verified. Delivered.”
+
+Hero Sub: “Buy new & used trucks, trailers, and tippers with transparent pricing, inspection, and easy finance.”
+
+Micro benefits: “RC Verified • Finance Options • Pan-India Delivery • Warranty Available”
+
+CTA labels: “Get Best Price”, “Request Callback”, “WhatsApp Now”, “View Details”, “Find Vehicles”.
+
+13) SEO & Structured Data
+
+Design copy so that:
+
+One H1 (hero), H2 per section with keywords (Brands, Body Type, Finance, Blogs, FAQ).
+
+Internal links to category/brand landings.
+
+FAQ section content can be marked up as FAQPage.
+
+Provide OpenGraph image template (1200×630) and favicon set guidance.
+
+14) UI Kit (must deliver)
+
+Tokens: colors, typography, spacing scale, radii, shadows, motion.
+
+Components: header, mega-menu, search bar (tabbed), filter chips, listing card, brand tile, testimonial card, FAQ accordion, buttons (all states), sticky mobile bar, lead modal, footer blocks.
+
+States: default/hover/active/focus/disabled/loading/success/error (show all).
+
+Image specs: hero 1920×700 WebP; listing 4:3 WebP; logos SVG.
+
+15) Acceptance Criteria
+
+ Exact same section sequence as current homepage; each section modernized per this spec.
+
+ Above-the-fold contains search + primary CTAs + trust strip.
+
+ Three breakpoints (desktop/tablet/mobile) designed.
+
+ Listing cards include key specs, price, trust badges + 3 CTAs.
+
+ Sticky mobile CTA bar implemented.
+
+ Forms include validation, errors, success states; consent checkbox present.
+
+ Accessibility (AA), performance budget, and SEO considerations included.
+
+ Analytics event names + data-test-id locations provided.
+
+ UI kit + component library + OG template included.
+
+ Prototype links and redlines/annotations for dev handoff included.
+
+16) Handoff Package
+
+Figma file with: Homepage, UI Kit, Components, Prototype.
+
+Annotations: grids, spacing, event names, query param spec for search (cond, type, make, city, state).
+
+Asset export guidance and motion specs.
+
+Notes for performance (lazy-load, responsive images) and a11y (focus, contrast).
+
+17) Competitor Patterns to Borrow (but improve)
+
+From CarDekho Trucks: search-first hero.
+
+From TractorJunction Trucks: filter chips & brand rows.
+
+From TrucksBuses: rich spec lines on cards.
+
+Your differentiator: clearer CTA hierarchy, sticky bar, immediate trust under hero, stronger lead modals.
+
+Deliver the full design system and prototypes to match this prompt. Keep the current section order from jainautomart.com exactly, while upgrading visuals, interactions, and conversion elements as specified.

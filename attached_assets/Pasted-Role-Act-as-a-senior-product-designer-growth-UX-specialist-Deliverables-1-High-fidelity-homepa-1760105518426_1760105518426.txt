@@ -1,0 +1,276 @@
+Role: Act as a senior product designer + growth UX specialist.
+Deliverables: 1) High-fidelity homepage mockups (desktop/tablet/mobile), 2) a clickable prototype, 3) a UI kit (tokens + components), and 4) a tidy handoff spec (spacing, grids, states).
+Tech context: Frontend will be built in Next.js. Design should be dev-friendly and performance-minded.
+
+0) Inputs
+
+Brand: Jain Automart
+
+Logo: (use the provided file) — derive color tokens from the logo’s primaries.
+
+Existing site (keep the same section order): https://www.jainautomart.com/
+ (a full-page screenshot is provided—mirror the section sequence).
+
+Competitors for inspiration (do not copy):
+
+https://trucks.cardekho.com/
+
+https://trucks.tractorjunction.com/
+
+https://www.trucksbuses.com/
+
+1) Goals (ranked)
+
+Generate quality leads: Calls, WhatsApp, “Get Best Price”, “Request Callback”, “Send Enquiry”, and “Book Inspection/Test Drive”.
+
+Help users find vehicles fast: Prominent search, clear taxonomy (New/Used, Body Type, Make/Model), filters, and comparison hooks.
+
+Build trust: Dealer credibility, numbers, OEM partner logos, customer stories, star ratings, badges (Warranty/RC Verified/Financing).
+
+Keep SEO intact: Preserve content density and section order; improve scannability without losing text volume.
+
+2) Audience & Primary Journeys
+
+Buyers of heavy vehicles (trucks, trailers, tippers, tractors, tankers).
+
+Common intents: “Buy a used tipper in Jaipur” / “Compare new Tata tractor variants” / “Finance options” / “Sell or exchange existing truck.”
+
+3) Brand & Tone
+
+Professional, reliable, enterprise-grade.
+
+Visual language: sturdy, industrial, confident; avoid gimmicks.
+
+Motion: subtle, purposeful; no flashy parallax.
+
+4) Layout Rules
+
+Preserve section sequence from the current homepage, but modernize each section’s UI.
+
+Grid: 12-column desktop (1140–1200px max content width), 8-col tablet, 4-col mobile.
+
+Spacing scale: 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 px.
+
+Type: Recommend Inter or Poppins (system-safe fallback).
+
+Color tokens:
+
+--brand-primary: sampled from logo primary
+
+--brand-accent: sampled from logo secondary
+
+--neutral-900/700/500/300/100: slate/gray scale for text and surfaces
+
+--success, --warning, --danger for badges and alerts
+
+Buttons: Primary (filled), Secondary (outline), Tertiary (text). Strong hover/focus/disabled states.
+
+5) Above-the-Fold (Hero) — Conversion Engine
+
+Headline (value-led): “Heavy Vehicles. Verified. Delivered.”
+
+Subhead: “Buy new & used trucks, trailers, and tippers with transparent pricing, inspection, and easy finance.”
+
+Primary CTA group (sticky on mobile):
+
+Get Best Price (modal form)
+
+Request Callback
+
+WhatsApp (deep link)
+
+Search Bar (prominent, card style):
+
+Tabs: New | Used
+
+Inputs: Body Type (Truck/Trailer/Tipper/… ), Make (Tata, Ashok Leyland, …), City/State
+
+Button: Find Vehicles
+
+Trust Strip under hero: badges (“RC Verified”, “Financing Available”, “Pan-India Delivery”, “Warranty Options”)
+
+Hero media: rotating banner or static vehicle in studio-style lighting with subtle scroll-fade.
+
+6) Section-by-Section Redesign (keep same order as current site)
+
+For each existing section on jainautomart.com, redesign with these patterns. If a section doesn’t exist, do not add it here—only refactor the one that exists, in place.
+
+A) Category Navigator (if present early)
+
+Card grid with large pictograms: Truck, Trailer, Tipper, Tanker, Reefer, Container, Tractor, Bus.
+
+Each card: image, title, “X Listings”, CTA → category PLP.
+
+Hover: small lift + shadow; on mobile → full-bleed row cards.
+
+B) Featured Listings (New & Used)
+
+Toggle: New | Used
+
+Carousel (desktop) / scroll cards (mobile).
+
+Card anatomy:
+
+Image with Verified ribbon & watermark
+
+Title (Year Make Model Variant)
+
+Key specs inline: Axle • GVW • BS-VI • City
+
+Price (₹) + badge “Negotiable” if applicable
+
+CTAs: View Details, Get Best Price, WhatsApp
+
+Microcopy: “Financing Available • RC Verified • Low KM”
+
+C) Brands / OEMs
+
+Horizontal logo marquee with filter chips for Makes (Tata, Leyland, BharatBenz, Volvo…).
+
+Click → brand landing (SEO, not just filter).
+
+D) Body Type Finder
+
+Iconic tiles (Tipper, Trailer, Reefer, Container, Tanker…).
+
+Show counts; clicking applies deep link to PLP with filters.
+
+E) Why Jain Automart (Trust Section)
+
+3–4 value props with icons:
+
+“Verified Documents”
+
+“100+ Cities Served”
+
+“Financing & Insurance”
+
+“Expert Inspection”
+
+Add a numbers band (Inventory, Cities, Happy Customers).
+
+F) Finance & Insurance CTA
+
+Split panel: Get Pre-Approved form + partner logos.
+
+Micro-form (Name, Phone, Vehicle Type, City) → Submit → Thank-you.
+
+G) Customer Stories / Testimonials
+
+Real photos, 1–2 line quotes, star rating, city.
+
+Carousel with dots; ensure good contrast.
+
+H) Blog / Guides (SEO)
+
+3–6 cards with thumb, category, title, read time.
+
+CTA: Read more → Blog PLP. Keep content density high for SEO.
+
+I) FAQ (Collapsible)
+
+6–8 top buyer questions (finance, RC, delivery, warranty).
+
+Schema-ready copy (FAQPage).
+
+J) Footer
+
+Conversion hooks repeated: “Call”, “WhatsApp”, “Get Best Price”.
+
+Quick links: Categories, Brands, Finance, Sell Your Vehicle, Service Centers, Blog, About, Contact.
+
+Compliance: Address, CIN/GST, social, copyright.
+
+7) Micro-Conversions & Lead Capture
+
+Sticky CTA bar on mobile: Call | WhatsApp | Get Best Price | Filters.
+
+Exit-intent modal: “Send me best matches” (Name, Phone, City, Body Type).
+
+Compare mini-drawer: Add up to 3 vehicles; CTA “Compare Now”.
+
+Inline lead widgets on carousels: “Get Best Price”.
+
+8) Navigation & IA
+
+Top Nav: Categories (mega-menu by Body Type), Brands, New, Used, Service Centers, Finance, Blog.
+
+Right cluster: Search, Compare, Call, WhatsApp.
+
+Breadcrumbs on inner pages for SEO.
+
+9) Accessibility & Performance
+
+Color contrast ≥ WCAG AA.
+
+Keyboard & focus states visible.
+
+LCP target: < 2.5s.
+
+Use responsive images (srcset), lazy-load non-LCP, avoid blocking JS, compress hero art.
+
+10) Content & Copy (starter)
+
+Short, concrete, benefit-led.
+
+Avoid jargon where possible; keep spec labels consistent with PLP/PDP.
+
+Button copy examples:
+
+Primary: “Get Best Price”, “Find Vehicles”, “Request Callback”
+
+Secondary: “View Details”, “Compare”
+
+Micro: “WhatsApp Now”, “Book Inspection”
+
+11) Analytics & Experimentation
+
+Track: hero search interactions, CTA clicks (by placement), form starts/submits, WhatsApp clicks, filter usage, compare starts/completes.
+
+A/B ideas:
+
+Hero: Search-first vs. CTA-first layout
+
+Sticky CTA variations (3 vs 4 buttons)
+
+“Get Best Price” copy variants
+
+12) UI Kit (deliver as a page in the file)
+
+Tokens: colors, type scale (H1 40/48 → H6 16/24), shadows, radii (8/12/16), spacing.
+
+Components: header, mega-menu, search bar (tabbed), filter chips, listing card, brand tile, testimonial card, FAQ accordion, CTA buttons, sticky bar, lead modal, footer blocks.
+
+States: default/hover/active/disabled/loading/success/error.
+
+13) Hand-off & Spec
+
+Provide redlines (spacing), grid overlays, and component annotations.
+
+Export asset guidance (hero 1920×700 webp; cards 4:3 webp; brand logos SVG).
+
+Document Lottie/json for subtle hero animation (optional).
+
+14) Acceptance Criteria
+
+ Sections appear in the same sequence as the current site, modernized per spec.
+
+ Above-the-fold contains search + primary CTAs + trust strip.
+
+ Three responsive breakpoints (desktop/tablet/mobile) designed.
+
+ Listing cards include key specs + price + trust badges and 3 CTAs (Details, Best Price, WhatsApp).
+
+ Sticky mobile CTA bar present across the page.
+
+ Accessibility, performance and SEO considerations incorporated.
+
+ UI kit + component library provided.
+
+ Prototype links and notes for dev hand-off included.
+
+Optional: Designer Prompts for Imagery/Icon Style
+
+Hero imagery prompt: “Studio-lit heavy truck (6×4) on neutral background, crisp edges, subtle tire reflections, modern industrial vibe—clean, high-contrast, no background clutter.”
+
+Icon style: “Simple, geometric, duotone icons with rounded corners; consistent stroke, legible at 16–24px.”
