@@ -88,21 +88,21 @@ export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
       <div className="jam-container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 md:mb-12">
           <div>
-            <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-2">
+            <h2 className="jam-h2 text-[var(--jam-neutral-900)] mb-2">
               Featured Listings
             </h2>
-            <p className="jam-body text-[hsl(var(--color-jam-neutral-700))]">
+            <p className="jam-body text-gray-700">
               Handpicked verified vehicles ready for delivery
             </p>
           </div>
 
-          <div className="flex gap-2 bg-[hsl(var(--color-jam-neutral-100))] rounded-lg p-1">
+          <div className="flex gap-2 bg-gray-100 rounded-lg p-1">
             <button
               onClick={() => setActiveTab('new')}
               className={`px-6 py-2 rounded-md font-semibold transition-all jam-focus-ring ${
                 activeTab === 'new'
-                  ? 'bg-white text-[hsl(var(--color-jam-primary))] shadow-sm'
-                  : 'text-[hsl(var(--color-jam-neutral-700))]'
+                  ? 'bg-white text-[#1e4a7c] shadow-sm'
+                  : 'text-gray-700'
               }`}
               data-test-id="listings-tab-new"
             >
@@ -112,8 +112,8 @@ export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
               onClick={() => setActiveTab('used')}
               className={`px-6 py-2 rounded-md font-semibold transition-all jam-focus-ring ${
                 activeTab === 'used'
-                  ? 'bg-white text-[hsl(var(--color-jam-primary))] shadow-sm'
-                  : 'text-[hsl(var(--color-jam-neutral-700))]'
+                  ? 'bg-white text-[#1e4a7c] shadow-sm'
+                  : 'text-gray-700'
               }`}
               data-test-id="listings-tab-used"
             >
@@ -125,10 +125,10 @@ export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
         <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] items-center justify-center hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] items-center justify-center hover:bg-gray-100 transition-colors jam-focus-ring"
             aria-label="Scroll left"
           >
-            <ChevronLeft className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
+            <ChevronLeft className="w-6 h-6 text-gray-700" />
           </button>
 
           <div
@@ -159,14 +159,14 @@ export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
                 </div>
 
                 <div className="p-4">
-                  <h3 className="jam-h4 text-[hsl(var(--color-jam-neutral-900))] mb-2 line-clamp-1">
+                  <h3 className="jam-h4 text-[var(--jam-neutral-900)] mb-2 line-clamp-1">
                     {listing.year} {listing.make} {listing.model}
                   </h3>
-                  <p className="jam-small text-[hsl(var(--color-jam-neutral-700))] mb-3">
+                  <p className="jam-small text-gray-700 mb-3">
                     {listing.variant}
                   </p>
 
-                  <div className="flex items-center gap-2 text-[hsl(var(--color-jam-neutral-700))] jam-small mb-4">
+                  <div className="flex items-center gap-2 text-gray-700 jam-small mb-4">
                     <span>{listing.axle}</span>
                     <span>•</span>
                     <span>{listing.gvw}</span>
@@ -178,11 +178,11 @@ export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
 
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <div className="jam-h3 text-[hsl(var(--color-jam-primary))]">
+                      <div className="jam-h3 text-[#1e4a7c]">
                         ₹{(listing.price / 100000).toFixed(2)}L
                       </div>
                       {listing.negotiable && (
-                        <span className="jam-tiny text-[hsl(var(--color-jam-neutral-700))] bg-[hsl(var(--color-jam-neutral-100))] px-2 py-1 rounded-full">
+                        <span className="jam-tiny text-gray-700 bg-gray-100 px-2 py-1 rounded-full">
                           Negotiable
                         </span>
                       )}
@@ -212,10 +212,10 @@ export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
 
           <button
             onClick={() => scroll('right')}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] items-center justify-center hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] items-center justify-center hover:bg-gray-100 transition-colors jam-focus-ring"
             aria-label="Scroll right"
           >
-            <ChevronRight className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
+            <ChevronRight className="w-6 h-6 text-gray-700" />
           </button>
         </div>
       </div>

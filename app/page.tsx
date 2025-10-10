@@ -22,7 +22,7 @@ export default function HomePage() {
   const openLeadModal = () => setIsLeadModalOpen(true);
 
   return (
-    <>
+    <div className="flex-1 w-full bg-white">
       <Header onOpenLeadModal={openLeadModal} />
       
       <main className="min-h-screen">
@@ -46,6 +46,6 @@ export default function HomePage() {
         isOpen={isLeadModalOpen} 
         onClose={() => setIsLeadModalOpen(false)} 
       />
-    </>
+    </div>
   );
 }

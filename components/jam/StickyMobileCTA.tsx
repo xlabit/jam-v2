@@ -37,29 +37,29 @@ export function StickyMobileCTA({ onOpenLeadModal }: StickyMobileCTAProps) {
     >
       <a
         href="tel:+918800123456"
-        className="flex flex-col items-center justify-center px-3 py-2 hover:bg-[hsl(var(--color-jam-neutral-50))] transition-colors rounded-lg jam-focus-ring"
+        className="flex flex-col items-center justify-center px-3 py-2 hover:bg-gray-50)] transition-colors rounded-lg jam-focus-ring"
         aria-label="Call us"
         data-test-id="sticky-cta-call"
       >
-        <Phone className="w-5 h-5 text-[hsl(var(--color-jam-primary))]" />
-        <span className="jam-tiny text-[hsl(var(--color-jam-neutral-700))] mt-1">Call</span>
+        <Phone className="w-5 h-5 text-[#1e4a7c]" />
+        <span className="jam-tiny text-gray-700 mt-1">Call</span>
       </a>
 
       <a
         href="https://wa.me/918800123456"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-col items-center justify-center px-3 py-2 hover:bg-[hsl(var(--color-jam-neutral-50))] transition-colors rounded-lg jam-focus-ring"
+        className="flex flex-col items-center justify-center px-3 py-2 hover:bg-gray-50)] transition-colors rounded-lg jam-focus-ring"
         aria-label="WhatsApp us"
         data-test-id="sticky-cta-whatsapp"
       >
         <MessageCircle className="w-5 h-5 text-[#25D366]" />
-        <span className="jam-tiny text-[hsl(var(--color-jam-neutral-700))] mt-1">WhatsApp</span>
+        <span className="jam-tiny text-gray-700 mt-1">WhatsApp</span>
       </a>
 
       <button
         onClick={onOpenLeadModal}
-        className="flex flex-col items-center justify-center px-3 py-2 bg-[hsl(var(--color-jam-accent))] text-[hsl(var(--color-jam-accent-fg))] rounded-lg hover:brightness-110 transition-all jam-focus-ring"
+        className="flex flex-col items-center justify-center px-3 py-2 bg-[var(--jam-accent)] text-[hsl(var(--color-jam-accent-fg)] rounded-lg hover:brightness-110 transition-all jam-focus-ring"
         data-test-id="sticky-cta-price"
       >
         <DollarSign className="w-5 h-5" />
@@ -67,12 +67,12 @@ export function StickyMobileCTA({ onOpenLeadModal }: StickyMobileCTAProps) {
       </button>
 
       <button
-        className="flex flex-col items-center justify-center px-3 py-2 hover:bg-[hsl(var(--color-jam-neutral-50))] transition-colors rounded-lg jam-focus-ring"
+        className="flex flex-col items-center justify-center px-3 py-2 hover:bg-gray-50)] transition-colors rounded-lg jam-focus-ring"
         aria-label="Open filters"
         data-test-id="sticky-cta-filters"
       >
-        <SlidersHorizontal className="w-5 h-5 text-[hsl(var(--color-jam-primary))]" />
-        <span className="jam-tiny text-[hsl(var(--color-jam-neutral-700))] mt-1">Filters</span>
+        <SlidersHorizontal className="w-5 h-5 text-[#1e4a7c]" />
+        <span className="jam-tiny text-gray-700 mt-1">Filters</span>
       </button>
     </div>
   );

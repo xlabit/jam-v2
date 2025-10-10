@@ -56,13 +56,13 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
 
           <div className="max-w-5xl mx-auto mb-8">
             <div className="bg-white rounded-2xl shadow-[var(--jam-elev-3)] p-4 md:p-6">
-              <div className="flex gap-2 mb-4 border-b border-[hsl(var(--color-jam-neutral-200))]">
+              <div className="flex gap-2 mb-4 border-b border-gray-200">
                 <button
                   onClick={() => setActiveTab('new')}
                   className={`px-6 py-3 rounded-t-lg font-semibold transition-all jam-focus-ring ${
                     activeTab === 'new'
-                      ? 'bg-[hsl(var(--color-jam-primary))] text-white'
-                      : 'text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))]'
+                      ? 'bg-[var(--jam-primary)] text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
                   }`}
                   data-test-id="hero-tab-new"
                   aria-selected={activeTab === 'new'}
@@ -74,8 +74,8 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
                   onClick={() => setActiveTab('used')}
                   className={`px-6 py-3 rounded-t-lg font-semibold transition-all jam-focus-ring ${
                     activeTab === 'used'
-                      ? 'bg-[hsl(var(--color-jam-primary))] text-white'
-                      : 'text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))]'
+                      ? 'bg-[var(--jam-primary)] text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
                   }`}
                   data-test-id="hero-tab-used"
                   aria-selected={activeTab === 'used'}
@@ -87,14 +87,14 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                 <div>
-                  <label htmlFor="bodyType" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                  <label htmlFor="bodyType" className="block jam-small font-medium text-gray-700 mb-2">
                     Body Type <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="bodyType"
                     value={searchForm.bodyType}
                     onChange={(e) => setSearchForm({ ...searchForm, bodyType: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[hsl(var(--color-jam-neutral-300))] text-[hsl(var(--color-jam-neutral-700))] jam-focus-ring"
+                    className="w-full px-4 py-3 rounded-lg border border-[var(--jam-neutral-300)] text-gray-700 jam-focus-ring"
                     data-test-id="hero-body-type-select"
                     required
                   >
@@ -106,14 +106,14 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="make" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                  <label htmlFor="make" className="block jam-small font-medium text-gray-700 mb-2">
                     Make (Optional)
                   </label>
                   <select
                     id="make"
                     value={searchForm.make}
                     onChange={(e) => setSearchForm({ ...searchForm, make: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[hsl(var(--color-jam-neutral-300))] text-[hsl(var(--color-jam-neutral-700))] jam-focus-ring"
+                    className="w-full px-4 py-3 rounded-lg border border-[var(--jam-neutral-300)] text-gray-700 jam-focus-ring"
                     data-test-id="hero-make-select"
                   >
                     <option value="">All Makes</option>
@@ -124,14 +124,14 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="city" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                  <label htmlFor="city" className="block jam-small font-medium text-gray-700 mb-2">
                     City (Optional)
                   </label>
                   <select
                     id="city"
                     value={searchForm.city}
                     onChange={(e) => setSearchForm({ ...searchForm, city: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[hsl(var(--color-jam-neutral-300))] text-[hsl(var(--color-jam-neutral-700))] jam-focus-ring"
+                    className="w-full px-4 py-3 rounded-lg border border-[var(--jam-neutral-300)] text-gray-700 jam-focus-ring"
                     data-test-id="hero-city-select"
                   >
                     <option value="">All Cities</option>
@@ -142,14 +142,14 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
                 </div>
 
                 <div>
-                  <label htmlFor="state" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                  <label htmlFor="state" className="block jam-small font-medium text-gray-700 mb-2">
                     State (Optional)
                   </label>
                   <select
                     id="state"
                     value={searchForm.state}
                     onChange={(e) => setSearchForm({ ...searchForm, state: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[hsl(var(--color-jam-neutral-300))] text-[hsl(var(--color-jam-neutral-700))] jam-focus-ring"
+                    className="w-full px-4 py-3 rounded-lg border border-[var(--jam-neutral-300)] text-gray-700 jam-focus-ring"
                     data-test-id="hero-state-select"
                   >
                     <option value="">All States</option>
@@ -163,7 +163,7 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
               <button
                 onClick={handleSearch}
                 disabled={!searchForm.bodyType}
-                className="w-full md:w-auto px-8 py-4 bg-[hsl(var(--color-jam-accent))] text-[hsl(var(--color-jam-accent-fg))] rounded-lg font-semibold hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)] jam-focus-ring flex items-center justify-center gap-2"
+                className="w-full md:w-auto px-8 py-4 bg-[var(--jam-accent)] text-[hsl(var(--color-jam-accent-fg)] rounded-lg font-semibold hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)] jam-focus-ring flex items-center justify-center gap-2"
                 data-test-id="hero-search-btn"
               >
                 <Search className="w-5 h-5" />
@@ -203,7 +203,7 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
-              <ShieldCheck className="w-8 h-8 text-[hsl(var(--color-jam-accent))]" />
+              <ShieldCheck className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">RC Verified</div>
                 <div className="jam-tiny text-white/80">Authentic Docs</div>
@@ -211,7 +211,7 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
             </div>
 
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
-              <DollarSign className="w-8 h-8 text-[hsl(var(--color-jam-accent))]" />
+              <DollarSign className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">Financing</div>
                 <div className="jam-tiny text-white/80">Easy Approval</div>
@@ -219,7 +219,7 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
             </div>
 
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
-              <Truck className="w-8 h-8 text-[hsl(var(--color-jam-accent))]" />
+              <Truck className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">Pan-India</div>
                 <div className="jam-tiny text-white/80">Delivery</div>
@@ -227,7 +227,7 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
             </div>
 
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
-              <Award className="w-8 h-8 text-[hsl(var(--color-jam-accent))]" />
+              <Award className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">Warranty</div>
                 <div className="jam-tiny text-white/80">Options Available</div>

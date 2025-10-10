@@ -31,13 +31,13 @@ const partners = [
 
 export function WhyJainAutomart() {
   return (
-    <section className="jam-section bg-[hsl(var(--color-jam-neutral-50))]">
+    <section className="jam-section bg-[var(--jam-neutral-50)]">
       <div className="jam-container">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-4">
+          <h2 className="jam-h2 text-[var(--jam-neutral-900)] mb-4">
             Why Jain Automart?
           </h2>
-          <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] max-w-2xl mx-auto">
+          <p className="jam-body text-gray-700 max-w-2xl mx-auto">
             India's most trusted platform for commercial vehicle transactions
           </p>
         </div>
@@ -51,13 +51,13 @@ export function WhyJainAutomart() {
                 className="bg-white rounded-2xl p-6 shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)] transition-shadow"
                 data-test-id={`value-prop-${prop.title.toLowerCase().replace(/\s+/g, '-')}`}
               >
-                <div className="w-14 h-14 rounded-xl bg-[hsl(var(--color-jam-primary))]/10 flex items-center justify-center mb-4">
-                  <IconComponent className="w-7 h-7 text-[hsl(var(--color-jam-primary))]" />
+                <div className="w-14 h-14 rounded-xl bg-[var(--jam-primary)]/10 flex items-center justify-center mb-4">
+                  <IconComponent className="w-7 h-7 text-[#1e4a7c]" />
                 </div>
-                <h3 className="jam-h4 text-[hsl(var(--color-jam-neutral-900))] mb-2">
+                <h3 className="jam-h4 text-[var(--jam-neutral-900)] mb-2">
                   {prop.title}
                 </h3>
-                <p className="jam-body text-[hsl(var(--color-jam-neutral-700))]">
+                <p className="jam-body text-gray-700">
                   {prop.description}
                 </p>
               </div>
@@ -65,36 +65,36 @@ export function WhyJainAutomart() {
           })}
         </div>
 
-        <div className="bg-gradient-to-r from-[hsl(var(--color-jam-primary))] to-[hsl(var(--color-jam-primary))]/90 rounded-2xl p-8 md:p-12 text-white mb-12">
+        <div className="bg-gradient-to-r from-[var(--jam-primary)] to-[var(--jam-primary)]/90 rounded-2xl p-8 md:p-12 text-white mb-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="jam-h2 text-[hsl(var(--color-jam-accent))] mb-2">10K+</div>
+              <div className="jam-h2 text-[var(--jam-accent)] mb-2">10K+</div>
               <div className="jam-body">Vehicles Listed</div>
             </div>
             <div>
-              <div className="jam-h2 text-[hsl(var(--color-jam-accent))] mb-2">100+</div>
+              <div className="jam-h2 text-[var(--jam-accent)] mb-2">100+</div>
               <div className="jam-body">Cities Covered</div>
             </div>
             <div>
-              <div className="jam-h2 text-[hsl(var(--color-jam-accent))] mb-2">1.5K+</div>
+              <div className="jam-h2 text-[var(--jam-accent)] mb-2">1.5K+</div>
               <div className="jam-body">Fleet Owners</div>
             </div>
             <div>
-              <div className="jam-h2 text-[hsl(var(--color-jam-accent))] mb-2">4.7★</div>
+              <div className="jam-h2 text-[var(--jam-accent)] mb-2">4.7★</div>
               <div className="jam-body">Avg. Rating</div>
             </div>
           </div>
         </div>
 
         <div>
-          <h3 className="jam-h3 text-center text-[hsl(var(--color-jam-neutral-900))] mb-8">
+          <h3 className="jam-h3 text-center text-[var(--jam-neutral-900)] mb-8">
             Trusted by Leading Partners
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {partners.map((partner) => (
               <div
                 key={partner}
-                className="bg-white px-6 py-4 rounded-lg shadow-sm text-[hsl(var(--color-jam-neutral-700))] font-semibold"
+                className="bg-white px-6 py-4 rounded-lg shadow-sm text-gray-700 font-semibold"
                 data-test-id={`partner-${partner.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 {partner}

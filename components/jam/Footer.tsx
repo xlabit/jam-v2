@@ -14,7 +14,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
   const quickLinks = ['About Us', 'Contact', 'Careers', 'Privacy Policy', 'Terms & Conditions', 'Sitemap'];
 
   return (
-    <footer className="bg-[hsl(var(--color-jam-neutral-900))] text-white">
+    <footer className="bg-[var(--jam-neutral-900)] text-white">
       <div className="jam-container py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-4">
@@ -34,7 +34,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[hsl(var(--color-jam-primary))] transition-colors flex items-center justify-center jam-focus-ring"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[var(--jam-primary)] transition-colors flex items-center justify-center jam-focus-ring"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -43,7 +43,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[hsl(var(--color-jam-primary))] transition-colors flex items-center justify-center jam-focus-ring"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[var(--jam-primary)] transition-colors flex items-center justify-center jam-focus-ring"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
@@ -52,7 +52,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[hsl(var(--color-jam-primary))] transition-colors flex items-center justify-center jam-focus-ring"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[var(--jam-primary)] transition-colors flex items-center justify-center jam-focus-ring"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -61,7 +61,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[hsl(var(--color-jam-primary))] transition-colors flex items-center justify-center jam-focus-ring"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[var(--jam-primary)] transition-colors flex items-center justify-center jam-focus-ring"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -70,7 +70,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[hsl(var(--color-jam-primary))] transition-colors flex items-center justify-center jam-focus-ring"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[var(--jam-primary)] transition-colors flex items-center justify-center jam-focus-ring"
                 aria-label="YouTube"
               >
                 <Youtube className="w-5 h-5" />
@@ -85,7 +85,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 <li key={category}>
                   <Link
                     href={`/vehicles?category=${category.toLowerCase()}`}
-                    className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring"
+                    className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring"
                   >
                     {category}
                   </Link>
@@ -101,7 +101,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 <li key={brand}>
                   <Link
                     href={`/vehicles?brand=${brand.toLowerCase().replace(' ', '-')}`}
-                    className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring"
+                    className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring"
                   >
                     {brand}
                   </Link>
@@ -114,27 +114,27 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
             <h3 className="jam-h4 mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/vehicles?condition=new" className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <Link href="/vehicles?condition=new" className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   New Vehicles
                 </Link>
               </li>
               <li>
-                <Link href="/vehicles?condition=used" className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <Link href="/vehicles?condition=used" className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   Used Vehicles
                 </Link>
               </li>
               <li>
-                <Link href="/service-centers" className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <Link href="/service-centers" className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   Service Centers
                 </Link>
               </li>
               <li>
-                <Link href="/finance" className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <Link href="/finance" className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   Finance
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <Link href="/blog" className="jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   Blog
                 </Link>
               </li>
@@ -145,19 +145,19 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
             <h3 className="jam-h4 mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li>
-                <a href="tel:+918800123456" className="flex items-center gap-2 jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <a href="tel:+918800123456" className="flex items-center gap-2 jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   <Phone className="w-4 h-4" />
                   +91 88001 23456
                 </a>
               </li>
               <li>
-                <a href="mailto:info@jainautomart.com" className="flex items-center gap-2 jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <a href="mailto:info@jainautomart.com" className="flex items-center gap-2 jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   <Mail className="w-4 h-4" />
                   info@jainautomart.com
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/918800123456" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 jam-body text-white/80 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring">
+                <a href="https://wa.me/918800123456" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 jam-body text-white/80 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring">
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp Us
                 </a>
@@ -206,7 +206,7 @@ export function Footer({ onOpenLeadModal }: FooterProps) {
                 <Link
                   key={link}
                   href={`/${link.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="jam-small text-white/60 hover:text-[hsl(var(--color-jam-accent))] transition-colors jam-focus-ring"
+                  className="jam-small text-white/60 hover:text-[var(--jam-accent)] transition-colors jam-focus-ring"
                 >
                   {link}
                 </Link>

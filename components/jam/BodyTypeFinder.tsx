@@ -16,10 +16,10 @@ export function BodyTypeFinder() {
     <section className="jam-section">
       <div className="jam-container">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-4">
+          <h2 className="jam-h2 text-[var(--jam-neutral-900)] mb-4">
             Find by Body Type
           </h2>
-          <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] max-w-2xl mx-auto">
+          <p className="jam-body text-gray-700 max-w-2xl mx-auto">
             Quickly search vehicles by their body configuration
           </p>
         </div>
@@ -31,7 +31,7 @@ export function BodyTypeFinder() {
               <Link
                 key={type.name}
                 href={type.href}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br bg-white border-2 border-transparent hover:border-[hsl(var(--color-jam-primary))] transition-all shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)] hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br bg-white border-2 border-transparent hover:border-[var(--jam-primary)] transition-all shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)] hover:-translate-y-1"
                 data-test-id={`body-type-${type.name.toLowerCase()}`}
               >
                 <div className="p-6 flex flex-col items-center text-center gap-4">
@@ -39,13 +39,13 @@ export function BodyTypeFinder() {
                     <IconComponent className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h3 className="jam-h4 text-[hsl(var(--color-jam-neutral-900))] mb-1">{type.name}</h3>
-                    <p className="jam-small text-[hsl(var(--color-jam-neutral-700))]">
+                    <h3 className="jam-h4 text-[var(--jam-neutral-900)] mb-1">{type.name}</h3>
+                    <p className="jam-small text-gray-700">
                       {type.count.toLocaleString()} available
                     </p>
                   </div>
-                  <div className="w-full pt-4 border-t border-[hsl(var(--color-jam-neutral-200))]">
-                    <span className="jam-small text-[hsl(var(--color-jam-primary))] font-semibold group-hover:underline">
+                  <div className="w-full pt-4 border-t border-gray-200">
+                    <span className="jam-small text-[#1e4a7c] font-semibold group-hover:underline">
                       Explore →
                     </span>
                   </div>

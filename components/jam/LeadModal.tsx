@@ -82,17 +82,17 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
         aria-labelledby="modal-title"
         aria-modal="true"
       >
-        <div className="sticky top-0 bg-white border-b border-[hsl(var(--color-jam-neutral-200))] px-6 py-4 flex items-center justify-between">
-          <h2 id="modal-title" className="jam-h3 text-[hsl(var(--color-jam-neutral-900))]">
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+          <h2 id="modal-title" className="jam-h3 text-[var(--jam-neutral-900)]">
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors flex items-center justify-center jam-focus-ring"
+            className="w-10 h-10 rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center jam-focus-ring"
             aria-label="Close modal"
             data-test-id="lead-modal-close"
           >
-            <X className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
+            <X className="w-6 h-6 text-gray-700" />
           </button>
         </div>
 
@@ -100,7 +100,7 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="lead-name" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                <label htmlFor="lead-name" className="block jam-small font-medium text-gray-700 mb-2">
                   Full Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -109,8 +109,8 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.name ? 'border-red-500' : 'border-[hsl(var(--color-jam-neutral-300))]'
-                  } text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring`}
+                    errors.name ? 'border-red-500' : 'border-[var(--jam-neutral-300)]'
+                  } text-[var(--jam-neutral-900)] jam-focus-ring`}
                   placeholder="Enter your full name"
                   data-test-id="lead-name-input"
                 />
@@ -118,11 +118,11 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
               </div>
 
               <div>
-                <label htmlFor="lead-phone" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                <label htmlFor="lead-phone" className="block jam-small font-medium text-gray-700 mb-2">
                   Phone Number <span className="text-red-500">*</span>
                 </label>
                 <div className="flex gap-2">
-                  <div className="w-16 px-3 py-3 rounded-lg border border-[hsl(var(--color-jam-neutral-300))] bg-[hsl(var(--color-jam-neutral-50))] text-[hsl(var(--color-jam-neutral-700))] flex items-center justify-center">
+                  <div className="w-16 px-3 py-3 rounded-lg border border-[var(--jam-neutral-300)] bg-[var(--jam-neutral-50)] text-gray-700 flex items-center justify-center">
                     +91
                   </div>
                   <input
@@ -131,8 +131,8 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className={`flex-1 px-4 py-3 rounded-lg border ${
-                      errors.phone ? 'border-red-500' : 'border-[hsl(var(--color-jam-neutral-300))]'
-                    } text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring`}
+                      errors.phone ? 'border-red-500' : 'border-[var(--jam-neutral-300)]'
+                    } text-[var(--jam-neutral-900)] jam-focus-ring`}
                     placeholder="98765 43210"
                     data-test-id="lead-phone-input"
                   />
@@ -142,7 +142,7 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="lead-city" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                  <label htmlFor="lead-city" className="block jam-small font-medium text-gray-700 mb-2">
                     City <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -151,8 +151,8 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     className={`w-full px-4 py-3 rounded-lg border ${
-                      errors.city ? 'border-red-500' : 'border-[hsl(var(--color-jam-neutral-300))]'
-                    } text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring`}
+                      errors.city ? 'border-red-500' : 'border-[var(--jam-neutral-300)]'
+                    } text-[var(--jam-neutral-900)] jam-focus-ring`}
                     placeholder="Your city"
                     data-test-id="lead-city-input"
                   />
@@ -160,7 +160,7 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                 </div>
 
                 <div>
-                  <label htmlFor="lead-state" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                  <label htmlFor="lead-state" className="block jam-small font-medium text-gray-700 mb-2">
                     State <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -168,8 +168,8 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     className={`w-full px-4 py-3 rounded-lg border ${
-                      errors.state ? 'border-red-500' : 'border-[hsl(var(--color-jam-neutral-300))]'
-                    } text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring`}
+                      errors.state ? 'border-red-500' : 'border-[var(--jam-neutral-300)]'
+                    } text-[var(--jam-neutral-900)] jam-focus-ring`}
                     data-test-id="lead-state-select"
                   >
                     <option value="">Select State</option>
@@ -182,7 +182,7 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
               </div>
 
               <div>
-                <label htmlFor="lead-interest" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                <label htmlFor="lead-interest" className="block jam-small font-medium text-gray-700 mb-2">
                   I'm interested in <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -190,8 +190,8 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                   value={formData.interest}
                   onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                   className={`w-full px-4 py-3 rounded-lg border ${
-                    errors.interest ? 'border-red-500' : 'border-[hsl(var(--color-jam-neutral-300))]'
-                  } text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring`}
+                    errors.interest ? 'border-red-500' : 'border-[var(--jam-neutral-300)]'
+                  } text-[var(--jam-neutral-900)] jam-focus-ring`}
                   data-test-id="lead-interest-select"
                 >
                   <option value="">Select your interest</option>
@@ -203,7 +203,7 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
               </div>
 
               <div>
-                <label htmlFor="lead-notes" className="block jam-small font-medium text-[hsl(var(--color-jam-neutral-700))] mb-2">
+                <label htmlFor="lead-notes" className="block jam-small font-medium text-gray-700 mb-2">
                   Additional Notes (Optional)
                 </label>
                 <textarea
@@ -211,7 +211,7 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-3 rounded-lg border border-[hsl(var(--color-jam-neutral-300))] text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring"
+                  className="w-full px-4 py-3 rounded-lg border border-[var(--jam-neutral-300)] text-[var(--jam-neutral-900)] jam-focus-ring"
                   placeholder="Any specific requirements or questions..."
                   data-test-id="lead-notes-input"
                 />
@@ -224,13 +224,13 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
                     checked={formData.consent}
                     onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
                     className={`mt-0.5 w-5 h-5 rounded border ${
-                      errors.consent ? 'border-red-500' : 'border-[hsl(var(--color-jam-neutral-300))]'
-                    } text-[hsl(var(--color-jam-primary))] jam-focus-ring`}
+                      errors.consent ? 'border-red-500' : 'border-[var(--jam-neutral-300)]'
+                    } text-[#1e4a7c] jam-focus-ring`}
                     data-test-id="lead-consent-checkbox"
                   />
-                  <span className="jam-small text-[hsl(var(--color-jam-neutral-700))]">
+                  <span className="jam-small text-gray-700">
                     I agree to be contacted by Jain Automart and accept the{' '}
-                    <a href="/terms" className="text-[hsl(var(--color-jam-primary))] hover:underline">
+                    <a href="/terms" className="text-[#1e4a7c] hover:underline">
                       Terms & Conditions
                     </a>
                   </span>
@@ -248,11 +248,11 @@ export function LeadModal({ isOpen, onClose, title = 'Get Best Price' }: LeadMod
             </form>
           ) : (
             <div className="text-center py-8">
-              <CheckCircle className="w-20 h-20 text-[hsl(var(--color-jam-primary))] mx-auto mb-6" />
-              <h3 className="jam-h3 text-[hsl(var(--color-jam-neutral-900))] mb-4">
+              <CheckCircle className="w-20 h-20 text-[#1e4a7c] mx-auto mb-6" />
+              <h3 className="jam-h3 text-[var(--jam-neutral-900)] mb-4">
                 Request Submitted Successfully!
               </h3>
-              <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] mb-8">
+              <p className="jam-body text-gray-700 mb-8">
                 Thank you for your interest. Our team will contact you shortly via phone or WhatsApp.
               </p>
               
