@@ -25,7 +25,7 @@ export function Header({ onOpenLeadModal }: HeaderProps) {
   ];
 
   return (
-    <header className="bg-white border-b border-[hsl(var(--jam-neutral-200))] sticky top-0 z-50">
+    <header className="bg-white border-b border-[hsl(var(--color-jam-neutral-200))] sticky top-0 z-50">
       <div className="jam-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-8">
@@ -43,7 +43,7 @@ export function Header({ onOpenLeadModal }: HeaderProps) {
             <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
               <div className="relative group">
                 <button
-                  className="flex items-center gap-1 text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                  className="flex items-center gap-1 text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                   onMouseEnter={() => setIsCategoriesOpen(true)}
                   onMouseLeave={() => setIsCategoriesOpen(false)}
                   aria-expanded={isCategoriesOpen}
@@ -65,12 +65,12 @@ export function Header({ onOpenLeadModal }: HeaderProps) {
                       <Link
                         key={category.name}
                         href={category.href}
-                        className="block px-4 py-2 hover:bg-[hsl(var(--jam-neutral-100))] text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] transition-colors"
+                        className="block px-4 py-2 hover:bg-[hsl(var(--color-jam-neutral-100))] text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] transition-colors"
                         role="menuitem"
                       >
                         <div className="flex justify-between items-center">
                           <span className="jam-body">{category.name}</span>
-                          <span className="jam-small text-[hsl(var(--jam-neutral-500))]">
+                          <span className="jam-small text-[hsl(var(--color-jam-neutral-500))]">
                             {category.count}
                           </span>
                         </div>
@@ -82,42 +82,42 @@ export function Header({ onOpenLeadModal }: HeaderProps) {
 
               <Link
                 href="/brands"
-                className="text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                className="text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                 data-test-id="header-brands-link"
               >
                 Brands
               </Link>
               <Link
                 href="/vehicles?condition=new"
-                className="text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                className="text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                 data-test-id="header-new-link"
               >
                 New
               </Link>
               <Link
                 href="/vehicles?condition=used"
-                className="text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                className="text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                 data-test-id="header-used-link"
               >
                 Used
               </Link>
               <Link
                 href="/service-centers"
-                className="text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                className="text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                 data-test-id="header-service-link"
               >
                 Service Centers
               </Link>
               <Link
                 href="/finance"
-                className="text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                className="text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                 data-test-id="header-finance-link"
               >
                 Finance
               </Link>
               <Link
                 href="/blog"
-                className="text-[hsl(var(--jam-neutral-700))] hover:text-[hsl(var(--jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
+                className="text-[hsl(var(--color-jam-neutral-700))] hover:text-[hsl(var(--color-jam-primary))] jam-body font-medium transition-colors jam-focus-ring"
                 data-test-id="header-blog-link"
               >
                 Blog
@@ -127,24 +127,24 @@ export function Header({ onOpenLeadModal }: HeaderProps) {
 
           <div className="flex items-center gap-3">
             <button
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[hsl(var(--jam-neutral-100))] transition-colors jam-focus-ring"
+              className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
               aria-label="Search"
               data-test-id="header-search-btn"
             >
-              <Search className="w-5 h-5 text-[hsl(var(--jam-neutral-700))]" />
+              <Search className="w-5 h-5 text-[hsl(var(--color-jam-neutral-700))]" />
             </button>
             
             <button
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[hsl(var(--jam-neutral-100))] transition-colors jam-focus-ring"
+              className="hidden md:flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
               aria-label="Compare vehicles"
               data-test-id="header-compare-btn"
             >
-              <GitCompare className="w-5 h-5 text-[hsl(var(--jam-neutral-700))]" />
+              <GitCompare className="w-5 h-5 text-[hsl(var(--color-jam-neutral-700))]" />
             </button>
 
             <a
               href="tel:+918800123456"
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-[hsl(var(--jam-primary))] text-white hover:bg-[hsl(var(--jam-primary))]/90 transition-colors jam-focus-ring"
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-[hsl(var(--color-jam-primary))] text-white hover:bg-[hsl(var(--color-jam-primary))]/90 transition-colors jam-focus-ring"
               data-test-id="header-call-btn"
             >
               <Phone className="w-4 h-4" />
@@ -163,63 +163,63 @@ export function Header({ onOpenLeadModal }: HeaderProps) {
             </a>
 
             <button
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[hsl(var(--jam-neutral-100))] transition-colors jam-focus-ring"
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
               data-test-id="header-mobile-menu-btn"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-[hsl(var(--jam-neutral-700))]" />
+                <X className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
               ) : (
-                <Menu className="w-6 h-6 text-[hsl(var(--jam-neutral-700))]" />
+                <Menu className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
               )}
             </button>
           </div>
         </div>
 
         {isMobileMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-[hsl(var(--jam-neutral-200))]" aria-label="Mobile navigation">
+          <nav className="lg:hidden py-4 border-t border-[hsl(var(--color-jam-neutral-200))]" aria-label="Mobile navigation">
             <div className="flex flex-col gap-2">
               <Link
                 href="/vehicles"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 Categories
               </Link>
               <Link
                 href="/brands"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 Brands
               </Link>
               <Link
                 href="/vehicles?condition=new"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 New Vehicles
               </Link>
               <Link
                 href="/vehicles?condition=used"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 Used Vehicles
               </Link>
               <Link
                 href="/service-centers"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 Service Centers
               </Link>
               <Link
                 href="/finance"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 Finance
               </Link>
               <Link
                 href="/blog"
-                className="px-4 py-2 text-[hsl(var(--jam-neutral-700))] hover:bg-[hsl(var(--jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
+                className="px-4 py-2 text-[hsl(var(--color-jam-neutral-700))] hover:bg-[hsl(var(--color-jam-neutral-100))] rounded-lg transition-colors jam-body font-medium"
               >
                 Blog
               </Link>

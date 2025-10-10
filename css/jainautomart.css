@@ -1,220 +1,282 @@
 /** 
  * Jain Automart Brand Design System
- * Derived from logo and optimized for truck/vehicle industry
+ * Simple approach with CSS variables only
  */
 
-@layer base {
-  :root {
-    /* Brand Colors - Derived from Jain Automart Logo */
-    --jam-primary: 217 79% 37%;        /* Deep Blue from logo */
-    --jam-primary-foreground: 0 0% 100%;
-    --jam-accent: 38 92% 50%;          /* Vibrant yellow/gold for CTAs */
-    --jam-accent-foreground: 0 0% 0%;
-    
-    /* Semantic Colors */
-    --jam-success: 142 76% 36%;
-    --jam-warning: 38 92% 50%;
-    --jam-danger: 0 72% 51%;
-    --jam-info: 199 89% 48%;
-    
-    /* Neutral Scale - WCAG AA Compliant */
-    --jam-neutral-50: 0 0% 98%;
-    --jam-neutral-100: 210 17% 95%;
-    --jam-neutral-200: 210 16% 88%;
-    --jam-neutral-300: 212 14% 75%;
-    --jam-neutral-500: 215 14% 47%;
-    --jam-neutral-700: 217 19% 27%;
-    --jam-neutral-900: 217 33% 17%;
-    
-    /* Trust Badge Colors */
-    --jam-verified: 142 76% 36%;
-    --jam-finance: 217 79% 37%;
-    --jam-warranty: 38 92% 50%;
-    
-    /* Elevation Shadows */
-    --jam-elev-1: 0px 1px 3px rgba(15, 23, 42, 0.08);
-    --jam-elev-2: 0px 4px 12px rgba(15, 23, 42, 0.12);
-    --jam-elev-3: 0px 12px 24px rgba(15, 23, 42, 0.16);
-    
-    /* Border Radii */
-    --jam-radius-sm: 0.5rem;      /* 8px */
-    --jam-radius-md: 0.75rem;     /* 12px */
-    --jam-radius-lg: 1rem;        /* 16px */
-    --jam-radius-pill: 999px;
-    
-    /* Motion Timing */
-    --jam-transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
-    --jam-transition-base: 180ms cubic-bezier(0.4, 0, 0.2, 1);
-    --jam-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
+:root {
+  /* Brand Colors - Derived from Jain Automart Logo */
+  --jam-primary: #1e4a7c;
+  --jam-primary-rgb: 30, 74, 124;
+  --jam-accent: #f59e0b;
+  --jam-accent-rgb: 245, 158, 11;
   
-  .dark {
-    --jam-primary: 217 79% 57%;
-    --jam-primary-foreground: 217 33% 17%;
-    --jam-neutral-50: 217 33% 17%;
-    --jam-neutral-900: 0 0% 98%;
-  }
+  /* Neutral Scale */
+  --jam-neutral-50: #fafafa;
+  --jam-neutral-100: #f4f4f5;
+  --jam-neutral-200: #e4e4e7;
+  --jam-neutral-300: #d4d4d8;
+  --jam-neutral-500: #71717a;
+  --jam-neutral-700: #3f3f46;
+  --jam-neutral-900: #18181b;
 }
 
-/* Typography Scale */
-@layer components {
+/* Typography - Standard CSS Classes */
+.jam-h1 {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
   .jam-h1 {
-    @apply text-[40px] leading-[48px] md:text-[48px] md:leading-[56px] font-bold tracking-tight;
+    font-size: 3rem;
+    line-height: 3.5rem;
   }
-  
+}
+
+.jam-h2 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
   .jam-h2 {
-    @apply text-[32px] leading-[40px] md:text-[40px] md:leading-[48px] font-bold tracking-tight;
-  }
-  
-  .jam-h3 {
-    @apply text-[24px] leading-[32px] md:text-[32px] md:leading-[40px] font-semibold;
-  }
-  
-  .jam-h4 {
-    @apply text-[20px] leading-[28px] md:text-[24px] md:leading-[32px] font-semibold;
-  }
-  
-  .jam-body {
-    @apply text-[16px] leading-[24px];
-  }
-  
-  .jam-small {
-    @apply text-[14px] leading-[20px];
-  }
-  
-  .jam-tiny {
-    @apply text-[12px] leading-[16px];
+    font-size: 2.5rem;
+    line-height: 3rem;
   }
 }
 
-/* Brand Components */
-@layer components {
-  /* Primary CTA Button */
-  .jam-btn-primary {
-    @apply bg-[hsl(var(--jam-accent))] text-[hsl(var(--jam-accent-foreground))] 
-           hover:brightness-110 active:brightness-95
-           px-6 py-3 rounded-lg font-semibold
-           transition-all duration-[var(--jam-transition-fast)]
-           shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)];
-  }
-  
-  /* Secondary CTA Button */
-  .jam-btn-secondary {
-    @apply bg-[hsl(var(--jam-primary))] text-[hsl(var(--jam-primary-foreground))]
-           hover:bg-[hsl(var(--jam-primary))]/90
-           px-6 py-3 rounded-lg font-semibold
-           transition-all duration-[var(--jam-transition-fast)]
-           shadow-[var(--jam-elev-1)] hover:shadow-[var(--jam-elev-2)];
-  }
-  
-  /* Outline Button */
-  .jam-btn-outline {
-    @apply border-2 border-[hsl(var(--jam-primary))] text-[hsl(var(--jam-primary))]
-           hover:bg-[hsl(var(--jam-primary))] hover:text-[hsl(var(--jam-primary-foreground))]
-           px-6 py-3 rounded-lg font-semibold
-           transition-all duration-[var(--jam-transition-fast)];
-  }
-  
-  /* Card with Hover Effect */
-  .jam-card {
-    @apply bg-white rounded-[var(--jam-radius-md)] 
-           shadow-[var(--jam-elev-1)] 
-           transition-all duration-[var(--jam-transition-base)]
-           hover:shadow-[var(--jam-elev-2)] hover:-translate-y-1;
-  }
-  
-  /* Listing Card */
-  .jam-listing-card {
-    @apply jam-card overflow-hidden group;
-  }
-  
-  .jam-listing-card-image {
-    @apply relative aspect-[4/3] overflow-hidden;
-  }
-  
-  .jam-listing-card-image img {
-    @apply transition-transform duration-[var(--jam-transition-slow)]
-           group-hover:scale-105;
-  }
-  
-  /* Trust Badge */
-  .jam-badge-verified {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-           bg-[hsl(var(--jam-verified))]/10 text-[hsl(var(--jam-verified))]
-           border border-[hsl(var(--jam-verified))]/20;
-  }
-  
-  .jam-badge-finance {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-           bg-[hsl(var(--jam-finance))]/10 text-[hsl(var(--jam-finance))]
-           border border-[hsl(var(--jam-finance))]/20;
-  }
-  
-  .jam-badge-warranty {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-           bg-[hsl(var(--jam-warranty))]/10 text-[hsl(var(--jam-warranty))]
-           border border-[hsl(var(--jam-warranty))]/20;
-  }
-  
-  /* Filter Chip */
-  .jam-chip {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full
-           bg-[hsl(var(--jam-neutral-100))] text-[hsl(var(--jam-neutral-700))]
-           hover:bg-[hsl(var(--jam-primary))] hover:text-[hsl(var(--jam-primary-foreground))]
-           transition-all duration-[var(--jam-transition-fast)]
-           cursor-pointer border border-transparent
-           hover:border-[hsl(var(--jam-primary))];
-  }
-  
-  .jam-chip.active {
-    @apply bg-[hsl(var(--jam-primary))] text-[hsl(var(--jam-primary-foreground))]
-           border-[hsl(var(--jam-primary))];
-  }
-  
-  /* Section Container */
+.jam-h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.jam-h4 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.jam-body {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.jam-small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.jam-tiny {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* Buttons */
+.jam-btn-primary {
+  background-color: var(--jam-accent);
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jam-btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.jam-btn-secondary {
+  background-color: var(--jam-primary);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jam-btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.jam-btn-outline {
+  border: 2px solid var(--jam-primary);
+  color: var(--jam-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jam-btn-outline:hover {
+  background-color: var(--jam-primary);
+  color: #fff;
+}
+
+/* Cards */
+.jam-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 180ms ease;
+}
+
+.jam-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-0.25rem);
+}
+
+.jam-listing-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 180ms ease;
+  overflow: hidden;
+}
+
+.jam-listing-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-0.25rem);
+}
+
+/* Badges */
+.jam-badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: rgba(34, 197, 94, 0.1);
+  color: rgb(34, 197, 94);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.jam-badge-finance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: rgba(var(--jam-primary-rgb), 0.1);
+  color: var(--jam-primary);
+  border: 1px solid rgba(var(--jam-primary-rgb), 0.2);
+}
+
+.jam-badge-warranty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: rgba(var(--jam-accent-rgb), 0.1);
+  color: var(--jam-accent);
+  border: 1px solid rgba(var(--jam-accent-rgb), 0.2);
+}
+
+/* Chip */
+.jam-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: var(--jam-neutral-100);
+  color: var(--jam-neutral-700);
+  transition: all 120ms ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.jam-chip:hover {
+  background-color: var(--jam-primary);
+  color: #fff;
+  border-color: var(--jam-primary);
+}
+
+/* Section */
+.jam-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
   .jam-section {
-    @apply py-12 md:py-16 lg:py-20;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
-  
+}
+
+@media (min-width: 1024px) {
+  .jam-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.jam-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
   .jam-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  /* Sticky Mobile CTA Bar */
-  .jam-sticky-bar {
-    @apply fixed bottom-0 left-0 right-0 z-50
-           bg-white border-t border-[hsl(var(--jam-neutral-200))]
-           px-4 py-3 
-           flex items-center justify-between gap-3
-           transition-transform duration-[var(--jam-transition-base)]
-           shadow-[0_-4px_12px_rgba(15,23,42,0.1)]
-           pb-safe;  /* iOS safe area */
-  }
-  
-  .jam-sticky-bar.hidden {
-    @apply translate-y-full;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
-/* Performance Optimizations */
-@layer utilities {
-  .will-change-transform {
-    will-change: transform;
-  }
-  
-  .gpu-accelerate {
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+@media (min-width: 1024px) {
+  .jam-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
-/* Accessibility Focus States */
-@layer components {
-  .jam-focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 
-           focus-visible:ring-[hsl(var(--jam-primary))] 
-           focus-visible:ring-offset-2 
-           rounded-md;
-  }
+/* Sticky Bar */
+.jam-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: white;
+  border-top: 1px solid var(--jam-neutral-200);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  transition: transform 180ms ease;
+  box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.1);
+}
+
+/* Focus Ring */
+.jam-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--jam-primary);
+  border-radius: 0.375rem;
 }

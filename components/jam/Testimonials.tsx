@@ -51,13 +51,13 @@ export function Testimonials() {
   };
 
   return (
-    <section className="jam-section bg-[hsl(var(--jam-neutral-50))]">
+    <section className="jam-section bg-[hsl(var(--color-jam-neutral-50))]">
       <div className="jam-container">
         <div className="text-center mb-12">
-          <h2 className="jam-h2 text-[hsl(var(--jam-neutral-900))] mb-4">
+          <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-4">
             What Our Customers Say
           </h2>
-          <p className="jam-body text-[hsl(var(--jam-neutral-700))] max-w-2xl mx-auto">
+          <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] max-w-2xl mx-auto">
             Trusted by thousands of fleet owners and transport businesses
           </p>
         </div>
@@ -82,22 +82,22 @@ export function Testimonials() {
                       key={i}
                       className={`w-5 h-5 ${
                         i < testimonials[currentIndex].rating
-                          ? 'text-[hsl(var(--jam-accent))] fill-[hsl(var(--jam-accent))]'
-                          : 'text-[hsl(var(--jam-neutral-300))]'
+                          ? 'text-[hsl(var(--color-jam-accent))] fill-[hsl(var(--color-jam-accent))]'
+                          : 'text-[hsl(var(--color-jam-neutral-300))]'
                       }`}
                     />
                   ))}
                 </div>
 
-                <blockquote className="jam-body text-[hsl(var(--jam-neutral-700))] mb-6 italic">
+                <blockquote className="jam-body text-[hsl(var(--color-jam-neutral-700))] mb-6 italic">
                   "{testimonials[currentIndex].quote}"
                 </blockquote>
 
                 <div>
-                  <div className="jam-h4 text-[hsl(var(--jam-neutral-900))]">
+                  <div className="jam-h4 text-[hsl(var(--color-jam-neutral-900))]">
                     {testimonials[currentIndex].name}
                   </div>
-                  <div className="jam-small text-[hsl(var(--jam-neutral-700))]">
+                  <div className="jam-small text-[hsl(var(--color-jam-neutral-700))]">
                     {testimonials[currentIndex].city}
                   </div>
                 </div>
@@ -107,20 +107,20 @@ export function Testimonials() {
 
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] flex items-center justify-center hover:bg-[hsl(var(--jam-neutral-100))] transition-colors jam-focus-ring"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] flex items-center justify-center hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
             aria-label="Previous testimonial"
             data-test-id="testimonial-prev"
           >
-            <ChevronLeft className="w-6 h-6 text-[hsl(var(--jam-neutral-700))]" />
+            <ChevronLeft className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
           </button>
 
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] flex items-center justify-center hover:bg-[hsl(var(--jam-neutral-100))] transition-colors jam-focus-ring"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 bg-white rounded-full shadow-[var(--jam-elev-2)] flex items-center justify-center hover:bg-[hsl(var(--color-jam-neutral-100))] transition-colors jam-focus-ring"
             aria-label="Next testimonial"
             data-test-id="testimonial-next"
           >
-            <ChevronRight className="w-6 h-6 text-[hsl(var(--jam-neutral-700))]" />
+            <ChevronRight className="w-6 h-6 text-[hsl(var(--color-jam-neutral-700))]" />
           </button>
 
           <div className="flex justify-center gap-2 mt-8">
@@ -130,8 +130,8 @@ export function Testimonials() {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all jam-focus-ring ${
                   index === currentIndex
-                    ? 'w-8 bg-[hsl(var(--jam-primary))]'
-                    : 'bg-[hsl(var(--jam-neutral-300))]'
+                    ? 'w-8 bg-[hsl(var(--color-jam-primary))]'
+                    : 'bg-[hsl(var(--color-jam-neutral-300))]'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
                 data-test-id={`testimonial-dot-${index}`}

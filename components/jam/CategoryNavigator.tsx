@@ -16,13 +16,13 @@ const categories = [
 
 export function CategoryNavigator() {
   return (
-    <section className="jam-section bg-[hsl(var(--jam-neutral-50))]">
+    <section className="jam-section bg-[hsl(var(--color-jam-neutral-50))]">
       <div className="jam-container">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="jam-h2 text-[hsl(var(--jam-neutral-900))] mb-4">
+          <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-4">
             Browse by Category
           </h2>
-          <p className="jam-body text-[hsl(var(--jam-neutral-700))] max-w-2xl mx-auto">
+          <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] max-w-2xl mx-auto">
             Find the perfect heavy vehicle for your business needs
           </p>
         </div>
@@ -37,12 +37,12 @@ export function CategoryNavigator() {
                 className="jam-card group p-6 flex flex-col items-center text-center gap-4"
                 data-test-id={`category-${category.name.toLowerCase()}`}
               >
-                <div className="w-16 h-16 rounded-full bg-[hsl(var(--jam-primary))]/10 flex items-center justify-center group-hover:bg-[hsl(var(--jam-primary))] transition-colors">
-                  <IconComponent className="w-8 h-8 text-[hsl(var(--jam-primary))] group-hover:text-white transition-colors" />
+                <div className="w-16 h-16 rounded-full bg-[hsl(var(--color-jam-primary))]/10 flex items-center justify-center group-hover:bg-[hsl(var(--color-jam-primary))] transition-colors">
+                  <IconComponent className="w-8 h-8 text-[hsl(var(--color-jam-primary))] group-hover:text-white transition-colors" />
                 </div>
                 <div>
-                  <h3 className="jam-h4 text-[hsl(var(--jam-neutral-900))] mb-1">{category.name}</h3>
-                  <p className="jam-small text-[hsl(var(--jam-neutral-700))]">
+                  <h3 className="jam-h4 text-[hsl(var(--color-jam-neutral-900))] mb-1">{category.name}</h3>
+                  <p className="jam-small text-[hsl(var(--color-jam-neutral-700))]">
                     {category.listings.toLocaleString()} Listings
                   </p>
                 </div>

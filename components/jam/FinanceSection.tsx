@@ -27,12 +27,12 @@ export function FinanceSection() {
   return (
     <section className="jam-section">
       <div className="jam-container">
-        <div className="bg-gradient-to-br from-[hsl(var(--jam-primary))] to-[hsl(var(--jam-primary))]/90 rounded-2xl overflow-hidden">
+        <div className="bg-gradient-to-br from-[hsl(var(--color-jam-primary))] to-[hsl(var(--color-jam-primary))]/90 rounded-2xl overflow-hidden">
           <div className="grid md:grid-cols-2 gap-0">
             <div className="p-8 md:p-12 text-white">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-full bg-[hsl(var(--jam-accent))] flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-[hsl(var(--jam-accent-foreground))]" />
+                <div className="w-12 h-12 rounded-full bg-[hsl(var(--color-jam-accent))] flex items-center justify-center">
+                  <DollarSign className="w-6 h-6 text-[hsl(var(--color-jam-accent-fg))]" />
                 </div>
                 <h2 className="jam-h2">Get Pre-Approved</h2>
               </div>
@@ -45,14 +45,14 @@ export function FinanceSection() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="finance-name" className="block jam-small font-medium mb-2">
-                      Full Name <span className="text-[hsl(var(--jam-accent))]">*</span>
+                      Full Name <span className="text-[hsl(var(--color-jam-accent))]">*</span>
                     </label>
                     <input
                       id="finance-name"
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--jam-neutral-900))] jam-focus-ring"
+                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring"
                       placeholder="Enter your name"
                       required
                       data-test-id="finance-name-input"
@@ -61,14 +61,14 @@ export function FinanceSection() {
 
                   <div>
                     <label htmlFor="finance-phone" className="block jam-small font-medium mb-2">
-                      Phone Number <span className="text-[hsl(var(--jam-accent))]">*</span>
+                      Phone Number <span className="text-[hsl(var(--color-jam-accent))]">*</span>
                     </label>
                     <input
                       id="finance-phone"
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--jam-neutral-900))] jam-focus-ring"
+                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring"
                       placeholder="+91 98765 43210"
                       required
                       data-test-id="finance-phone-input"
@@ -77,13 +77,13 @@ export function FinanceSection() {
 
                   <div>
                     <label htmlFor="finance-vehicle" className="block jam-small font-medium mb-2">
-                      Vehicle Type <span className="text-[hsl(var(--jam-accent))]">*</span>
+                      Vehicle Type <span className="text-[hsl(var(--color-jam-accent))]">*</span>
                     </label>
                     <select
                       id="finance-vehicle"
                       value={formData.vehicleType}
                       onChange={(e) => setFormData({ ...formData, vehicleType: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--jam-neutral-900))] jam-focus-ring"
+                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring"
                       required
                       data-test-id="finance-vehicle-select"
                     >
@@ -96,13 +96,13 @@ export function FinanceSection() {
 
                   <div>
                     <label htmlFor="finance-city" className="block jam-small font-medium mb-2">
-                      City <span className="text-[hsl(var(--jam-accent))]">*</span>
+                      City <span className="text-[hsl(var(--color-jam-accent))]">*</span>
                     </label>
                     <select
                       id="finance-city"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--jam-neutral-900))] jam-focus-ring"
+                      className="w-full px-4 py-3 rounded-lg text-[hsl(var(--color-jam-neutral-900))] jam-focus-ring"
                       required
                       data-test-id="finance-city-select"
                     >
@@ -115,7 +115,7 @@ export function FinanceSection() {
 
                   <button
                     type="submit"
-                    className="w-full bg-[hsl(var(--jam-accent))] text-[hsl(var(--jam-accent-foreground))] px-6 py-4 rounded-lg font-semibold hover:brightness-110 transition-all shadow-lg jam-focus-ring"
+                    className="w-full bg-[hsl(var(--color-jam-accent))] text-[hsl(var(--color-jam-accent-fg))] px-6 py-4 rounded-lg font-semibold hover:brightness-110 transition-all shadow-lg jam-focus-ring"
                     data-test-id="finance-submit-btn"
                   >
                     Get Pre-Approved Now
@@ -123,7 +123,7 @@ export function FinanceSection() {
                 </form>
               ) : (
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-                  <CheckCircle className="w-16 h-16 text-[hsl(var(--jam-accent))] mx-auto mb-4" />
+                  <CheckCircle className="w-16 h-16 text-[hsl(var(--color-jam-accent))] mx-auto mb-4" />
                   <h3 className="jam-h3 mb-2">Request Submitted!</h3>
                   <p className="jam-body text-white/90">
                     Our team will contact you within 24 hours.
@@ -133,37 +133,37 @@ export function FinanceSection() {
             </div>
 
             <div className="bg-white p-8 md:p-12 flex flex-col justify-center">
-              <h3 className="jam-h3 text-[hsl(var(--jam-neutral-900))] mb-6">
+              <h3 className="jam-h3 text-[hsl(var(--color-jam-neutral-900))] mb-6">
                 Finance Partners
               </h3>
               <div className="space-y-4 mb-8">
                 {partners.map((partner) => (
                   <div
                     key={partner}
-                    className="flex items-center gap-3 p-4 bg-[hsl(var(--jam-neutral-50))] rounded-lg"
+                    className="flex items-center gap-3 p-4 bg-[hsl(var(--color-jam-neutral-50))] rounded-lg"
                     data-test-id={`finance-partner-${partner.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    <div className="w-10 h-10 rounded-full bg-[hsl(var(--jam-primary))]/10 flex items-center justify-center">
-                      <CheckCircle className="w-5 h-5 text-[hsl(var(--jam-primary))]" />
+                    <div className="w-10 h-10 rounded-full bg-[hsl(var(--color-jam-primary))]/10 flex items-center justify-center">
+                      <CheckCircle className="w-5 h-5 text-[hsl(var(--color-jam-primary))]" />
                     </div>
-                    <span className="jam-body font-semibold text-[hsl(var(--jam-neutral-900))]">
+                    <span className="jam-body font-semibold text-[hsl(var(--color-jam-neutral-900))]">
                       {partner}
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div className="space-y-3 text-[hsl(var(--jam-neutral-700))]">
+              <div className="space-y-3 text-[hsl(var(--color-jam-neutral-700))]">
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-[hsl(var(--jam-primary))] flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--color-jam-primary))] flex-shrink-0 mt-0.5" />
                   <span className="jam-small">Interest rates starting from 8.5% p.a.</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-[hsl(var(--jam-primary))] flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--color-jam-primary))] flex-shrink-0 mt-0.5" />
                   <span className="jam-small">Tenure up to 7 years</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-[hsl(var(--jam-primary))] flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[hsl(var(--color-jam-primary))] flex-shrink-0 mt-0.5" />
                   <span className="jam-small">Minimal documentation required</span>
                 </div>
               </div>

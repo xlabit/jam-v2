@@ -18,13 +18,13 @@ export function BrandsSection() {
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
 
   return (
-    <section className="jam-section bg-[hsl(var(--jam-neutral-50))]">
+    <section className="jam-section bg-[hsl(var(--color-jam-neutral-50))]">
       <div className="jam-container">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="jam-h2 text-[hsl(var(--jam-neutral-900))] mb-4">
+          <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-4">
             Popular Brands
           </h2>
-          <p className="jam-body text-[hsl(var(--jam-neutral-700))] max-w-2xl mx-auto">
+          <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] max-w-2xl mx-auto">
             Explore vehicles from trusted manufacturers
           </p>
         </div>
@@ -58,11 +58,11 @@ export function BrandsSection() {
                 data-test-id={`brand-logo-${brand.name.toLowerCase().replace(' ', '-')}`}
               >
                 <div className="relative w-full h-12">
-                  <div className="w-full h-full flex items-center justify-center text-[hsl(var(--jam-neutral-700))] font-bold">
+                  <div className="w-full h-full flex items-center justify-center text-[hsl(var(--color-jam-neutral-700))] font-bold">
                     {brand.name}
                   </div>
                 </div>
-                <span className="jam-tiny text-[hsl(var(--jam-neutral-700))]">
+                <span className="jam-tiny text-[hsl(var(--color-jam-neutral-700))]">
                   {brand.count} vehicles
                 </span>
               </div>

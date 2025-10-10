@@ -54,13 +54,13 @@ export function FAQ() {
   };
 
   return (
-    <section className="jam-section bg-[hsl(var(--jam-neutral-50))]">
+    <section className="jam-section bg-[hsl(var(--color-jam-neutral-50))]">
       <div className="jam-container">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="jam-h2 text-[hsl(var(--jam-neutral-900))] mb-4">
+          <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="jam-body text-[hsl(var(--jam-neutral-700))] max-w-2xl mx-auto">
+          <p className="jam-body text-[hsl(var(--color-jam-neutral-700))] max-w-2xl mx-auto">
             Got questions? We've got answers
           </p>
         </div>
@@ -74,15 +74,15 @@ export function FAQ() {
             >
               <button
                 onClick={() => toggle(faq.id)}
-                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[hsl(var(--jam-neutral-50))] transition-colors jam-focus-ring"
+                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[hsl(var(--color-jam-neutral-50))] transition-colors jam-focus-ring"
                 aria-expanded={openId === faq.id}
                 aria-controls={`faq-answer-${faq.id}`}
               >
-                <span className="jam-h4 text-[hsl(var(--jam-neutral-900))] pr-4">
+                <span className="jam-h4 text-[hsl(var(--color-jam-neutral-900))] pr-4">
                   {faq.question}
                 </span>
                 <ChevronDown
-                  className={`w-6 h-6 text-[hsl(var(--jam-primary))] flex-shrink-0 transition-transform ${
+                  className={`w-6 h-6 text-[hsl(var(--color-jam-primary))] flex-shrink-0 transition-transform ${
                     openId === faq.id ? 'rotate-180' : ''
                   }`}
                 />
@@ -91,7 +91,7 @@ export function FAQ() {
               {openId === faq.id && (
                 <div
                   id={`faq-answer-${faq.id}`}
-                  className="px-6 pb-4 jam-body text-[hsl(var(--jam-neutral-700))]"
+                  className="px-6 pb-4 jam-body text-[hsl(var(--color-jam-neutral-700))]"
                   role="region"
                   aria-labelledby={`faq-question-${faq.id}`}
                 >

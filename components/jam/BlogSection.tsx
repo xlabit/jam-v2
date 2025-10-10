@@ -61,10 +61,10 @@ export function BlogSection() {
       <div className="jam-container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 md:mb-12">
           <div>
-            <h2 className="jam-h2 text-[hsl(var(--jam-neutral-900))] mb-2">
+            <h2 className="jam-h2 text-[hsl(var(--color-jam-neutral-900))] mb-2">
               Latest from Our Blog
             </h2>
-            <p className="jam-body text-[hsl(var(--jam-neutral-700))]">
+            <p className="jam-body text-[hsl(var(--color-jam-neutral-700))]">
               Insights, tips, and news for commercial vehicle owners
             </p>
           </div>
@@ -96,24 +96,24 @@ export function BlogSection() {
                   className="w-full h-full object-cover transition-transform duration-[var(--jam-transition-slow)] group-hover:scale-105"
                 />
                 <div className="absolute top-3 left-3">
-                  <span className="jam-tiny font-semibold px-3 py-1 rounded-full bg-[hsl(var(--jam-primary))] text-white">
+                  <span className="jam-tiny font-semibold px-3 py-1 rounded-full bg-[hsl(var(--color-jam-primary))] text-white">
                     {blog.category}
                   </span>
                 </div>
               </div>
 
               <div className="p-6">
-                <h3 className="jam-h4 text-[hsl(var(--jam-neutral-900))] mb-3 line-clamp-2 group-hover:text-[hsl(var(--jam-primary))] transition-colors">
+                <h3 className="jam-h4 text-[hsl(var(--color-jam-neutral-900))] mb-3 line-clamp-2 group-hover:text-[hsl(var(--color-jam-primary))] transition-colors">
                   {blog.title}
                 </h3>
 
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-[hsl(var(--jam-neutral-700))]">
+                  <div className="flex items-center gap-2 text-[hsl(var(--color-jam-neutral-700))]">
                     <Clock className="w-4 h-4" />
                     <span className="jam-small">{blog.readTime}</span>
                   </div>
 
-                  <span className="jam-small text-[hsl(var(--jam-primary))] font-semibold group-hover:underline flex items-center gap-1">
+                  <span className="jam-small text-[hsl(var(--color-jam-primary))] font-semibold group-hover:underline flex items-center gap-1">
                     Read More
                     <ArrowRight className="w-4 h-4" />
                   </span>
