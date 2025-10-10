@@ -2,11 +2,129 @@
 
 Metronic 9 is a comprehensive Next.js template for modern web applications, built on Tailwind CSS 4.x and React 19.x. It serves as a complete admin dashboard and application framework with multiple layout demos, authentication system, user management, and various UI components. The project integrates ReUI (an open-source React component library) and provides a foundation for building scalable web applications with modern design patterns.
 
-**Project**: Jain Automart admin panel with secure site-owner login system at `/jammanage`.
+**Project**: Jain Automart - Complete commercial vehicle marketplace with public-facing homepage and secure admin panel.
+
+## Public Homepage (`/`)
+- **Purpose**: Lead generation and vehicle discovery for commercial vehicle buyers
+- **Target**: Fleet owners, logistics companies, individual buyers looking for trucks, trailers, tippers, and commercial vehicles
+- **Tech Stack**: Next.js 15, React 19, Tailwind CSS 4 with custom JAM brand design system
+- **Design**: High-conversion landing page following growth UX best practices
+
+## Admin Panel (`/jammanage`)
+- **Purpose**: Vehicle inventory management, vocabulary administration, and system controls
+- **Access**: Secure site-owner login with rate limiting and JWT sessions
+- **Modules**: Service Centers, Vehicles (with 9 vocabulary categories)
 
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+# Jain Automart Public Homepage
+
+## Overview (`/`)
+The public-facing homepage at the root route serves as a high-conversion lead generation landing page for commercial vehicle buyers. Built with a custom brand design system derived from the Jain Automart logo (deep blue primary, vibrant yellow accent).
+
+## Brand Design System (`/css/jainautomart.css`)
+- **Colors**: Deep blue primary (#1E4A7C), vibrant yellow/gold accent (#F59E0B), WCAG AA compliant neutral scale
+- **Typography**: Responsive scale (H1: 40/48px desktop → 28/36px mobile)
+- **Components**: jam-btn-primary, jam-btn-secondary, jam-card, jam-listing-card, jam-badge-*, jam-chip, jam-sticky-bar
+- **Motion**: Fast (120ms), base (180ms), slow (300ms) cubic-bezier transitions
+- **Elevation**: 3-level shadow system (elev-1/2/3)
+
+## Homepage Sections (in order)
+1. **Header** (`components/jam/Header.tsx`)
+   - Logo, mega-menu (Categories dropdown), navigation links (Brands, New, Used, Service Centers, Finance, Blog)
+   - Right cluster: Search icon, Compare, Call, WhatsApp buttons
+   - Mobile hamburger menu with slide-out navigation
+
+2. **Hero** (`components/jam/Hero.tsx`)
+   - Headline: "Heavy Vehicles. Verified. Delivered."
+   - Tabbed search bar (New/Used) with dropdowns (Body Type*, Make, City, State)
+   - Primary CTAs: Get Best Price, Request Callback, WhatsApp Us
+   - Trust badges: RC Verified, Financing Available, Pan-India Delivery, Warranty Options
+
+3. **Category Navigator** (`components/jam/CategoryNavigator.tsx`)
+   - 8 vehicle type cards with icons: Truck, Trailer, Tipper, Tanker, Reefer, Container, Tractor, Bus
+   - Each shows listing count and "View All" CTA
+
+4. **Featured Listings** (`components/jam/FeaturedListings.tsx`)
+   - New/Used toggle tabs
+   - Horizontal scrollable carousel with arrow controls
+   - Listing cards: 4:3 image with verified ribbon, year/make/model/variant, specs (Axle•GVW•Emission•City), price + negotiable pill
+   - CTAs: View Details, Get Best Price, WhatsApp
+
+5. **Brands Section** (`components/jam/BrandsSection.tsx`)
+   - Animated horizontal marquee of brand logos
+   - Filter chips for popular brands (Tata, Ashok Leyland, Mahindra, Bharat Benz, Eicher, Volvo)
+
+6. **Body Type Finder** (`components/jam/BodyTypeFinder.tsx`)
+   - 5 iconic tiles with gradient backgrounds (Tipper, Trailer, Reefer, Container, Tanker)
+   - Vehicle counts and deep-links to filtered product listing pages
+
+7. **Why Jain Automart** (`components/jam/WhyJainAutomart.tsx`)
+   - 4 value propositions with icons (Verified Docs, Cities Served, Finance/Insurance, Expert Inspection)
+   - Statistics band: "10K+ Vehicles • 100+ Cities • 1.5K+ Fleet Owners • 4.7★ Rating"
+   - Partner bank logos (HDFC, ICICI, SBI, Axis, Tata Capital, Mahindra Finance)
+
+8. **Finance Section** (`components/jam/FinanceSection.tsx`)
+   - Split panel: Pre-approval form (Name, Phone, Vehicle Type, City) + partner information
+   - Form validation with success state
+
+9. **Testimonials** (`components/jam/Testimonials.tsx`)
+   - Customer testimonials carousel with prev/next controls and dot indicators
+   - Each testimonial: photo, quote, star rating, city
+
+10. **Blog Section** (`components/jam/BlogSection.tsx`)
+    - 6 blog cards with category badges, images, titles, read time
+    - "Read More" CTAs to blog articles
+
+11. **FAQ** (`components/jam/FAQ.tsx`)
+    - Accessible accordion with 8 FAQs (finance, RC transfer, delivery, warranty, inspection, EMI, insurance, used vehicles)
+    - Collapsible panels with smooth transitions and proper ARIA attributes
+
+12. **Footer** (`components/jam/Footer.tsx`)
+    - Logo, social links (Facebook, Twitter, Instagram, LinkedIn, YouTube)
+    - Categories, Brands, Quick Links columns
+    - Contact information (Phone, Email, WhatsApp, Address)
+    - Conversion CTAs: Get Best Price, Call Now, WhatsApp
+    - Copyright and compliance links
+
+## Mobile Components
+- **Sticky Mobile CTA Bar** (`components/jam/StickyMobileCTA.tsx`)
+  - Fixed bottom bar visible only on mobile (<768px)
+  - 4 action buttons: Call, WhatsApp, Get Best Price, Filters
+  - Auto-hide on scroll down, reveal on scroll up
+  - iOS safe area padding support
+
+## Lead Capture System
+- **Lead Modal** (`components/jam/LeadModal.tsx`)
+  - Triggered by all "Get Best Price" and "Request Callback" CTAs across:
+    - Hero section (2 buttons)
+    - Featured Listings cards (Best Price buttons)
+    - Footer (Get Best Price button)
+    - Sticky Mobile CTA bar (Best Price button)
+  - Form fields: Name (required), Phone (+91 pattern, required), City (required), State (required), Interest (dropdown: New/Used/Service/Finance), Notes (optional, 280 chars)
+  - Consent checkbox: "I agree to be contacted via phone/WhatsApp"
+  - Validation states with error messages
+  - Success state with WhatsApp deep link (prefilled message)
+  - Accessible with proper ARIA attributes
+
+## Implementation Details
+- **Main Page**: `app/page.tsx` - Client component managing lead modal state
+- **State Management**: React useState for modal open/close, passed via onOpenLeadModal prop to all CTA components
+- **Analytics**: data-test-id attributes on all interactive elements for tracking events
+- **Accessibility**: WCAG AA contrast, focus states (jam-focus-ring), ARIA labels, keyboard navigation
+- **Responsive**: Mobile-first design with tablet/desktop breakpoints
+- **Performance**: Optimized images (Next.js Image), scroll-based visibility, transition timing
+- **SEO-Ready**: Semantic HTML structure (H1/H2), proper heading hierarchy, ready for structured data implementation
+
+## Technical Stack
+- **Framework**: Next.js 15 with App Router, React 19 (client components)
+- **Styling**: Tailwind CSS 4 with custom JAM brand tokens
+- **Icons**: Lucide React for all iconography
+- **Forms**: React Hook Form + Zod validation (LeadModal, FinanceSection)
+- **Images**: Next.js Image component with placeholder support
+- **TypeScript**: Full type safety with proper interfaces for all component props
 
 # Jain Automart Admin System
 
