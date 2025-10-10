@@ -5,7 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Search, Phone, MessageCircle, GitCompare, Menu, X, ChevronDown } from 'lucide-react';
 
-export function Header() {
+interface HeaderProps {
+  onOpenLeadModal?: () => void;
+}
+
+export function Header({ onOpenLeadModal }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 

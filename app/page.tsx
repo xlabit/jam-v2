@@ -19,14 +19,16 @@ import { LeadModal } from '@/components/jam/LeadModal';
 export default function HomePage() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
 
+  const openLeadModal = () => setIsLeadModalOpen(true);
+
   return (
     <>
-      <Header />
+      <Header onOpenLeadModal={openLeadModal} />
       
       <main className="min-h-screen">
-        <Hero />
+        <Hero onOpenLeadModal={openLeadModal} />
         <CategoryNavigator />
-        <FeaturedListings />
+        <FeaturedListings onOpenLeadModal={openLeadModal} />
         <BrandsSection />
         <BodyTypeFinder />
         <WhyJainAutomart />
@@ -36,9 +38,9 @@ export default function HomePage() {
         <FAQ />
       </main>
 
-      <Footer />
+      <Footer onOpenLeadModal={openLeadModal} />
       
-      <StickyMobileCTA />
+      <StickyMobileCTA onOpenLeadModal={openLeadModal} />
       
       <LeadModal 
         isOpen={isLeadModalOpen} 

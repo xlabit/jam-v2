@@ -3,7 +3,11 @@
 import { useState, useEffect } from 'react';
 import { Phone, MessageCircle, DollarSign, SlidersHorizontal } from 'lucide-react';
 
-export function StickyMobileCTA() {
+interface StickyMobileCTAProps {
+  onOpenLeadModal?: () => void;
+}
+
+export function StickyMobileCTA({ onOpenLeadModal }: StickyMobileCTAProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -54,6 +58,7 @@ export function StickyMobileCTA() {
       </a>
 
       <button
+        onClick={onOpenLeadModal}
         className="flex flex-col items-center justify-center px-3 py-2 bg-[hsl(var(--jam-accent))] text-[hsl(var(--jam-accent-foreground))] rounded-lg hover:brightness-110 transition-all jam-focus-ring"
         data-test-id="sticky-cta-price"
       >

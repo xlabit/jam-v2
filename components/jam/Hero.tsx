@@ -4,7 +4,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Search, Phone, MessageCircle, ShieldCheck, DollarSign, Truck, Award } from 'lucide-react';
 
-export function Hero() {
+interface HeroProps {
+  onOpenLeadModal?: () => void;
+}
+
+export function Hero({ onOpenLeadModal }: HeroProps) {
   const [activeTab, setActiveTab] = useState<'new' | 'used'>('new');
   const [searchForm, setSearchForm] = useState({
     bodyType: '',
@@ -170,6 +174,7 @@ export function Hero() {
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
             <button
+              onClick={onOpenLeadModal}
               className="jam-btn-primary flex items-center gap-2"
               data-test-id="hero-best-price-btn"
             >
@@ -177,6 +182,7 @@ export function Hero() {
               Get Best Price
             </button>
             <button
+              onClick={onOpenLeadModal}
               className="jam-btn-secondary flex items-center gap-2"
               data-test-id="hero-callback-btn"
             >

@@ -4,6 +4,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { ShieldCheck, MessageCircle, Eye, DollarSign, ChevronLeft, ChevronRight } from 'lucide-react';
 
+interface FeaturedListingsProps {
+  onOpenLeadModal?: () => void;
+}
+
 const listings = [
   {
     id: 1,
@@ -67,7 +71,7 @@ const listings = [
   },
 ];
 
-export function FeaturedListings() {
+export function FeaturedListings({ onOpenLeadModal }: FeaturedListingsProps) {
   const [activeTab, setActiveTab] = useState<'new' | 'used'>('new');
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -191,7 +195,7 @@ export function FeaturedListings() {
                       View Details
                     </button>
                     <div className="flex gap-2">
-                      <button className="flex-1 jam-btn-outline flex items-center justify-center gap-2 text-sm py-2">
+                      <button onClick={onOpenLeadModal} className="flex-1 jam-btn-outline flex items-center justify-center gap-2 text-sm py-2">
                         <DollarSign className="w-4 h-4" />
                         Best Price
                       </button>

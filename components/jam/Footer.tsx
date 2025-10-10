@@ -4,7 +4,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, MessageCircle, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 
-export function Footer() {
+interface FooterProps {
+  onOpenLeadModal?: () => void;
+}
+
+export function Footer({ onOpenLeadModal }: FooterProps) {
   const categories = ['Trucks', 'Trailers', 'Tippers', 'Tankers', 'Reefers', 'Containers'];
   const brands = ['Tata', 'Ashok Leyland', 'Mahindra', 'Bharat Benz', 'Eicher', 'Volvo'];
   const quickLinks = ['About Us', 'Contact', 'Careers', 'Privacy Policy', 'Terms & Conditions', 'Sitemap'];
@@ -170,7 +174,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-6">
-            <button className="jam-btn-primary" data-test-id="footer-cta-price">
+            <button onClick={onOpenLeadModal} className="jam-btn-primary" data-test-id="footer-cta-price">
               Get Best Price
             </button>
             <a
