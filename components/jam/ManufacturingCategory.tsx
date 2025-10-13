@@ -106,6 +106,7 @@ export function ManufacturingCategory() {
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                       data-cms-key={`category-${index + 1}-image`}
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
                     />
                     {/* Hover overlay with brand tint */}
                     <div className="absolute inset-0 bg-[#1e4a7c]/0 group-hover:bg-[#1e4a7c]/12 transition-colors duration-300"></div>
