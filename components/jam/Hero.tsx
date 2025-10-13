@@ -41,9 +41,9 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
     <section className="relative text-white overflow-hidden" style={{ 
       background: 'linear-gradient(135deg, #002b4f 0%, #004a7c 50%, #0073c0 100%)'
     }}>
-      {/* Radial glow for search area focus */}
+      {/* Subtle radial glow for search area focus */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[800px] h-[400px] bg-[#0073c0] rounded-full blur-[120px] opacity-20"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[800px] h-[400px] bg-[#0073c0] rounded-full blur-[120px] opacity-10"></div>
       </div>
       
       {/* Decorative geometric elements */}
@@ -218,35 +218,35 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+            <div className="flex items-center gap-3 bg-black/30 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
               <ShieldCheck className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">RC Verified</div>
-                <div className="jam-tiny text-white/80">Authentic Docs</div>
+                <div className="jam-tiny text-white/90">Authentic Docs</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+            <div className="flex items-center gap-3 bg-black/30 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
               <DollarSign className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">Financing</div>
-                <div className="jam-tiny text-white/80">Easy Approval</div>
+                <div className="jam-tiny text-white/90">Easy Approval</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+            <div className="flex items-center gap-3 bg-black/30 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
               <Truck className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">Pan-India</div>
-                <div className="jam-tiny text-white/80">Delivery</div>
+                <div className="jam-tiny text-white/90">Delivery</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+            <div className="flex items-center gap-3 bg-black/30 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
               <Award className="w-8 h-8 text-[var(--jam-accent)]" />
               <div>
                 <div className="jam-small font-semibold">Warranty</div>
-                <div className="jam-tiny text-white/80">Options Available</div>
+                <div className="jam-tiny text-white/90">Options Available</div>
               </div>
             </div>
           </div>
