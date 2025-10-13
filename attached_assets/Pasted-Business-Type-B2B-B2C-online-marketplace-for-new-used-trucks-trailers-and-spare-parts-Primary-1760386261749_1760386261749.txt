@@ -1,0 +1,113 @@
+Business Type: B2B/B2C online marketplace for new & used trucks, trailers, and spare parts.
+
+Primary Brand Colors: Deep Blue (#002b4f), Yellow-Orange (#ffb629), White (#ffffff)
+
+Hero tagline: “Heavy Vehicles. Verified. Delivered.”
+
+Keep all buttons, dropdowns, icons, and tabs functional — no backend or layout change.
+
+🎨 Design Objective
+
+Enhance the visual tone of the hero area for stronger emotional and professional impact — achieving a premium industrial feel while preserving clarity and readability.
+
+The new hero should:
+
+Look trustworthy and premium
+
+Create depth and visual hierarchy
+
+Improve conversion focus (draw eyes toward search and CTA)
+
+Reflect transport, logistics, and automotive industry
+
+Load fast (no heavy video loops unless optimized)
+
+🧩 Core Direction: “Modern Industrial Blue Gradient”
+
+Implement a rich gradient overlay with subtle depth and metallic precision to replace the current flat color.
+
+Gradient Specification:
+
+Direction: top-left → bottom-right
+
+Start color: #002b4f (deep navy)
+
+Mid color: #004a7c (blue steel)
+
+End color: #0073c0 (vibrant cyan blue)
+
+Overlay: 10–15% texture or noise (optional) to mimic metal surface depth.
+
+Add a subtle glow highlight near the search bar area to draw attention to CTAs without distracting.
+
+💡 Optional Enhancement Alternatives
+
+If Replit AI supports variant generation, offer these optional themes for user preview:
+
+Option A: Real Image Overlay
+
+Use a hero background image showing a truck fleet on highway at sunrise or logistics yard.
+
+Overlay: #002b4f with 70% opacity.
+
+Blur radius: 5–10px for readability.
+
+Keep text and elements 100% readable.
+
+Option B: Blueprint Overlay
+
+Background: same blue gradient (#002b4f → #004a7c).
+
+Add faint white blueprint lines or vector truck outlines (opacity 10–15%) in background.
+
+Symbolizes engineering precision and trust.
+
+Option C: Metallic Gradient
+
+Gradient from steel gray-blue (#3c5263) to deep navy (#002b4f).
+
+Add 3–5% diagonal light reflection for realism.
+
+Looks industrial, durable, and premium.
+
+Option D: Abstract Mesh
+
+Modern mesh gradient (blue → gray → white).
+
+Light flow shapes to represent movement and trade.
+
+Perfect for minimal, global look.
+
+🔧 Implementation Notes
+
+Do not modify layout, buttons, tabs, or dropdown functionality.
+
+Adjust text and button color contrast (if necessary) for WCAG accessibility:
+
+White text (#ffffff) on dark blue
+
+Yellow-orange CTA buttons (#ffb629) should stay unchanged.
+
+Optimize all visual assets for web (compressed <200kb).
+
+Maintain responsiveness across devices (desktop, tablet, mobile).
+
+🧱 Deliverable Checklist
+
+Replace hero background with selected theme (Gradient / Image / Blueprint / Mesh).
+
+Test text and button legibility on all devices.
+
+Maintain consistency with brand colors and typography.
+
+Export and preview 2–3 visual variants for review before deployment.
+
+🧭 Optional Design Guidance for AI
+
+Use visual psychology to enhance focus:
+
+Keep search bar area slightly illuminated (subtle spotlight gradient or radial fade).
+
+Create mild contrast transition from darker top → lighter middle → darker bottom to guide user eye movement.
+
+Ensure hero section feels trustworthy, professional, and tech-oriented.

@@ -38,10 +38,26 @@ export function Hero({ onOpenLeadModal }: HeroProps) {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-[#1e4a7c] to-[#1e4a7c]/80 text-white overflow-hidden" style={{ backgroundColor: 'var(--jam-primary)' }}>
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('/media/images/600x400/truck-pattern.svg')] bg-repeat opacity-50"></div>
+    <section className="relative text-white overflow-hidden" style={{ 
+      background: 'linear-gradient(135deg, #002b4f 0%, #004a7c 50%, #0073c0 100%)'
+    }}>
+      {/* Radial glow for search area focus */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 w-[800px] h-[400px] bg-[#0073c0] rounded-full blur-[120px] opacity-20"></div>
       </div>
+      
+      {/* Decorative geometric elements */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="absolute top-10 right-10 w-64 h-64 border-2 border-white/30 rounded-lg rotate-12"></div>
+        <div className="absolute bottom-20 left-20 w-48 h-48 border-2 border-white/20 rounded-lg -rotate-12"></div>
+        <div className="absolute top-1/3 left-1/4 w-32 h-32 border border-white/20 rounded-full"></div>
+      </div>
+      
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
+        backgroundSize: '50px 50px'
+      }}></div>
 
       <div className="jam-container relative">
         <div className="py-12 md:py-16 lg:py-20">
