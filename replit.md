@@ -130,10 +130,8 @@ Preferred communication style: Simple, everyday language.
 - **Visual Hierarchy**: Gradient creates depth from darker edges to lighter center
 - **Performance**: Pure CSS implementation with no heavy assets
 
-## CTA Cards Section
-
-## CTACards Component (`components/jam/CTACards.tsx`)
-✅ **NEW** - High-conversion CTA cards section positioned directly below Hero banner.
+## CTA Cards Section (`components/jam/CTACards.tsx`)
+✅ **ADDED** - High-conversion CTA cards section positioned directly below Hero banner.
 
 ### Purpose
 Drive engagement and conversions through three visually stunning, action-oriented cards targeting different user journeys:
@@ -167,3 +165,79 @@ Drive engagement and conversions through three visually stunning, action-oriente
 - Z-index layering for proper content/image stacking
 - CSS-in-JS animations with @keyframes
 - Lucide React icons for visual hierarchy
+
+
+## Manufacturing Category Section (`components/jam/ManufacturingCategory.tsx`)
+✅ **NEW** - Conversion-optimized category grid replacing Browse by Category section.
+
+### Section Overview
+- **Section ID**: `our-manufacturing-category`
+- **Title**: "Our Manufacturing Category"
+- **Subtitle**: "Discover the core categories we manufacture & supply."
+- **Categories**: Exactly 6 categories in specified order
+
+### Categories (in order)
+1. **Trailers** - Heavy-duty trailers for long-haul transport
+2. **Tippers** - Durable tippers for mining & construction
+3. **Tankers & Bulkers** - Safe transport for liquids & bulk materials
+4. **Body Building** - Custom body solutions for diverse payloads
+5. **Container** - Standard & specialized containers for logistics
+6. **Tip Trailers** - High-strength tip trailers for heavy loads
+
+### Responsive Layout
+- **Desktop**: 3 columns × 2 rows (grid-cols-3)
+- **Tablet**: 2 columns (md:grid-cols-2)
+- **Mobile**: 1 column stacked (grid-cols-1)
+- **Gap**: 24px between cards
+- **Min Height**: 200px per card
+
+### Card Design
+- **Layout**: Image (48% width desktop) + Content area (52%)
+- **Background**: White with 1px border (#e8edf3)
+- **Border Radius**: 12px (rounded-xl)
+- **Shadow**: sm (hover: xl)
+- **Padding**: 24px
+
+### Interactive Features
+- **Hover Effects**: 
+  - translateY(-8px) + scale(1.02)
+  - Image scale 1.1
+  - 12% brand-primary tint overlay
+  - Shadow elevation increase
+- **CTA**: "Explore" text + chevron icon with gap animation
+- **Full Card Clickable**: Entire card acts as navigation link
+
+### Admin Editability
+Each category card includes data-cms-key attributes for content management:
+- `category-N-title` - Category title
+- `category-N-image` - Category image
+- `category-N-desc` - Category description
+- `category-N-link` - Category link URL
+
+### Analytics & Testing
+- **Analytics**: `data-event="category_click_{name}"` on each card
+- **QA Testing**: `data-test-id="cat-{name}"` for automated tests
+- **Events**: category_click_trailers, category_click_tippers, category_click_tankers, category_click_bodybuilding, category_click_container, category_click_tiptrailers
+
+### Accessibility (WCAG AA)
+- **Semantic HTML**: `<section>`, `<ul>`, `<li>`, proper heading hierarchy
+- **ARIA**: `aria-labelledby` linking cards to titles
+- **Keyboard Navigation**: Full tab navigation with jam-focus-ring
+- **Alt Text**: Descriptive alt text on all images
+- **Contrast**: #0b2f4d text on white background (>7:1 ratio)
+
+### Performance
+- **Lazy Loading**: All images use `loading="lazy"`
+- **Responsive Images**: Next.js Image with responsive srcset
+- **Optimized Sizes**: (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw
+- **Image Format**: WebP with JPEG/PNG fallback
+- **File Size**: <500KB per image, optimized for web
+
+### Image Assets
+Located in `public/media/categories/`:
+- trailers.jpg
+- tippers.jpg
+- tankers.jpg
+- bodybuilding.jpg
+- container.jpg
+- tiptrailers.jpg
