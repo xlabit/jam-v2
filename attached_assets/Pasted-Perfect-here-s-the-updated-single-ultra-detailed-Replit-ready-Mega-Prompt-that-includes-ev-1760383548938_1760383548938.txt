@@ -1,0 +1,177 @@
+Perfect — here’s the **updated, single, ultra-detailed Replit-ready “Mega Prompt”** that includes everything from before **plus** a **third CTA card** and **optimized text & layout suggestions** for **better conversion** — while keeping the theme, tone, and context true to Jain Automart’s audience (truck & trailer buyers/sellers/importers).
+
+You can **copy-paste this entire prompt into Replit’s AI developer** to build or refine the homepage section in one go.
+
+---
+
+## 🚀 MEGA PROMPT — Add 3 Modern, High-Conversion CTA Cards Below Hero Banner
+
+**Project:** Jain Automart
+**Environment:** Replit (Next.js / React)
+**Theme:** Metronic
+**Live Site Reference:** [https://www.jainautomart.com/](https://www.jainautomart.com/)
+**Target Layout URL:** [https://345257a2-3853-4e29-a0d8-ada4e820f546-00-13s51yngjr63h.sisko.replit.dev/](https://345257a2-3853-4e29-a0d8-ada4e820f546-00-13s51yngjr63h.sisko.replit.dev/)
+
+---
+
+### 🎯 Objective
+
+Create a **new section** immediately **below the hero banner** of the home page with **three visually stunning, conversion-focused CTA cards** (Call-to-Action banners).
+These cards should **inspire engagement, improve conversion**, and blend seamlessly with the **Metronic-style visual language** and Jain Automart’s **blue-orange brand palette**.
+
+---
+
+### 🧱 Section Details
+
+**Section ID:** `home-cta-cards`
+**Position:** Directly below hero banner, above featured categories/brands section.
+**Layout:**
+
+* **Desktop:** Three cards in a row (equal width, uniform height).
+* **Tablet/Mobile:** Stack vertically with soft spacing.
+* **Each card clickable as a block** (not just the button).
+
+**Overall Section Container:**
+`.container.mx-auto.max-w-7xl.px-6.py-10.flex.flex-wrap.gap-6.justify-between.items-stretch`
+
+---
+
+## 🅰️ CTA 1 — “Explore Truck & Trailer Parts Online”
+
+**Purpose:** Push users to explore spare parts inventory.
+**Improved Copy for Better Conversion:**
+
+* **Headline:** “Find Genuine Truck & Trailer Parts Online”
+* **Subheadline:** “Trusted suppliers. Quick delivery. Competitive prices.”
+* **CTA Button:** `Browse Parts` → `/parts-online`
+* **Visual:** Transparent cutaway or 3D schematic of a truck (side view).
+* **Tone:** Confident + trustworthy.
+
+**Design & Style:**
+
+* Background: Deep Navy Blue (`#0C2C52`)
+* Text: White or Light Gray (`#F2F4F7`)
+* Button: Vibrant Orange (`#FFA726`) → Hover: darker orange (`#FB8C00`)
+* Icon: small wrench/gear accent behind heading (SVG or Metronic icon)
+* Hover: card lift + soft shadow (`shadow-lg transition-transform scale-[1.02]`)
+
+---
+
+## 🅱️ CTA 2 — “Import Truck & Trailer Parts from India”
+
+**Purpose:** Target international buyers/importers.
+**Optimized Copy:**
+
+* **Headline:** “Import Truck & Trailer Parts from India with Ease”
+* **Subheadline:** “Get authentic spare parts directly from verified Indian suppliers.”
+* **CTA Button:** `Start Import Inquiry` → `/contact`
+* **Visual:** Truck engine or gearbox cutout, positioned right.
+* **Tone:** Global, authoritative.
+
+**Design & Style:**
+
+* Background: Slightly lighter navy gradient (`linear-gradient(135deg, #102F54, #1B3D67)`)
+* Text: White
+* Button: Orange with soft hover animation
+* Accent: Subtle map of India watermark or world map faint in background
+* Hover: zoom-in image (scale 1.05) + shadow intensify
+
+---
+
+## 🅾️ CTA 3 — “Sell Your Truck or Trailer Instantly”
+
+**Purpose:** Encourage sellers to list their vehicles (new or used).
+**Conversion-Optimized Copy:**
+
+* **Headline:** “Sell Your Truck or Trailer — Hassle Free!”
+* **Subheadline:** “Get instant visibility, verified buyers & best value on Jain Automart.”
+* **CTA Button:** `List Your Vehicle` → `/add-listing`
+* **Visual:** Side-angle photo of a truck or trailer with faint price-tag overlay icon.
+* **Tone:** Friendly + action-driven.
+
+**Design & Style:**
+
+* Background: Metallic Gray or Navy overlay with soft texture (`#1E2F45`)
+* Text: White / Light Gray
+* Button: Orange → hover dark orange
+* Add badge element: “Free Listing” or “No Commission” for credibility.
+* Hover: Button pulse + subtle tilt animation (`rotate-[0.5deg]`).
+
+---
+
+### 🧩 Shared Design Rules
+
+* **Card structure:**
+
+  ```html
+  <div class="cta-card flex flex-col md:flex-row items-center justify-between gap-6 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all">
+    <div class="cta-content w-full md:w-1/2">
+      <h3 class="text-2xl font-semibold mb-2">Headline</h3>
+      <p class="text-base opacity-90 mb-4">Subheadline</p>
+      <a href="..." class="btn-primary">Button</a>
+    </div>
+    <div class="cta-image w-full md:w-1/2">
+      <img src="..." alt="..." loading="lazy" class="rounded-lg" />
+    </div>
+  </div>
+  ```
+
+* **Animations:**
+
+  * Fade-in upward (`opacity: 0 → 1`, `transform: translateY(20px) → 0`)
+  * Duration: 0.5s per card, 0.1s staggered delay.
+
+* **Accessibility:**
+
+  * Use `<section>` + `<article>` + `<h3>` structure.
+  * Add `aria-label` and descriptive alt text.
+  * Keyboard navigable buttons.
+  * Ensure color contrast meets **WCAG 2.1 AA**.
+
+---
+
+### 📱 Responsive Layout Rules
+
+| Breakpoint | Layout               | Notes                        |
+| ---------- | -------------------- | ---------------------------- |
+| ≥1200px    | 3 cards horizontally | Even spacing (`gap-6`)       |
+| 768–1199px | 2 cards per row      | Center align last one        |
+| ≤767px     | Single column        | Stack vertically, full width |
+
+---
+
+### 💡 Conversion & UI Optimization
+
+* **Make full card clickable** (wrap CTA and content inside `<a>`).
+* **Visual hierarchy:** Headline → Subheadline → CTA → Image.
+* **Add animation trigger on scroll (AOS / Framer Motion / CSS only).**
+* **Performance tip:** Lazy load all images, serve in WebP if possible.
+* **Analytics readiness:**
+
+  * CTA1: `data-event="cta_parts_browse_click"`
+  * CTA2: `data-event="cta_import_inquiry_click"`
+  * CTA3: `data-event="cta_sell_listing_click"`
+
+---
+
+### 🧾 Acceptance Checklist
+
+* [ ] Section appears immediately below hero banner
+* [ ] Three CTAs render evenly and responsively
+* [ ] Each CTA has unique copy, button, and visual focus
+* [ ] Buttons link correctly (`/parts-online`, `/contact`, `/add-listing`)
+* [ ] Design matches Metronic visual tone (rounded, modern, clean)
+* [ ] Cards load fast, animate smoothly, and adapt to mobile
+* [ ] All text and CTAs tested for clarity and conversion
+* [ ] Accessibility & contrast validated
+* [ ] Fully responsive up to 1440px and down to 320px
+
+---
+
+### 🧠 Prompt Summary for Replit
+
+> “Create a new section `home-cta-cards` directly below the hero banner on Jain Automart homepage. Use Metronic design style to build **three modern CTA cards** promoting parts browsing, import inquiry, and vehicle selling. Ensure responsive grid layout (3/2/1), clean typography, brand-consistent colors (navy/white/orange), subtle animations, and full-card click behavior. Optimize for conversions and readability. Use provided text and structure, improve visual hierarchy, accessibility, and responsiveness. Preview final design in both desktop and mobile breakpoints.”
+
+---
+
+Would you like me to now create a **second companion prompt** that builds this same CTA section in the **admin panel (for content editing)** — so the site owner can change headings, buttons, or links dynamically?

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Header } from '@/components/jam/Header';
 import { Hero } from '@/components/jam/Hero';
+import { CTACards } from '@/components/jam/CTACards';
 import { CategoryNavigator } from '@/components/jam/CategoryNavigator';
 import { FeaturedListings } from '@/components/jam/FeaturedListings';
 import { BrandsSection } from '@/components/jam/BrandsSection';
@@ -27,6 +28,7 @@ export default function HomePage() {
       
       <main className="min-h-screen">
         <Hero onOpenLeadModal={openLeadModal} />
+        <CTACards />
         <CategoryNavigator />
         <FeaturedListings onOpenLeadModal={openLeadModal} />
         <BrandsSection />
