@@ -107,3 +107,41 @@ Preferred communication style: Simple, everyday language.
 - **date-fns**
 - **ApexCharts**
 - **Leaflet**
+
+# Jain Automart Public Homepage - CTA Cards Section
+
+## CTACards Component (`components/jam/CTACards.tsx`)
+✅ **NEW** - High-conversion CTA cards section positioned directly below Hero banner.
+
+### Purpose
+Drive engagement and conversions through three visually stunning, action-oriented cards targeting different user journeys:
+1. **Parts Browsing** - Encourage exploration of truck & trailer parts inventory
+2. **Import Inquiry** - Target international buyers/importers 
+3. **Vehicle Listing** - Motivate sellers to list their vehicles
+
+### Design & Layout
+- **Responsive Grid**: 3 columns (desktop) → 2 columns (tablet) → 1 column (mobile)
+- **Brand Colors**: Navy blue backgrounds (#0C2C52, gradient variants), orange CTAs (#FFA726)
+- **Visual Elements**: 
+  - Icon badges (Wrench, Globe, Truck icons)
+  - Background images with 20% opacity overlay
+  - Decorative blur elements
+  - Badge highlights ("Global Shipping", "Free Listing")
+
+### Features
+- **Full Card Clickable**: Entire card acts as CTA for better UX
+- **Smooth Animations**: Fade-in-up entrance with staggered delay (0.1s per card)
+- **Hover Effects**: Scale transform (1.02), shadow lift, button gap animation
+- **Analytics Ready**: data-event attributes for conversion tracking
+- **Accessibility**: Proper ARIA labels, semantic HTML, WCAG AA contrast
+
+### CTA Routes
+1. `/parts-online` - Browse truck & trailer parts
+2. `/contact` - Start import inquiry  
+3. `/add-listing` - List vehicle for sale
+
+### Technical Implementation
+- Next.js Image component with responsive sizes
+- Z-index layering for proper content/image stacking
+- CSS-in-JS animations with @keyframes
+- Lucide React icons for visual hierarchy
