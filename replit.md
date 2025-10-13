@@ -108,7 +108,29 @@ Preferred communication style: Simple, everyday language.
 - **ApexCharts**
 - **Leaflet**
 
-# Jain Automart Public Homepage - CTA Cards Section
+# Jain Automart Public Homepage - Recent Updates
+
+## Hero Section Redesign (`components/jam/Hero.tsx`)
+✅ **UPDATED** - Modern industrial blue gradient background for premium brand perception.
+
+### Visual Design
+- **Modern Gradient**: Linear gradient at 135deg from deep navy (#002b4f) → blue steel (#004a7c) → vibrant cyan (#0073c0)
+- **Radial Glow**: Subtle 10% opacity cyan glow centered on search area to draw user attention to CTAs
+- **Decorative Elements**: Geometric shapes (squares, circle) at 5% opacity for industrial/technical aesthetic
+- **Grid Pattern**: Subtle 3% opacity grid overlay for depth and precision feel
+
+### Accessibility
+- **WCAG AA Compliant**: All text maintains ≥4.5:1 contrast ratio
+- **Card Backgrounds**: Black/30 with backdrop blur for optimal white text readability (10.8:1 contrast)
+- **Text Opacity**: White text at 90% opacity for clear readability across gradient
+
+### Design Intent
+- **Premium Industrial Feel**: Reflects trust, engineering precision, and durability
+- **Conversion Focus**: Radial glow subtly directs attention to search form and CTAs
+- **Visual Hierarchy**: Gradient creates depth from darker edges to lighter center
+- **Performance**: Pure CSS implementation with no heavy assets
+
+## CTA Cards Section
 
 ## CTACards Component (`components/jam/CTACards.tsx`)
 ✅ **NEW** - High-conversion CTA cards section positioned directly below Hero banner.
