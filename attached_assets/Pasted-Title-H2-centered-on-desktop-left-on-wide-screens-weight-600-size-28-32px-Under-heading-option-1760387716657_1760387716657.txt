@@ -1,0 +1,119 @@
+Title: H2, centered on desktop/left on wide screens, weight 600, size 28–32px. Under-heading (optional tiny line): “Discover the core categories we manufacture & supply.”
+
+Grid
+
+Desktop: CSS grid grid-template-columns: repeat(3, 1fr); gap: 24px;
+
+Tablet: repeat(2, 1fr)
+
+Mobile: 1fr
+
+Card min-height: 180–220px (ensures visual parity)
+
+Card padding: 24px, radius 12px, background #fff (or very light neutral), subtle border 1px solid #e8edf3, box-shadow elev-1.
+
+Card Anatomy (left-to-right or stacked)
+
+Left area: image/icon (48% width on desktop) — high-quality photo or stylized SVG of the vehicle type.
+
+Right area: title (H3) + micro-description (1 line, optional; 14px) + CTA chevron icon (optional).
+
+On mobile: image on top, title + description centered below, CTA button full width.
+
+Visual Treatments
+
+Use duotone SVG illustrations or clipped photos with subtle drop shadow and white card background for clarity.
+
+On hover/focus: transform: translateY(-6px) scale(1.02); box-shadow: elev-2; and image scales 1.04.
+
+Hover overlay: 12% brand-primary tint to unify color theme.
+
+Title color: #0b2f4d (or theme neutral-900), description #566375.
+
+CTA affordance: small chevron on right or entire card clickable.
+
+Microcopy (examples)
+
+Trailers — “Heavy-duty trailers for long-haul transport.”
+
+Tippers — “Durable tippers for mining & construction.”
+
+Tankers & Bulkers — “Safe transport for liquids & bulk materials.”
+
+Body Building — “Custom body solutions for diverse payloads.”
+
+Container — “Standard & specialized containers for logistics.”
+
+Tip Trailers — “High-strength tip trailers for heavy loads.”
+
+🔷 Accessibility & UX
+
+All images have descriptive alt text (e.g., alt="Trailers - heavy duty") and a role="link" or aria-labelledby pointing to title.
+
+Keyboard: each card should be reachable via Tab and actionable via Enter/Space.
+
+Focus state: 3–4px outline with brand-accent and visible internal shadow.
+
+Ensure text contrast ≥ WCAG AA against card background.
+
+Use semantic tags: <section>, <h2>, <ul> (grid) and <li> for cards, <a> wrapping each card.
+
+🔷 Admin Editability (content management readiness)
+
+Each card element must include data-cms-key attributes so it can be edited via admin UI later:
+
+data-cms-key="category-1-title", data-cms-key="category-1-image", data-cms-key="category-1-desc", data-cms-key="category-1-link"
+
+Provide default content filled (use microcopy above). Make sure CMS keys are consistent for all six (category-1 … category-6).
+
+🔷 Analytics & Instrumentation
+
+Add data-event attributes for clicks:
+
+Trailers: data-event="category_click_trailers"
+
+Tippers: data-event="category_click_tippers"
+
+Tankers & Bulkers: data-event="category_click_tankers"
+
+Body Building: data-event="category_click_bodybuilding"
+
+Container: data-event="category_click_container"
+
+Tip Trailers: data-event="category_click_tiptrailers"
+
+Include data-test-id for QA: data-test-id="cat-trailers", etc.
+
+🔷 Image / Asset Specs
+
+Preferred assets: clipped PNGs or SVG illustrations with transparent background, not full-scene photos. If photos, use cropped subject on white/neutral bg.
+
+Dimensions:
+
+Desktop: 520 × 320 px (4:3 crop) for card images — serve responsive srcset.
+
+Mobile: 480 × 360 px fallback.
+
+Format: WebP preferred, fallback JPEG/PNG. Optimize to <120 KB per image.
+
+Provide alt text in admin content.
+
+🔷 Metronic Styling Hints (developer mapping)
+
+Card base class: .kt-card .kt-card-body (or .metronic-card)
+
+Use Metronic tokens: card-radius-12, shadow-sm, kt-btn for in-card chevron if used.
+
+Animate using kt-animate or CSS transitions.
+
+Keep typography consistent with site H2/H3 scale.
+
+🔷 Performance & Responsiveness
+
+Lazy-load images with loading="lazy".
+
+Preload only critical images if needed (first two visible on load).
+
+Keep DOM lightweight — use CSS transforms for hover to maintain GPU acceleration.
+
+🔷 Acceptance Criteria (QA Checklist)
