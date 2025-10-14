@@ -167,14 +167,16 @@ Drive engagement and conversions through three visually stunning, action-oriente
 - Lucide React icons for visual hierarchy
 
 
-## Manufacturing Category Section (`components/jam/ManufacturingCategory.tsx`)
-✅ **NEW** - Conversion-optimized category grid replacing Browse by Category section.
+## Manufacturing Category Section (`app/components/OurManufacturingCategories.tsx`)
+✅ **UPDATED** - Premium, conversion-optimized "Our Manufacturing Categories" section with Metronic visual language.
 
 ### Section Overview
 - **Section ID**: `our-manufacturing-category`
-- **Title**: "Our Manufacturing Category"
-- **Subtitle**: "Discover the core categories we manufacture & supply."
+- **Title**: "Our Manufacturing Categories"
+- **Subtitle**: "Explore our expertise across industry-leading vehicle builds."
 - **Categories**: Exactly 6 categories in specified order
+- **Background**: #F9FAFB (light neutral gray)
+- **Fonts**: Poppins / Inter
 
 ### Categories (in order)
 1. **Trailers** - Heavy-duty trailers for long-haul transport
@@ -192,20 +194,22 @@ Drive engagement and conversions through three visually stunning, action-oriente
 - **Min Height**: 200px per card
 
 ### Card Design
-- **Layout**: Image (48% width desktop) + Content area (52%)
-- **Background**: White with 1px border (#e8edf3)
-- **Border Radius**: 12px (rounded-xl)
-- **Shadow**: sm (hover: xl)
-- **Padding**: 24px
+- **Layout**: Image top center, content below
+- **Background**: White with 1px border (#EAEAF0)
+- **Border Radius**: 16px (rounded-2xl)
+- **Shadow**: 0 6px 20px rgba(0,0,0,0.05) (hover: 0 12px 40px rgba(0,0,0,0.12))
+- **Padding**: 24px desktop, 20px mobile
+- **Min Height**: 280px
 
 ### Interactive Features
 - **Hover Effects**: 
-  - translateY(-8px) + scale(1.02)
-  - Image scale 1.1
-  - 12% brand-primary tint overlay
+  - translateY(-6px) + scale(1.02)
+  - Image scale 1.05
   - Shadow elevation increase
-- **CTA**: "Explore" text + chevron icon with gap animation
+  - "Explore Now →" CTA appears in #DA251C
+- **Focus State**: 3px outline with #FFB629 (yellow accent)
 - **Full Card Clickable**: Entire card acts as navigation link
+- **Analytics**: window.dataLayer push on click
 
 ### Admin Editability
 Each category card includes data-cms-key attributes for content management:
@@ -215,16 +219,17 @@ Each category card includes data-cms-key attributes for content management:
 - `category-N-link` - Category link URL
 
 ### Analytics & Testing
-- **Analytics**: `data-event="category_click_{name}"` on each card
-- **QA Testing**: `data-test-id="cat-{name}"` for automated tests
-- **Events**: category_click_trailers, category_click_tippers, category_click_tankers, category_click_bodybuilding, category_click_container, category_click_tiptrailers
+- **Analytics**: `data-event="category_click_{slug}"` on each card (hyphens preserved)
+- **QA Testing**: `data-test-id="cat_{slug}"` for automated tests
+- **Events**: category_click_trailers, category_click_tippers, category_click_tankers-bulkers, category_click_body-building, category_click_container, category_click_tip-trailers
+- **DataLayer**: Pushes event with category_slug and category_name on click
 
 ### Accessibility (WCAG AA)
 - **Semantic HTML**: `<section>`, `<ul>`, `<li>`, proper heading hierarchy
-- **ARIA**: `aria-labelledby` linking cards to titles
-- **Keyboard Navigation**: Full tab navigation with jam-focus-ring
+- **ARIA**: `aria-label="View {Category} category"` on all links, `role="list"` and `role="listitem"`
+- **Keyboard Navigation**: Full tab navigation with 3px #FFB629 focus ring
 - **Alt Text**: Descriptive alt text on all images
-- **Contrast**: #0b2f4d text on white background (>7:1 ratio)
+- **Contrast**: #1A1A1A text on white cards (>10:1 ratio)
 
 ### Performance
 - **Lazy Loading**: All images use `loading="lazy"`
@@ -237,7 +242,13 @@ Each category card includes data-cms-key attributes for content management:
 Located in `public/media/categories/`:
 - trailers.jpg
 - tippers.jpg
-- tankers.jpg
-- bodybuilding.jpg
+- tankers.jpg (for Tankers & Bulkers)
+- bodybuilding.jpg (for Body Building)
 - container.jpg
-- tiptrailers.jpg
+- tiptrailers.jpg (for Tip Trailers)
+
+### Component Props
+Accepts optional `categories` prop for CMS integration:
+```tsx
+<OurManufacturingCategories categories={customCategoriesArray} />
+```
