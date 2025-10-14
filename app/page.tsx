@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Header } from '@/components/jam/Header';
 import { Hero } from '@/components/jam/Hero';
 import { CTACards } from '@/components/jam/CTACards';
-import { ManufacturingCategory } from '@/components/jam/ManufacturingCategory';
+import OurManufacturingCategories from '@/app/components/OurManufacturingCategories';
 import { FeaturedListings } from '@/components/jam/FeaturedListings';
 import { BrandsSection } from '@/components/jam/BrandsSection';
 import { BodyTypeFinder } from '@/components/jam/BodyTypeFinder';
@@ -29,7 +29,7 @@ export default function HomePage() {
       <main className="min-h-screen">
         <Hero onOpenLeadModal={openLeadModal} />
         <CTACards />
-        <ManufacturingCategory />
+        <OurManufacturingCategories />
         <FeaturedListings onOpenLeadModal={openLeadModal} />
         <BrandsSection />
         <BodyTypeFinder />

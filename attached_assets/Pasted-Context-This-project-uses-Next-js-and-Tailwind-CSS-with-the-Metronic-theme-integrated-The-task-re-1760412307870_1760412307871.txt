@@ -1,0 +1,104 @@
+Context:
+This project uses Next.js and Tailwind CSS with the Metronic theme integrated. The task: replace the existing “Browse By Category” block on the homepage with a premium, conversion-oriented section titled “Our Manufacturing Categories”. Keep all other site functionality unchanged. This is a visual/section change only.
+
+Objective:
+Create a production-ready React component that renders the new “Our Manufacturing Categories” block exactly as described. The component must be responsive, accessible, optimized, and follow the Metronic visual language. It must be editable in admin (data attributes), track analytics (data-event attributes), and be performant (lazy images, responsive srcset). Provide one single component file and any small helper file (if absolutely needed). Use Tailwind utility classes alongside existing Metronic classes.
+
+General rules:
+	1.	No other site code should be changed.
+	2.	The component must be self-contained and export default a React component.
+	3.	Use semantic HTML: section, h2, ul, li, a, img.
+	4.	Each card must be wrapped in an anchor tag that navigates to the category PLP link.
+	5.	Include data-cms-key attributes for title, image, description, link for each card: category-1 … category-6.
+	6.	Include analytics attributes: data-event (category_click_[slug]) and data-test-id (cat_[slug]).
+	7.	Accessibility: images must have alt text, anchors must have aria-label, cards must be keyboard-focusable with visible focus ring.
+	8.	Images: use Next.js Image component if available; otherwise use img with loading=“lazy”. Use WebP if possible.
+	9.	Provide prop-based data fallback: component should accept an optional categories prop array; if not passed, render default six categories with default copy.
+	10.	File path to create: app/components/OurManufacturingCategories.jsx (or .tsx if you prefer TypeScript). Also list any additional files you create.
+
+Visual and content specification:
+Section container:
+	•	section id: our-manufacturing-category
+	•	background: very light neutral (#F9FAFB)
+	•	container max width: 1200px centered
+	•	top padding: 80px; bottom padding: 100px
+
+Heading:
+	•	text: Our Manufacturing Categories
+	•	subtitle text: Explore our expertise across industry-leading vehicle builds.
+	•	heading font: Poppins or Inter; bold
+	•	heading sizes: desktop ~2.5rem, tablet ~2rem, mobile ~1.8rem
+	•	subtitle color: #6B6B6B
+
+Grid:
+	•	Desktop >= 1200px: 3 columns x 2 rows
+	•	Tablet 768–1199px: 2 columns
+	•	Mobile <= 767px: 1 column stacked
+	•	gap: 32px
+
+Card (each of 6):
+	•	clickable anchor wrapping card
+	•	background white, border radius 16px, border 1px solid #EAEAF0, shadow 0 6px 20px rgba(0,0,0,0.05)
+	•	padding 24px desktop, 20px mobile
+	•	min-height or aspect ratio ~16:10 for visual parity
+	•	image area top center (object-fit: contain)
+	•	image: consistent truck imagery with same direction; transparent background preferred
+	•	title: Poppins / Inter semi-bold, size 1.2rem, color #1A1A1A
+	•	description: small line under title, color #6B6B6B, size 0.95rem
+	•	hover interaction: transform translateY(-6px) scale(1.02), shadow intensifies, image scales 1.05, show CTA microtext “Explore Now →” in accent color #DA251C fading in
+	•	keyboard focus: 3px outline with accent color #FFB629
+
+Cards content and order (default fallback data if prop not provided):
+	1.	Trailers — Heavy-duty trailers for long-haul transport. slug: trailers link: /category/trailers
+	2.	Tippers — Durable tippers for mining & construction. slug: tippers link: /category/tippers
+	3.	Tankers & Bulkers — Safe transport for liquids & bulk materials. slug: tankers-bulkers link: /category/tankers-bulkers
+	4.	Body Building — Custom body solutions for diverse payloads. slug: body-building link: /category/body-building
+	5.	Container — Standard & specialized containers for logistics. slug: container link: /category/container
+	6.	Tip Trailers — High-strength tip trailers for heavy loads. slug: tip-trailers link: /category/tip-trailers
+
+Data attributes per card:
+	•	data-cms-key=“category-{n}-title”
+	•	data-cms-key=“category-{n}-image”
+	•	data-cms-key=“category-{n}-desc”
+	•	data-cms-key=“category-{n}-link”
+	•	data-event=“category_click_{slug}”
+	•	data-test-id=“cat_{slug}”
+
+Behavior:
+	•	entire card clickable; but also keep explicit visible CTA microtext on hover
+	•	on click, send an analytics event (developer can wire to data layer; include a minimal onClick handler that runs a window.dataLayer push or console.log for dev)
+	•	respect keyboard navigation and Enter/Space activation
+
+Performance:
+	•	Use responsive images (srcSet) and lazy loading
+	•	Keep images under 120 KB when possible; if not available, use placeholders
+	•	Use CSS transforms and opacity changes for animations to keep GPU acceleration
+
+Responsiveness:
+	•	Ensure typography and padding scale down for tablet and mobile
+	•	On mobile, stack image above text, center align, and make the CTA full width if shown
+	•	Menu and other site components remain untouched
+
+Accessibility:
+	•	Each anchor must have aria-label “View [Category Name] category”
+	•	Use role=“list” on the grid and role=“listitem” on each card for screen readers
+	•	Images alt text descriptive: e.g., “Trailers - heavy duty”
+
+Deliverables required in response:
+	1.	Create file app/components/OurManufacturingCategories.jsx (or .tsx). The file should export default the React component.
+	2.	Include any minimal helper functions inside same file or additional files if necessary. If creating additional files list them.
+	3.	Provide sample usage and props example snippet to insert into the homepage (e.g., import OurManufacturingCategories from ‘components/OurManufacturingCategories’ and use  or pass data prop).
+	4.	Include brief notes at top of file as comments explaining where to place assets and how to replace default category data with CMS values.
+	5.	Return only code and small necessary comments: the React component file content and example usage snippet. Do not return any long text explanation beyond small in-file comments.
+
+Acceptance checklist (to verify once implemented):
+	•	Heading changed to “Our Manufacturing Categories” and subtitle present
+	•	Exactly 6 cards shown in specified order
+	•	Cards clickable and link to their PLP
+	•	Data attributes (data-cms-key, data-event, data-test-id) present for each card
+	•	Accessible via keyboard and readable by screen readers
+	•	Lazy images and responsive srcset used
+	•	Hover/focus animations match spec
+	•	Component exported and example usage provided
+
+Now generate the requested React component file at app/components/OurManufacturingCategories.jsx (or .tsx). Include Tailwind-compatible classes and any Metronic utility classes if appropriate. Keep code clean, well-structured, and ready to paste into the Replit project.
