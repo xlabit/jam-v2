@@ -1,0 +1,192 @@
+You are an expert frontend developer and UI/UX designer working in Replit using Next.js, Tailwind CSS, and the Metronic theme system.
+Rebuild the “Our Manufacturing Categories” section to look premium, modern, and conversion-oriented — visually sharp, professional, and trustworthy.
+The existing version looks plain and amateur. The goal is to make it feel clean, high-end, and enterprise-level without clutter.
+
+OBJECTIVE
+
+Redesign the 6-category grid into a visually balanced, card-based layout that feels elegant, structured, and brand-consistent.
+Keep the same content (6 categories, same text, links, and order).
+Make every card feel intentional, clickable, and part of a cohesive visual system.
+
+DESIGN SYSTEM
+
+Use a modern automotive-inspired visual language:
+
+Color palette: Deep navy #002b4f, industrial gray #f5f6fa, white #ffffff, accent orange/red #ffb629 or #da251c.
+
+Typography: Use Poppins or Inter (weights 400, 600, 700). High contrast headings, lighter descriptive copy.
+
+Spacing: More generous white space; consistent vertical rhythm; avoid cramped blocks.
+
+LAYOUT STRUCTURE
+
+Section container:
+
+ID: our-manufacturing-category
+
+Full width light gray background (#f9fafb)
+
+Content max-width: 1200px centered
+
+Padding: 100px top / 120px bottom (desktop)
+
+Section heading:
+
+“Our Manufacturing Categories” centered
+
+Subtitle: “Explore our expertise across industry-leading vehicle builds.”
+
+Heading font-weight 700, size 40px desktop / 28px mobile, line-height 1.2
+
+Subtitle muted gray #6b6b6b, size 16px, margin-top 8px
+
+Add a thin accent bar below heading (4px high, 60px wide, brand orange) for a premium cue.
+
+GRID
+
+3 columns × 2 rows desktop
+
+2 columns tablet
+
+1 column stacked mobile
+
+Gap between cards: 40px desktop, 24px tablet/mobile
+
+Each card equal height, ~300–340px.
+
+CARD DESIGN (Premium look)
+
+Each card must look like a polished interactive tile with layered visual hierarchy.
+
+Card base:
+
+Background: white (#ffffff)
+
+Border radius: 20px
+
+Shadow: subtle but clean (0 8px 25px rgba(0,0,0,0.05))
+
+Border: 1px solid rgba(0,0,0,0.04)
+
+Internal padding: 28–32px
+
+Display: flex column; image top, text bottom.
+
+Image:
+
+Aspect ratio 16:9, object-fit cover or contain.
+
+All trucks visually aligned; consistent cropping.
+
+Add soft drop shadow and subtle rounded corners on images.
+
+Use light gray background block behind images for structure if needed.
+
+Hover effect: image zooms in slightly (scale 1.05, transition 250ms ease-out).
+
+Title + Description:
+
+Title: bold, 18px, dark navy text.
+
+Description: 15px muted gray, line-height 1.6, margin-top 6px.
+
+Align left on desktop, center on mobile.
+
+Maintain consistent spacing above/below text.
+
+Hover state:
+
+Card slightly lifts (translateY(-8px)),
+box-shadow intensifies (0 12px 28px rgba(0,0,0,0.1)),
+and bottom accent bar slides in with brand color.
+
+CTA microtext “Explore Now →” fades in below description (color accent orange).
+
+Focus/keyboard state:
+
+Outline: 3px solid brand orange (#ffb629), visible and accessible.
+
+MICRO-INTERACTIONS
+
+Smooth hover transitions for lift and image zoom (200–300ms ease).
+
+Subtle gradient background fade on hover (linear-gradient(180deg, rgba(255,182,41,0.05) 0%, #ffffff 100%)).
+
+Cursor pointer for full card.
+
+Use only GPU-friendly CSS transforms (translate, scale, opacity).
+
+COPY AND ORDER (keep same)
+
+Trailers — Heavy-duty trailers for long-haul transport.
+
+Tippers — Durable tippers for mining & construction.
+
+Tankers & Bulkers — Safe transport for liquids & bulk materials.
+
+Body Building — Custom body solutions for diverse payloads.
+
+Container — Standard & specialized containers for logistics.
+
+Tip Trailers — High-strength tip trailers for heavy loads.
+
+DATA ATTRIBUTES AND ACCESSIBILITY
+
+Each card:
+
+data-cms-key for title, desc, image, and link
+
+data-event="category_click_[slug]"
+
+data-test-id="cat_[slug]"
+
+aria-label="View [Category] category"
+
+Images alt text descriptive (e.g., “Tippers for mining and construction”)
+
+Entire card clickable (wrap <a>)
+
+PERFORMANCE
+
+Lazy load all images.
+
+Use responsive srcset for faster loads.
+
+Limit images to ~120 KB optimized WebP.
+
+RESPONSIVENESS
+
+On mobile, image full width top, text below centered.
+
+Padding reduces to 16–20px.
+
+Font sizes scale proportionally.
+
+Maintain same hover effect on tap with smooth active feedback.
+
+OUTPUT REQUIREMENT
+
+Generate the full React component in Next.js (OurManufacturingCategories.jsx or .tsx).
+Use Tailwind utility classes for layout, typography, colors, spacing, transitions.
+Export default functional component.
+Provide one sample usage import line and example usage snippet for the homepage.
+Include short comments for customization (images, CMS data).
+No unnecessary explanation text—only code and minimal comments.
+
+Acceptance checklist:
+
+Section visually premium and cohesive.
+
+Heading and subtitle well balanced.
+
+6 polished cards in consistent grid.
+
+Smooth animations, hover/focus visible.
+
+Fully responsive.
+
+Accessible and optimized.
+
+Now generate the clean React component code implementing this upgraded design exactly.
+
+END PROMPT

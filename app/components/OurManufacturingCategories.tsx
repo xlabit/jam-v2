@@ -1,13 +1,13 @@
 /**
- * Our Manufacturing Categories Component
+ * Our Manufacturing Categories Component - Premium Design
  * 
  * Assets: Place category images in /public/media/categories/ as:
- * - trailers.png/jpg (transparent background preferred)
- * - tippers.png/jpg
- * - tankers-bulkers.png/jpg
- * - body-building.png/jpg
- * - container.png/jpg
- * - tip-trailers.png/jpg
+ * - trailers.jpg (16:9 aspect ratio, optimized WebP <120KB)
+ * - tippers.jpg
+ * - tankers.jpg
+ * - bodybuilding.jpg
+ * - container.jpg
+ * - tiptrailers.jpg
  * 
  * CMS Integration: Pass custom categories array as prop to override defaults
  * Analytics: onClick sends event to window.dataLayer (configure GTM/analytics)
@@ -80,9 +80,7 @@ export default function OurManufacturingCategories({
 }: OurManufacturingCategoriesProps) {
   
   const handleCategoryClick = (slug: string, title: string) => {
-    // Analytics event - integrate with your tracking solution
     if (typeof window !== 'undefined') {
-      // GTM dataLayer push
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({
         event: 'category_click',
@@ -90,7 +88,6 @@ export default function OurManufacturingCategories({
         category_name: title,
       });
       
-      // Development logging
       console.log(`Analytics: category_click_${slug}`, { title, slug });
     }
   };
@@ -98,20 +95,24 @@ export default function OurManufacturingCategories({
   return (
     <section 
       id="our-manufacturing-category" 
-      className="bg-[#F9FAFB] py-20 lg:py-[80px] pb-[100px]"
+      className="w-full bg-[#f9fafb] pt-[100px] pb-[120px]"
     >
       <div className="container mx-auto max-w-[1200px] px-6">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <h2 
-            className="font-bold text-[1.8rem] md:text-[2rem] lg:text-[2.5rem] leading-tight mb-3"
+            className="font-bold text-[28px] lg:text-[40px] leading-[1.2] text-[#002b4f] mb-2"
             style={{ fontFamily: 'Poppins, Inter, system-ui, sans-serif' }}
             data-cms-key="section-title"
           >
             Our Manufacturing Categories
           </h2>
+          
+          {/* Accent Bar */}
+          <div className="w-[60px] h-[4px] bg-[#ffb629] mx-auto mt-4 mb-3"></div>
+          
           <p 
-            className="text-[#6B6B6B] text-base md:text-lg"
+            className="text-[#6b6b6b] text-[16px] leading-relaxed"
             data-cms-key="section-subtitle"
           >
             Explore our expertise across industry-leading vehicle builds.
@@ -121,7 +122,7 @@ export default function OurManufacturingCategories({
         {/* Categories Grid */}
         <ul 
           role="list" 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10"
         >
           {categories.map((category, index) => (
             <li key={category.slug} role="listitem">
@@ -132,44 +133,57 @@ export default function OurManufacturingCategories({
                 data-event={`category_click_${category.slug}`}
                 data-test-id={`cat_${category.slug}`}
                 data-cms-key={`category-${index + 1}-link`}
-                className="group block bg-white rounded-2xl border border-[#EAEAF0] p-6 lg:p-6 min-h-[280px] transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.02] shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)] focus:outline-none focus:ring-[3px] focus:ring-[#FFB629]"
+                className="group relative block bg-white rounded-[20px] border border-[rgba(0,0,0,0.04)] p-7 lg:p-8 min-h-[300px] lg:min-h-[340px] transition-all duration-300 ease-out hover:-translate-y-2 shadow-[0_8px_25px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-[3px] focus:ring-[#ffb629] overflow-hidden"
+                style={{
+                  backgroundImage: 'linear-gradient(180deg, rgba(255,182,41,0) 0%, #ffffff 100%)',
+                }}
               >
-                {/* Image Area */}
-                <div className="relative w-full h-40 mb-6 overflow-hidden rounded-lg flex items-center justify-center">
-                  <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-105">
-                    <Image
-                      src={category.image}
-                      alt={`${category.title} - ${category.description.toLowerCase()}`}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      loading="lazy"
-                      data-cms-key={`category-${index + 1}-image`}
-                    />
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,182,41,0.05)] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-[20px]"></div>
+                
+                {/* Content wrapper with relative positioning */}
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Image Area - 16:9 aspect ratio */}
+                  <div className="relative w-full mb-6 overflow-hidden rounded-lg" style={{ aspectRatio: '16/9' }}>
+                    <div className="absolute inset-0 bg-[#f5f6fa] rounded-lg"></div>
+                    <div className="relative w-full h-full transition-transform duration-[250ms] ease-out group-hover:scale-105">
+                      <Image
+                        src={category.image}
+                        alt={`${category.title} - ${category.description.toLowerCase()}`}
+                        fill
+                        className="object-contain drop-shadow-md"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        loading="lazy"
+                        data-cms-key={`category-${index + 1}-image`}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Content Area */}
+                  <div className="text-center md:text-left flex-1 flex flex-col">
+                    <h3 
+                      className="font-bold text-[18px] text-[#002b4f] mb-1.5"
+                      style={{ fontFamily: 'Poppins, Inter, system-ui, sans-serif' }}
+                      data-cms-key={`category-${index + 1}-title`}
+                    >
+                      {category.title}
+                    </h3>
+                    <p 
+                      className="text-[#6b6b6b] text-[15px] leading-[1.6] mb-4"
+                      data-cms-key={`category-${index + 1}-desc`}
+                    >
+                      {category.description}
+                    </p>
+                    
+                    {/* CTA Text - Fades in on hover */}
+                    <div className="mt-auto text-[#ffb629] font-semibold text-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Explore Now →
+                    </div>
                   </div>
                 </div>
 
-                {/* Content Area */}
-                <div className="text-center md:text-left">
-                  <h3 
-                    className="font-semibold text-[1.2rem] text-[#1A1A1A] mb-2"
-                    style={{ fontFamily: 'Poppins, Inter, system-ui, sans-serif' }}
-                    data-cms-key={`category-${index + 1}-title`}
-                  >
-                    {category.title}
-                  </h3>
-                  <p 
-                    className="text-[#6B6B6B] text-[0.95rem] mb-3"
-                    data-cms-key={`category-${index + 1}-desc`}
-                  >
-                    {category.description}
-                  </p>
-                  
-                  {/* CTA Text - Shows on Hover */}
-                  <div className="text-[#DA251C] font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Explore Now →
-                  </div>
-                </div>
+                {/* Bottom accent bar - slides in on hover */}
+                <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-gradient-to-r from-[#ffb629] to-[#da251c] transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out rounded-b-[20px]"></div>
               </Link>
             </li>
           ))}
