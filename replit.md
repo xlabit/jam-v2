@@ -168,15 +168,16 @@ Drive engagement and conversions through three visually stunning, action-oriente
 
 
 ## Manufacturing Category Section (`app/components/OurManufacturingCategories.tsx`)
-✅ **UPDATED** - Premium, conversion-optimized "Our Manufacturing Categories" section with Metronic visual language.
+✅ **PREMIUM REDESIGN** - Enterprise-level, conversion-optimized "Our Manufacturing Categories" section with automotive-inspired visual language and advanced micro-interactions.
 
 ### Section Overview
 - **Section ID**: `our-manufacturing-category`
 - **Title**: "Our Manufacturing Categories"
 - **Subtitle**: "Explore our expertise across industry-leading vehicle builds."
 - **Categories**: Exactly 6 categories in specified order
-- **Background**: #F9FAFB (light neutral gray)
-- **Fonts**: Poppins / Inter
+- **Background**: #f9fafb (light neutral gray)
+- **Fonts**: Poppins / Inter (weights 400, 600, 700)
+- **Color Palette**: Deep navy #002b4f, white #ffffff, accent orange #ffb629, accent red #da251c
 
 ### Categories (in order)
 1. **Trailers** - Heavy-duty trailers for long-haul transport
@@ -186,30 +187,42 @@ Drive engagement and conversions through three visually stunning, action-oriente
 5. **Container** - Standard & specialized containers for logistics
 6. **Tip Trailers** - High-strength tip trailers for heavy loads
 
+### Section Header Design
+- **Heading**: 40px desktop / 28px mobile, font-weight 700, color #002b4f, line-height 1.2
+- **Accent Bar**: 60px wide × 4px high, orange (#ffb629), centered below heading
+- **Subtitle**: 16px, #6b6b6b, centered
+- **Padding**: 100px top / 120px bottom (generous white space)
+- **Max Width**: 1200px container
+
 ### Responsive Layout
 - **Desktop**: 3 columns × 2 rows (grid-cols-3)
 - **Tablet**: 2 columns (md:grid-cols-2)
 - **Mobile**: 1 column stacked (grid-cols-1)
-- **Gap**: 24px between cards
-- **Min Height**: 200px per card
+- **Gap**: 40px desktop, 24px tablet/mobile
+- **Card Height**: 300-340px min height
 
-### Card Design
-- **Layout**: Image top center, content below
-- **Background**: White with 1px border (#EAEAF0)
-- **Border Radius**: 16px (rounded-2xl)
-- **Shadow**: 0 6px 20px rgba(0,0,0,0.05) (hover: 0 12px 40px rgba(0,0,0,0.12))
-- **Padding**: 24px desktop, 20px mobile
-- **Min Height**: 280px
+### Premium Card Design
+- **Layout**: Image top (16:9 aspect ratio), content below, flex column
+- **Background**: White with subtle border (rgba(0,0,0,0.04))
+- **Border Radius**: 20px for polished, modern feel
+- **Shadow**: 0 8px 25px rgba(0,0,0,0.05) base, 0 12px 28px rgba(0,0,0,0.1) on hover
+- **Padding**: 28-32px internal spacing
+- **Min Height**: 300-340px
+- **Image Background**: Light gray (#f5f6fa) block behind images for structure
+- **Image Effects**: Drop shadow, rounded corners, object-fit contain
 
-### Interactive Features
-- **Hover Effects**: 
-  - translateY(-6px) + scale(1.02)
-  - Image scale 1.05
-  - Shadow elevation increase
-  - "Explore Now →" CTA appears in #DA251C
-- **Focus State**: 3px outline with #FFB629 (yellow accent)
+### Advanced Micro-Interactions
+- **Hover Effects (GPU-accelerated)**: 
+  - Card lift: translateY(-8px) with smooth ease-out
+  - Image zoom: scale 1.05 (250ms transition)
+  - Shadow intensifies to 0 12px 28px rgba(0,0,0,0.1)
+  - Gradient overlay: linear-gradient from rgba(255,182,41,0.05) fades in
+  - Bottom accent bar (4px gradient #ffb629 → #da251c) slides up from bottom
+  - "Explore Now →" CTA fades in, color #ffb629
+- **Focus State**: 3px outline ring with #ffb629 (brand orange), keyboard accessible
 - **Full Card Clickable**: Entire card acts as navigation link
 - **Analytics**: window.dataLayer push on click
+- **Performance**: Pure CSS transforms (translate, scale, opacity) for 60fps
 
 ### Admin Editability
 Each category card includes data-cms-key attributes for content management:
@@ -218,6 +231,12 @@ Each category card includes data-cms-key attributes for content management:
 - `category-N-desc` - Category description
 - `category-N-link` - Category link URL
 
+### Typography
+- **Card Title**: 18px bold, #002b4f (deep navy), Poppins/Inter
+- **Card Description**: 15px, #6b6b6b (muted gray), line-height 1.6
+- **CTA Text**: 14px, #ffb629 (orange), font-weight 600
+- **Mobile Alignment**: Text centered on mobile, left-aligned on desktop (responsive)
+
 ### Analytics & Testing
 - **Analytics**: `data-event="category_click_{slug}"` on each card (hyphens preserved)
 - **QA Testing**: `data-test-id="cat_{slug}"` for automated tests
@@ -225,18 +244,19 @@ Each category card includes data-cms-key attributes for content management:
 - **DataLayer**: Pushes event with category_slug and category_name on click
 
 ### Accessibility (WCAG AA)
-- **Semantic HTML**: `<section>`, `<ul>`, `<li>`, proper heading hierarchy
-- **ARIA**: `aria-label="View {Category} category"` on all links, `role="list"` and `role="listitem"`
-- **Keyboard Navigation**: Full tab navigation with 3px #FFB629 focus ring
-- **Alt Text**: Descriptive alt text on all images
-- **Contrast**: #1A1A1A text on white cards (>10:1 ratio)
+- **Semantic HTML**: `<section>`, `<ul role="list">`, `<li role="listitem">`, proper heading hierarchy
+- **ARIA**: `aria-label="View {Category} category"` on all links
+- **Keyboard Navigation**: Full tab navigation with 3px #ffb629 focus ring
+- **Alt Text**: Descriptive alt text on all images (e.g., "Trailers - heavy-duty trailers for long-haul transport")
+- **Contrast**: #002b4f text on white cards (exceeds WCAG AA 4.5:1 requirement)
 
 ### Performance
 - **Lazy Loading**: All images use `loading="lazy"`
 - **Responsive Images**: Next.js Image with responsive srcset
 - **Optimized Sizes**: (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw
 - **Image Format**: WebP with JPEG/PNG fallback
-- **File Size**: <500KB per image, optimized for web
+- **File Size**: <120KB per image, optimized for web
+- **GPU Acceleration**: CSS transforms (translate, scale, opacity) for 60fps animations
 
 ### Image Assets
 Located in `public/media/categories/`:
